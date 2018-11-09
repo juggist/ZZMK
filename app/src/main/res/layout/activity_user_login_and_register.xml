@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.user.UserLoginAndRegisterActivity">
+
+    <com.juggist.baseandroid.view.NavigationTabStrip
+        android:id="@+id/nts"
+        android:layout_width="@dimen/dp_300"
+        android:layout_height="@dimen/dp_68"
+        android:layout_marginTop="@dimen/dp_110"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:nts_active_color="@color/font_select"
+        app:nts_color="@color/font_select"
+        app:nts_inactive_color="@color/font_normal"
+        app:nts_size="@dimen/sp_32"
+        app:nts_tab_space="@dimen/dp_180"
+        app:nts_titles="@array/loginAndRegister"
+        app:nts_type="line"
+        app:nts_weight="@dimen/dp_2" />
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nts"></FrameLayout>
+</android.support.constraint.ConstraintLayout>

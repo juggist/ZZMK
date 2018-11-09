@@ -1,0 +1,82 @@
+<resources>
+    <string name="app_name">BaseAndroid</string>
+
+    <string name="user_login">登录</string>
+    <string name="user_register">注册</string>
+    <string name="finish">完成</string>
+    <string name="ensure">确定</string>
+
+    <string name="unit">元</string>
+    <string name="custom_price">自定义</string>
+
+    <string name="title_psw_forget">忘记密码</string>
+    <string name="title_order_submit">确认订单</string>
+    <string name="title_review_big_pic">查看大图</string>
+
+    <string name="tab_home">首页</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_buy">购物车</string>
+    <string name="tab_mine">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="hint_phone">请输入手机号码</string>
+    <string name="hint_psw">请输入密码</string>
+    <string name="hint_code">请输入验证码</string>
+    <string name="hint_newPsw">请输入新密码6~8位</string>
+    <string name="hint_inviteCode">请输入邀请码</string>
+
+    <string name="psw_forget">忘记密码?</string>
+    <string name="code_send">获取验证码</string>
+    <string name="inviteCode_to_get">如何获取邀请码？</string>
+    <string name="protocol_agree">我已阅读并同意</string>
+    <string name="protocol_note">《用户协议》</string>
+
+    <string name="inviteCode_tip1">1.关注 众妆美库 微信公众号。</string>
+    <string name="inviteCode_tip2">2.回复【邀请码】即得限量邀请码。</string>
+
+    <string name="session_end">专场结束时间</string>
+    <string name="session_share">批量转发</string>
+    <string name="session_join">进入专场</string>
+    <string name="session_title">专场</string>
+
+    <string name="download">下载</string>
+    <string name="download_tip01">下载图片到您的相册</string>
+    <string name="download_tip02">复制文案到您的粘贴板</string>
+
+    <string name="share">分享</string>
+    <string name="share_to">分享到</string>
+    <string name="share_wx">微信</string>
+    <string name="share_circle">朋友圈</string>
+    <string name="share_weibo">微博</string>
+    <string name="share_qq">QQ</string>
+
+    <string name="product_specs">规格</string>
+    <string name="product_num">数量</string>
+    <string name="product_up">+</string>
+    <string name="product_down">-</string>
+    <string name="product_buy">立即购买</string>
+    <string name="product_buy_all">全选</string>
+
+
+    <string name="order_total_num">共%s件商品</string>
+    <string name="order_total_money">合计</string>
+    <string name="order_submit">提交订单</string>
+    <string name="order_transport_money">运费</string>
+    <string name="order_transport_money_empty">免运费</string>
+    <string name="order_sale_cash">优惠券</string>
+    <string name="order_sale_cash_empty">暂无可用</string>
+    <string name="order_total_money_2">小计</string>
+
+    <string name="toast_login_phone_empty">请输入手机号码</string>
+    <string name="toast_login_phone_un_right">请输入正确的手机号码</string>
+    <string name="toast_login_psw_empty">请输入密码</string>
+    <string name="toast_auth_code_empty">请输入验证码</string>
+    <string name="toast_auth_code">验证码发送成功</string>
+    <string name="toast_protocol_check">请阅读并同意《用户协议》</string>
+
+    <string name="lv_loading">正在加载数据中...</string>
+    <string name="lv_data_empty">当前暂无数据</string>
+    <string name="lv_net_error">没有网络了，点击屏幕重试</string>
+</resources>

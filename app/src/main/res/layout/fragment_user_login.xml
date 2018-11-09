@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_70"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_margin"
+    android:paddingRight="@dimen/common_margin"
+    tools:context=".ui.user.fragment.UserLoginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/input_container_bg"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.juggist.baseandroid.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:textHint="@string/hint_phone"
+            app:textLeftDrawableNormal="@drawable/login_icon_user"
+            app:textLeftDrawableSelect="@drawable/login_icon_user_pre"
+            app:textSize="26" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/input_container_bg">
+
+        <com.juggist.baseandroid.view.ButtonCountDown
+            android:id="@+id/btn_code_send"
+            android:layout_width="@dimen/dp_170"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/button_auth_code_bg"
+            android:text="@string/code_send"
+            android:textColor="@drawable/button_auth_code_textcolor"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.juggist.baseandroid.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_psw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@null"
+            android:drawableLeft="@drawable/login_icon_pin"
+            android:maxLength="11"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_code_send"
+            app:textHint="@string/hint_code"
+            app:textLeftDrawableNormal="@drawable/login_icon_pin"
+            app:textLeftDrawableSelect="@drawable/login_icon_pin_pre"
+            app:textSize="26" />
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginRight="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_110"
+        android:background="@drawable/btn_corner_bg"
+        android:text="@string/user_login"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_32" />
+
+    <TextView
+        android:id="@+id/tv_psw_forfet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_139"
+        android:text="@string/psw_forget"
+        android:textSize="@dimen/sp_26" />
+</LinearLayout>

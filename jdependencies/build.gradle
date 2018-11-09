@@ -1,0 +1,124 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.hugo'
+
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //EventBus 3.0
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [eventBusIndex: 'org.greenrobot.eventbus.EventBusIndex']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+    /**
+     * image
+     */
+    //glide
+    api 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    /**
+     * bus
+     */
+    //eventBus
+    api 'org.greenrobot:eventbus:3.1.1'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+    /**
+     * utils
+     */
+    //hugo
+    //logger
+    api 'com.orhanobut:logger:2.2.0'
+    /**
+     * http
+     */
+    //retrofit
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    //RxJava
+    api "io.reactivex.rxjava2:rxjava:2.2.3"
+    api "io.reactivex.rxjava2:rxandroid:2.1.0"
+    // 衔接 Retrofit & RxJava
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    /**
+     * 支持Gson解析
+     */
+
+    api 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    /**
+     * 依赖注入
+     */
+    //dagger
+    api 'com.google.dagger:dagger:2.19'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
+
+    /**
+     * 动态权限
+     */
+    //PermissionsDispatcher
+    api ("com.github.hotchemi:permissionsdispatcher:3.3.1") { exclude module: 'support-v13' }
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.3.1'
+
+    /**
+     * 自动注解view
+     */
+    //butterknife
+    api 'com.jakewharton:butterknife:9.0.0-rc1'
+    //这个注解必须放在app module里 ，如果放在library module会报错
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+    /**
+     * 沉浸式状态栏
+     */
+    //immersionbar
+    api 'com.gyf.barlibrary:barlibrary:2.3.0'
+    /**
+     * 下拉刷新
+     */
+    //smartRefreshLayout
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
+    api "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"//版本 23以上（必须）
+    /**
+     * banner滚动图
+     */
+    api 'com.youth.banner:banner:1.4.10'  //最新版本
+    /*
+     * 图片展示工具
+     */
+    /**
+     * tools
+     */
+    //LeakCanary内存泄漏工具
+    debugApi 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    // Optional, if you use support library fragments:
+    debugApi 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
+}

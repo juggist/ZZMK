@@ -1,0 +1,3 @@
+网络库选用的Okhttp3.0
+结合retrofit和RxJava
+解析用Gson

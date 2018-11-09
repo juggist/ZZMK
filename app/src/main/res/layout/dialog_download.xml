@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_300">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_30"
+            android:src="@drawable/delete" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/found_icon_finish"
+                app:layout_constraintBottom_toBottomOf="@+id/tv"
+                app:layout_constraintTop_toTopOf="@+id/tv" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:text="@string/download_tip01"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_30"
+                app:layout_constraintLeft_toRightOf="@+id/iv" />
+
+            <ImageView
+                android:id="@+id/iv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/found_icon_finish"
+                app:layout_constraintBottom_toBottomOf="@+id/tv2"
+                app:layout_constraintTop_toTopOf="@+id/tv2" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_40"
+                android:text="@string/download_tip02"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_30"
+                app:layout_constraintLeft_toRightOf="@+id/iv2"
+                app:layout_constraintTop_toBottomOf="@+id/tv" />
+        </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_download"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_88"
+        android:background="@color/font_select"
+        android:text="@string/download"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_30" />
+</LinearLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/common_margin">
+
+    <ImageView
+        android:id="@+id/iv_session_icon"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_120"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_session_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="韩国GM solution水光蜂蜜面膜蚕丝补水保湿紧致提拉滋润"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_30"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/iv_session_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_session_old_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="原价: ￥238"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_session_name" />
+
+
+    <TextView
+        android:id="@+id/tv_session_weight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="净含量: 10片/盒"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_session_old_price" />
+
+    <TextView
+        android:id="@+id/tv_session_new_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="￥79"
+        android:textColor="@color/font_select"
+        android:textSize="@dimen/sp_36"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_session_weight" />
+
+    <com.juggist.baseandroid.view.NoScrollGridView
+        android:layout_marginTop="@dimen/dp_40"
+        android:id="@+id/gv"
+        android:layout_width="0dp"
+        android:verticalSpacing="@dimen/dp_10"
+        android:horizontalSpacing="@dimen/dp_10"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_session_new_price"></com.juggist.baseandroid.view.NoScrollGridView>
+
+    <ImageButton
+        android:id="@+id/ibtn_sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/btn_sale"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gv" />
+    <ImageButton
+        android:id="@+id/ibtn_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/special_download"
+        app:layout_constraintRight_toLeftOf="@+id/ibtn_sale"
+        app:layout_constraintTop_toTopOf="@+id/ibtn_sale" />
+    <ImageButton
+        android:id="@+id/ibtn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/btn_buy"
+        app:layout_constraintRight_toLeftOf="@+id/ibtn_download"
+        app:layout_constraintTop_toTopOf="@+id/ibtn_sale" />
+</android.support.constraint.ConstraintLayout>

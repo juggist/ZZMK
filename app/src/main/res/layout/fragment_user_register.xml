@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_70"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_margin"
+    android:paddingRight="@dimen/common_margin"
+    tools:context=".ui.user.fragment.UserRegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/input_container_bg"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.juggist.baseandroid.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:textHint="@string/hint_phone"
+            app:textLeftDrawableNormal="@drawable/register_icon_phone"
+            app:textLeftDrawableSelect="@drawable/register_icon_phone_pre"
+            app:textSize="26" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/input_container_bg">
+
+        <com.juggist.baseandroid.view.ButtonCountDown
+            android:id="@+id/btn_code_send"
+            android:layout_width="@dimen/dp_170"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/button_auth_code_bg"
+            android:text="@string/code_send"
+            android:textColor="@drawable/button_auth_code_textcolor"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.juggist.baseandroid.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_code_send"
+            app:textHint="@string/hint_code"
+            app:textLeftDrawableNormal="@drawable/register_icon_number"
+            app:textLeftDrawableSelect="@drawable/register_icon_number_pre"
+            app:textSize="26" />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/input_container_bg"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.juggist.baseandroid.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_psw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:textHint="@string/hint_newPsw"
+            app:textLeftDrawableNormal="@drawable/register_icon_password"
+            app:textLeftDrawableSelect="@drawable/register_icon_password_pre"
+            app:textSize="26" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/input_container_bg">
+
+        <TextView
+            android:id="@+id/tv_inviteCode_to_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="@string/inviteCode_to_get"
+            android:textColor="@color/font_select"
+            android:textSize="@dimen/sp_22"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.juggist.baseandroid.view.ClearEditText
+            android:id="@+id/et_inviteCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_inviteCode_to_get"
+            app:textHint="@string/hint_inviteCode"
+            app:textLeftDrawableNormal="@drawable/register_icon_code"
+            app:textLeftDrawableSelect="@drawable/register_icon_code_pre"
+            app:textSize="26" />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:button="@drawable/checkbox_style"
+            android:checked="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="@string/protocol_agree"
+            android:textColor="@color/font_normal"
+            android:textSize="@dimen/sp_22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/protocol_note"
+            android:textColor="@color/font_select"
+            android:textSize="@dimen/sp_22" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginRight="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_110"
+        android:background="@drawable/btn_corner_bg"
+        android:text="@string/user_register"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_32" />
+</LinearLayout>

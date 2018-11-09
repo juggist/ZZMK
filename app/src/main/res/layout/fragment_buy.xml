@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".ui.buy.BuyFragment">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/tab_buy"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_32" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_alignParentBottom="true"
+            android:background="@color/font_normal" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/top"
+        android:divider="@color/item_bg"
+        android:dividerHeight="@dimen/dp_1"
+        android:scrollbars="none"></ListView>
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_92"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/iv_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@drawable/imageview_buy_select_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_toRightOf="@+id/iv_select"
+            android:text="@string/product_buy_all"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_24" />
+
+        <TextView
+            android:id="@+id/tv_total_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_toLeftOf="@+id/tv_calculate"
+            android:text="合计:$300"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_28" />
+
+        <TextView
+            android:id="@+id/tv_calculate"
+            android:layout_width="@dimen/dp_208"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/spes_red"
+            android:gravity="center"
+            android:text="结算"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_24" />
+    </RelativeLayout>
+
+</RelativeLayout>
