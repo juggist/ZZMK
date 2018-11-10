@@ -1,5 +1,6 @@
 package com.juggist.jcore.service;
 
+import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.ResponseBean;
 import com.juggist.jcore.bean.SessionBean;
 
@@ -18,4 +19,8 @@ public interface SessionServiceApi {
     @FormUrlEncoded
     @POST("api.php")
     Observable<ResponseBean<SessionBean>> getSessionList(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<ProductBean>> getProductList(@FieldMap HashMap<String,String> params);
 }

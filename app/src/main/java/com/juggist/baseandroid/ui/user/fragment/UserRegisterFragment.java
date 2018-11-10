@@ -2,7 +2,7 @@ package com.juggist.baseandroid.ui.user.fragment;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;

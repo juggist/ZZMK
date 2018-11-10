@@ -1,7 +1,7 @@
 package com.juggist.jcore.http.exception;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.juggist.jcore.http.ErrorCode;
 

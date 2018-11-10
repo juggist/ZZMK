@@ -149,7 +149,7 @@
         android:layout_height="@dimen/dp_98"
         android:layout_alignParentBottom="true">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -184,7 +184,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/title_total_money"
                 app:layout_constraintLeft_toRightOf="@+id/title_total_money" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_order_submit"

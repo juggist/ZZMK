@@ -2,7 +2,7 @@ package com.juggist.jcore;
 
 import android.app.Application;
 import android.os.StrictMode;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.juggist.jcore.utils.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;

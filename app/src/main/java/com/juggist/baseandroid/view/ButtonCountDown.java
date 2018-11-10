@@ -13,7 +13,7 @@ import com.juggist.jcore.utils.StringUtil;
  * @date 2018/11/8 9:40 AM
  * 自定义倒计时按钮
  */
-public class ButtonCountDown extends android.support.v7.widget.AppCompatButton {
+public class ButtonCountDown extends androidx.appcompat.widget.AppCompatButton {
     private Context context;
     private String tag;
     private long millisInFuture, countDownInterval;

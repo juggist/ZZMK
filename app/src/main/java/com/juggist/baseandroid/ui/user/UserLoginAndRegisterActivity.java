@@ -1,7 +1,7 @@
 package com.juggist.baseandroid.ui.user;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.juggist.baseandroid.R;

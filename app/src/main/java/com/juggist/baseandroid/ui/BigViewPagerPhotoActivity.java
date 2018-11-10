@@ -2,13 +2,12 @@ package com.juggist.baseandroid.ui;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.ActionSheetDialog;
@@ -17,6 +16,8 @@ import com.juggist.jcore.utils.ImageUtils;
 
 import java.util.ArrayList;
 
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 public class BigViewPagerPhotoActivity extends BackBaseActivity {
@@ -84,37 +85,36 @@ public class BigViewPagerPhotoActivity extends BackBaseActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-//            final PhotoView img = new PhotoView(BigViewPagerPhotoActivity.this);// 构造textView对象
-//            img.setBackgroundColor(0xff000000);
-//            Glide.with(BigViewPagerPhotoActivity.this).load(pics.get(position)).into(img);
-//            img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-//                    ViewGroup.LayoutParams.FILL_PARENT));
-//            container.addView(img);
-//
-//            img.setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    new ActionSheetDialog(BigViewPagerPhotoActivity.this)
-//                            .builder()
-//                            .setTitle("是否保存图片")
-//                            .setCancelable(true)
-//                            .setCanceledOnTouchOutside(false)
-//                            .addSheetItem("确定", ActionSheetDialog.SheetItemColor.Blue,
-//                                    new ActionSheetDialog.OnSheetItemClickListener() {
-//                                        @Override
-//                                        public void onClick(int which) {
-//                                            tmpImg = img;
-//                                            tmpImg.setTag(pics.get(position));
-////                                            PermissionGen.needPermission(BigViewPagerPhotoActivity.this, 100, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//                                        }
-//                                    })
-//                            .show();
-//
-//                    return false;
-//                }
-//            });
-//            return img;
-            return null;
+            final PhotoView img = new PhotoView(BigViewPagerPhotoActivity.this);// 构造textView对象
+            img.setBackgroundColor(0xff000000);
+            Glide.with(BigViewPagerPhotoActivity.this).load(pics.get(position)).into(img);
+            img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                    ViewGroup.LayoutParams.FILL_PARENT));
+            container.addView(img);
+
+            img.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    new ActionSheetDialog(BigViewPagerPhotoActivity.this)
+                            .builder()
+                            .setTitle("是否保存图片")
+                            .setCancelable(true)
+                            .setCanceledOnTouchOutside(false)
+                            .addSheetItem("确定", ActionSheetDialog.SheetItemColor.Blue,
+                                    new ActionSheetDialog.OnSheetItemClickListener() {
+                                        @Override
+                                        public void onClick(int which) {
+                                            tmpImg = img;
+                                            tmpImg.setTag(pics.get(position));
+//                                            PermissionGen.needPermission(BigViewPagerPhotoActivity.this, 100, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                                        }
+                                    })
+                            .show();
+
+                    return false;
+                }
+            });
+            return img;
         }
 
         @Override

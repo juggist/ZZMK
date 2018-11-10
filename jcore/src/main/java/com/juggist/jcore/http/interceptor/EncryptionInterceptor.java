@@ -1,7 +1,7 @@
 package com.juggist.jcore.http.interceptor;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.juggist.jcore.utils.EncryptUtil;

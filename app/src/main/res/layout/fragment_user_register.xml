@@ -35,7 +35,7 @@
             app:textSize="26" />
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_130"
         android:background="@drawable/input_container_bg">
@@ -72,7 +72,7 @@
             app:textLeftDrawableNormal="@drawable/register_icon_number"
             app:textLeftDrawableSelect="@drawable/register_icon_number_pre"
             app:textSize="26" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:visibility="gone"
@@ -100,7 +100,7 @@
             app:textSize="26" />
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_130"
@@ -136,7 +136,7 @@
             app:textLeftDrawableNormal="@drawable/register_icon_code"
             app:textLeftDrawableSelect="@drawable/register_icon_code_pre"
             app:textSize="26" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@ package com.juggist.jcore.utils;
  * @date 2018/11/8 5:10 PM
  */
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 
 import java.text.DateFormat;

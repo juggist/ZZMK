@@ -1,7 +1,7 @@
 package com.juggist.baseandroid.ui.home;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +24,7 @@ import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import butterknife.BindView;
 
 /**
@@ -76,7 +77,7 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                toSessionActivity();
+//                toSessionActivity();
             }
         });
         //网络异常，点击屏幕重新加载
@@ -114,8 +115,13 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
      * 跳转专场
      */
     @Override
-    public void toSessionActivity() {
-        startActivity(new Intent(getActivity(), SessionActivity.class));
+    public void toSessionActivity(String group_name,String group_id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("group_name",group_name);
+        bundle.putString("group_id",group_id);
+        Intent intent = new Intent(getActivity(),SessionActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**

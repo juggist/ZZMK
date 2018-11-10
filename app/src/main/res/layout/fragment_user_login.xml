@@ -35,7 +35,7 @@
             app:textSize="26" />
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_130"
         android:background="@drawable/input_container_bg">
@@ -73,7 +73,7 @@
             app:textLeftDrawableNormal="@drawable/login_icon_pin"
             app:textLeftDrawableSelect="@drawable/login_icon_pin_pre"
             app:textSize="26" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btn_login"

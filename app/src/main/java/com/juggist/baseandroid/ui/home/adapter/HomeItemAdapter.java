@@ -70,14 +70,8 @@ public class HomeItemAdapter extends BaseAdapter {
         }else{
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.ibtn_session_join.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listener != null)
-                    listener.toSessionActivity();
-            }
-        });
-        SessionBean.DataBean item = sessionBeans.get(position);
+
+        final SessionBean.DataBean item = sessionBeans.get(position);
         Glide.with(context).load(item.getGroup_pic()).into(vh.iv_session_icon);
         vh.tv_session_theme.setText(item.getGroup_name());
         vh.tv_session_start_time.setText(item.getSort_number() + "款   " + TimeUtils.millis2String(Long.parseLong(item.getPublic_time()),new SimpleDateFormat("MM-dd")) + "  开场");
@@ -85,6 +79,14 @@ public class HomeItemAdapter extends BaseAdapter {
         vh.tv_session_end_time.setText(TimeUtils.millis2String(TimeUtils.string2Millis(item.getEnd_time()),new SimpleDateFormat("MM-dd HH:mm")));
 
         updateProductViews(vh.ll_views,item.getGoods_list());
+
+        vh.ibtn_session_join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null)
+                    listener.toSessionActivity(item.getGroup_name(),item.getId());
+            }
+        });
         return convertView;
     }
 
@@ -107,7 +109,7 @@ public class HomeItemAdapter extends BaseAdapter {
         private LinearLayout ll_views;
     }
     public interface OnClickListener{
-        void toSessionActivity();
+        void toSessionActivity(String group_name,String group_id);
     }
     public void update(ArrayList<SessionBean.DataBean> sessionBeans){
         this.sessionBeans.clear();

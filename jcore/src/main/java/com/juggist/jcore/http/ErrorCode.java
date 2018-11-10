@@ -22,7 +22,9 @@ public enum ErrorCode {
     /**
      * 用户信息
      */
-    USER_INFO_OUT_OF_LENGTH("USER_INFO_OUT_OF_LENGTH","用户信息重叠")
+    USER_INFO_OUT_OF_LENGTH("USER_INFO_OUT_OF_LENGTH","用户信息重叠"),
+
+    DATA_NULL("DATA_NULL","获取数据失败")
     ;
 
 
