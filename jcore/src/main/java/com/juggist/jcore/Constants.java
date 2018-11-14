@@ -21,6 +21,10 @@ public class Constants {
 
     public static class ERROR{
         public static final String DATA_IS_NULL = "数据获取失败";
+        public static final String DATA_OUT_OF_LENGTH = "数据不存在";
+
+        public static final String SHOPCAR_UPDATE_NUM_OUT_OF_LENGTH = "修改商品数量异常";
+
     }
     public static class URL{
 //        public static final String BASE = "http://47.106.109.194/";

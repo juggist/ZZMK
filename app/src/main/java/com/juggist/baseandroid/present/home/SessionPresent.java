@@ -17,7 +17,7 @@ public class SessionPresent implements SessionContract.Present {
     private SessionContract.View view;
     private ISessionService sessionService;
 
-    private int page = 0;
+    private int page = 1;
     private static final int page_size = 10;
     private String group_id;
     private ArrayList<ProductBean.DataBean.GoodsListBean> totalProducts = new ArrayList<>();
@@ -32,7 +32,7 @@ public class SessionPresent implements SessionContract.Present {
 
     @Override
     public void refreshOnSellProductsList() {
-        page = 0;
+        page = 1;
         getProductList();
     }
 
@@ -51,7 +51,7 @@ public class SessionPresent implements SessionContract.Present {
                  * 数据
                  */
                 //添加数据
-                if(page == 0){//刷新
+                if(page == 1){//刷新
                     totalProducts.clear();
                 }
                 totalProducts.addAll(goodsListBeans);
@@ -63,7 +63,7 @@ public class SessionPresent implements SessionContract.Present {
                 if(view == null)
                     return;
                 view.dismissLoading();
-                if(page == 0){//刷新
+                if(page == 1){//刷新
                     if(goodsListBeans.size() == 0){ //页面数据为空
                         view.getOnSellProductsListEmpty();
                     }else if(goodsListBeans.size() < page_size){
@@ -111,7 +111,7 @@ public class SessionPresent implements SessionContract.Present {
         if(view == null)
             return;
         view.dismissLoading();
-        if(page == 0){//刷新
+        if(page == 1){//刷新
             if(totalProducts.size() == 0){//无数据
                   view.getOnSellProductsListEmptyFail(extMsg);
             }else{//有数据

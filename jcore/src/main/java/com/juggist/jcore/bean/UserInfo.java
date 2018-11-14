@@ -33,4 +33,37 @@ public class UserInfo extends BaseBean {
             return "";
         }
     }
+    public static String headPic(){
+        UserBean userBean = SPUtil.getObjectFromShare(Constants.SP.USER_INFO);
+        if(userBean != null){
+            return userBean.getPhoto();
+        }else{
+            return "";
+        }
+    }
+    public static String nickName(){
+        UserBean userBean = SPUtil.getObjectFromShare(Constants.SP.USER_INFO);
+        if(userBean != null){
+            return userBean.getNickname();
+        }else{
+            return "";
+        }
+    }
+    public static int todayOrdersNumber(){
+        UserBean userBean = SPUtil.getObjectFromShare(Constants.SP.USER_INFO);
+        if(userBean != null){
+            return userBean.getToday_orders_number();
+        }else{
+            return 0;
+        }
+    }
+    public static double totalPrice(){
+        UserBean userBean = SPUtil.getObjectFromShare(Constants.SP.USER_INFO);
+        if(userBean != null){
+            return userBean.getTotal_price();
+        }else{
+            return 0.0;
+        }
+    }
+
 }

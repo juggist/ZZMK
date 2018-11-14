@@ -7,12 +7,17 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
+import com.juggist.baseandroid.eventbus.HomeTabChangeEvent;
 import com.juggist.baseandroid.ui.buy.BuyFragment;
 import com.juggist.baseandroid.ui.discover.DiscoverFragment;
 import com.juggist.baseandroid.ui.home.HomeFragment;
 import com.juggist.baseandroid.ui.mine.MineFragment;
 import com.juggist.baseandroid.view.FragmentTabHost;
 import com.juggist.jcore.base.BaseActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -37,7 +42,15 @@ public class HomeActivity extends BaseActivity {
             MineFragment.class,
     };
 
-    private static final int PAGE_HOME = 0,PAGE_DISCOVER =1,PAGE_BUY = 2,PAGE_MINE = 3;
+    public static final int PAGE_HOME = 0,PAGE_DISCOVER =1,PAGE_BUY = 2,PAGE_MINE = 3;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_home;
@@ -45,7 +58,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         tabhost.setup(this, getSupportFragmentManager(), R.id.fl_container);
         tabhost.getTabWidget().setDividerDrawable(R.color.white);
         mTabStringArray = getResources().getStringArray(R.array.main_bottom_nav);
@@ -63,7 +75,6 @@ public class HomeActivity extends BaseActivity {
                     });
         }
         tabhost.setCurrentTab(0);
-
     }
 
     @Override
@@ -73,7 +84,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        EventBus.getDefault().register(this);
     }
 
     private View getTabItemView(int index) {
@@ -89,16 +100,25 @@ public class HomeActivity extends BaseActivity {
         switch (position){
             case PAGE_HOME:
                 tabhost.setCurrentTab(PAGE_HOME);
+                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
                 break;
             case PAGE_DISCOVER:
                 tabhost.setCurrentTab(PAGE_DISCOVER);
+                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
                 break;
             case PAGE_BUY:
                 tabhost.setCurrentTab(PAGE_BUY);
+                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
                 break;
             case PAGE_MINE:
                 tabhost.setCurrentTab(PAGE_MINE);
+                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.font_select).keyboardEnable(true).init();
+
                 break;
         }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void tabChange(HomeTabChangeEvent.TabChange event){
+        switchFragment(event.getPosition());
     }
 }

@@ -2,8 +2,6 @@ package com.juggist.jcore.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -13,6 +11,8 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.juggist.jcore.R;
 import com.juggist.jcore.utils.DynamicDensityGenerate;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 
 /**
@@ -35,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initListener();
         initData();
         initSystemStatusBar();
+
 
     }
     @Override

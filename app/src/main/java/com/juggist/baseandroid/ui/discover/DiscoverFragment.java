@@ -185,8 +185,8 @@ public class DiscoverFragment extends BaseFragment {
 
         @Override
         public void showErrorDialog(String message)  {
-            ToastUtil.showLong(message);
 
+            ToastUtil.showLong(message);
         }
 
         @Override

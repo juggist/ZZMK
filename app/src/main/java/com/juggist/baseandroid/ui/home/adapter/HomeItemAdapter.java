@@ -53,7 +53,7 @@ public class HomeItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
         if(convertView == null){
             vh = new ViewHolder();
@@ -84,7 +84,7 @@ public class HomeItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if(listener != null)
-                    listener.toSessionActivity(item.getGroup_name(),item.getId());
+                    listener.toSessionActivity(position);
             }
         });
         return convertView;
@@ -109,7 +109,7 @@ public class HomeItemAdapter extends BaseAdapter {
         private LinearLayout ll_views;
     }
     public interface OnClickListener{
-        void toSessionActivity(String group_name,String group_id);
+        void toSessionActivity(int position);
     }
     public void update(ArrayList<SessionBean.DataBean> sessionBeans){
         this.sessionBeans.clear();

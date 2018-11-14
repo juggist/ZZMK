@@ -31,6 +31,34 @@
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <include layout="@layout/view_net_error"></include>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/shoppingCart"
+            android:layout_marginLeft="@dimen/dp_20">
+
+            <ImageView
+                android:id="@+id/iv_shoppingcart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_shoppingcart" />
+
+            <TextView
+                android:id="@+id/tv_shopping_num"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="-20dp"
+                android:gravity="center"
+                android:layout_marginRight="-20dp"
+                android:background="@drawable/textview_circle_red_bg"
+                android:text="1"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_20"
+                app:layout_constraintRight_toRightOf="@+id/iv_shoppingcart"
+                app:layout_constraintTop_toTopOf="@+id/iv_shoppingcart" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 
 </LinearLayout>

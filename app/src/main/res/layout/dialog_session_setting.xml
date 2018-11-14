@@ -68,6 +68,7 @@
             android:layout_toLeftOf="@+id/unit"
             android:background="@drawable/edittext_strok_bg"
             android:inputType="number"
+            android:maxLength="4"
             android:textColor="@color/font_select"
             android:textSize="@dimen/sp_28" />
 

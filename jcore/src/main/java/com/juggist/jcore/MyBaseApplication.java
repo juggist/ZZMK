@@ -2,19 +2,19 @@ package com.juggist.jcore;
 
 import android.app.Application;
 import android.os.StrictMode;
-import androidx.annotation.Nullable;
 
 import com.juggist.jcore.utils.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
+import androidx.annotation.Nullable;
+
 /**
  * @author juggist
  * @date 2018/10/31 10:54 AM
  */
 public class MyBaseApplication extends Application {
-
     private static MyBaseApplication instance;
 
     public static MyBaseApplication getInstance() {
@@ -29,6 +29,7 @@ public class MyBaseApplication extends Application {
         setLogger();
         //注册工具类
         Utils.init(this);
+
     }
 
     /**

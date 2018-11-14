@@ -1,9 +1,11 @@
 package com.juggist.baseandroid.ui.home.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -56,6 +58,10 @@ public class SessionItemAdapter extends BaseAdapter {
             vh.tv_session_old_price = convertView.findViewById(R.id.tv_session_old_price);
             vh.tv_session_weight = convertView.findViewById(R.id.tv_session_weight);
             vh.tv_session_new_price = convertView.findViewById(R.id.tv_session_new_price);
+            vh.tv_session_location = convertView.findViewById(R.id.tv_session_location);
+            vh.tv_session_counter_price = convertView.findViewById(R.id.tv_session_counter_price);
+            vh.tv_session_no = convertView.findViewById(R.id.tv_session_no);
+            vh.tv_session_vip_price = convertView.findViewById(R.id.tv_session_vip_price);
             vh.gv = convertView.findViewById(R.id.gv);
             vh.ibtn_sale = convertView.findViewById(R.id.ibtn_sale);
             vh.ibtn_buy = convertView.findViewById(R.id.ibtn_buy);
@@ -64,6 +70,30 @@ public class SessionItemAdapter extends BaseAdapter {
         }else{
             vh = (ViewHolder) convertView.getTag();
         }
+
+
+
+        final ProductBean.DataBean.GoodsListBean item = productList.get(position);
+        ArrayList<String> mainPics = (ArrayList<String>) item.getMain_pic();
+        if(mainPics != null && mainPics.size() > 0){
+            Glide.with(context).load(mainPics.get(0)).into(vh.iv_session_icon);
+            vh.gv.setAdapter(new Adapter(mainPics));
+        }
+        vh.tv_session_name.setText(item.getGoods_name());
+        vh.tv_session_old_price.setText("代购价:￥" + item.getPrice());
+        ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean> spes = (ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean>) item.getAttr();
+        if(spes != null && spes.size() > 0){
+            ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean.ValueBean> valus = (ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean.ValueBean>) spes.get(0).getValue();
+            if(valus != null && valus.size() > 0){
+                vh.tv_session_weight.setText(spes.get(0).getAttrname() + ":" + valus.get(0).getContent());
+            }
+        }
+        vh.tv_session_new_price.setText("￥" + item.getWholesale_price());
+        vh.tv_session_location.setText(item.getMail_type_name());
+        vh.tv_session_counter_price.setText(item.getShoppe() == null ? "" : "专柜价:￥" + item.getShoppe());
+        vh.tv_session_counter_price.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        vh.tv_session_no.setText("货号:" + item.getSn());
+        vh.tv_session_vip_price.setText("升级享受会员价格:￥" + item.getWholesale_price());
 
         vh.ibtn_download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,32 +106,22 @@ public class SessionItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if( listener != null)
-                    listener.buy();
+                    listener.buy(item);
             }
         });
-
-        ProductBean.DataBean.GoodsListBean item = productList.get(position);
-        ArrayList<String> mainPics = (ArrayList<String>) item.getMain_pic();
-        if(mainPics != null && mainPics.size() > 0){
-            Glide.with(context).load(mainPics.get(0)).into(vh.iv_session_icon);
-            vh.gv.setAdapter(new Adapter(mainPics));
-        }
-        vh.tv_session_name.setText(item.getGoods_name());
-        vh.tv_session_old_price.setText(item.getPrice());
-        ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean> spes = (ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean>) item.getAttr();
-        if(spes != null && spes.size() > 0){
-            ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean.ValueBean> valus = (ArrayList<ProductBean.DataBean.GoodsListBean.AttrBean.ValueBean>) spes.get(0).getValue();
-            if(valus != null && valus.size() > 0){
-                vh.tv_session_weight.setText(spes.get(0).getAttrname() + ":" + valus.get(0).getContent());
+        vh.gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(listener != null)
+                    listener.toBigPic((ArrayList<String>) item.getMain_pic(),position);
             }
-        }
-        vh.tv_session_new_price.setText(item.getWholesale_price());
+        });
         return convertView;
     }
 
     private static class ViewHolder {
         private ImageView iv_session_icon;
-        private TextView tv_session_name,tv_session_old_price,tv_session_weight,tv_session_new_price;
+        private TextView tv_session_name,tv_session_old_price,tv_session_weight,tv_session_new_price,tv_session_location,tv_session_counter_price,tv_session_no,tv_session_vip_price;
         private GridView gv;
         private ImageButton ibtn_sale,ibtn_buy,ibtn_download;
     }
@@ -149,7 +169,8 @@ public class SessionItemAdapter extends BaseAdapter {
     }
     public interface Listener{
         void download();
-        void buy();
+        void buy(ProductBean.DataBean.GoodsListBean goodsListBean);
+        void toBigPic(ArrayList<String> picUrls,int position);
     }
 
     public void update(ArrayList<ProductBean.DataBean.GoodsListBean> productList){

@@ -1,5 +1,6 @@
 package com.juggist.baseandroid.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,8 +9,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
+import com.juggist.baseandroid.eventbus.HomeTabChangeEvent;
 import com.juggist.baseandroid.present.home.SessionPresent;
 import com.juggist.baseandroid.ui.BackBaseActivity;
+import com.juggist.baseandroid.ui.BigViewPagerPhotoActivity;
+import com.juggist.baseandroid.ui.HomeActivity;
 import com.juggist.baseandroid.ui.home.adapter.SessionItemAdapter;
 import com.juggist.baseandroid.ui.home.adapter.SessionItemAdapter.Listener;
 import com.juggist.baseandroid.utils.ToastUtil;
@@ -21,9 +25,12 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 
@@ -39,6 +46,10 @@ public class SessionActivity extends BackBaseActivity {
     TextView lvTv;
     @BindView(R.id.lv_ll)
     LinearLayout lvLl;
+    @BindView(R.id.tv_shopping_num)
+    TextView tvShoppingNum;
+    @BindView(R.id.shoppingCart)
+    ConstraintLayout shoppingCart;
 
     private SessionItemAdapter adapter;
     private SessionContract.Present present;
@@ -80,9 +91,17 @@ public class SessionActivity extends BackBaseActivity {
         lvLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lvTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))){
+                if (lvTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))) {
                     present.start();
                 }
+            }
+        });
+        //跳转购物车页面
+        shoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new HomeTabChangeEvent.TabChange(HomeActivity.PAGE_BUY));
+                SessionActivity.this.finish();
             }
         });
     }
@@ -92,14 +111,19 @@ public class SessionActivity extends BackBaseActivity {
         Bundle bundle = getIntent().getExtras();
         String group_name = bundle.getString("group_name");
         String group_id = bundle.getString("group_id");
-        new SessionPresent(new ViewModel(),group_id);
+
+        tv_title.setText(group_name);
+
+        new SessionPresent(new ViewModel(), group_id);
         initAdapter();
         present.start();
+
+
     }
 
     @Override
     protected String getTitile() {
-        return getResources().getString(R.string.session_title);
+        return null;
     }
 
     @Override
@@ -108,10 +132,11 @@ public class SessionActivity extends BackBaseActivity {
         super.onDestroy();
     }
 
-    private void parseBundle(){
+    private void parseBundle() {
 
 
     }
+
     /**
      * 初始化适配器
      */
@@ -119,6 +144,8 @@ public class SessionActivity extends BackBaseActivity {
         adapter = new SessionItemAdapter(this, new AdapterListener());
         lv.setAdapter(adapter);
     }
+
+
     /**
      * 适配器listener
      */
@@ -132,11 +159,21 @@ public class SessionActivity extends BackBaseActivity {
         }
 
         @Override
-        public void buy() {
-            DialogForBuy dfb = new DialogForBuy();
+        public void buy(ProductBean.DataBean.GoodsListBean goodsListBean) {
+            DialogForBuy dfb = new DialogForBuy(goodsListBean);
             FragmentTransaction ft = SessionActivity.this.getSupportFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             dfb.show(ft, "dfb");
+        }
+
+        @Override
+        public void toBigPic(ArrayList<String> picUrls, int position) {
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList("picUrl", picUrls);
+            bundle.putInt("position", position);
+            Intent intent = new Intent(SessionActivity.this, BigViewPagerPhotoActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 

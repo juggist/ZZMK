@@ -41,18 +41,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
 
-    /**
-     * image
-     */
-    //glide
-    api 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
     /**
      * bus
+     * eventBus
      */
-    //eventBus
     api 'org.greenrobot:eventbus:3.1.1'
-    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
     /**
      * utils
      */
@@ -73,39 +67,31 @@ dependencies {
     /**
      * 支持Gson解析
      */
-
     api 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     /**
      * 依赖注入
+     * dagger
      */
-    //dagger
     api 'com.google.dagger:dagger:2.19'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
 
     /**
      * 动态权限
+     * PermissionsDispatcher
      */
-    //PermissionsDispatcher
     api ("com.github.hotchemi:permissionsdispatcher:3.3.1") { exclude module: 'support-v13' }
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.3.1'
 
     /**
-     * 自动注解view
-     */
-    //butterknife
-    api 'com.jakewharton:butterknife:9.0.0-rc1'
-    //这个注解必须放在app module里 ，如果放在library module会报错
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
-    /**
      * 沉浸式状态栏
+     * immersionbar
      */
-    //immersionbar
     api 'com.gyf.barlibrary:barlibrary:2.3.0'
     /**
      * 下拉刷新
+     * smartRefreshLayout
      */
-    //smartRefreshLayout
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
     api 'androidx.appcompat:appcompat:1.0.2'//版本 23以上（必须）
@@ -117,6 +103,19 @@ dependencies {
      * 图片展示工具
      */
     api 'com.github.chrisbanes:PhotoView:2.2.0'
+    /**
+     * 导航栏
+     */
+    api 'com.github.hackware1993:MagicIndicator:1.5.0'
+
+    /**
+     * 自动注解view
+     * butterknife
+     */
+    api 'com.jakewharton:butterknife:9.0.0-rc1'
+    //这行必须写在appmodule里，否则报错
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+
     /**
      * tools
      */

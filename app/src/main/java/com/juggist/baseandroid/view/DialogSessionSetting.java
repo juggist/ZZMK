@@ -3,9 +3,7 @@ package com.juggist.baseandroid.view;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -23,7 +21,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
+import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.jcore.utils.KeyboardUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * @author juggist
@@ -41,6 +44,7 @@ public class DialogSessionSetting extends DialogFragment {
 
     private int selectIndex = -1;
 
+    private int addPrice = 0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +76,10 @@ public class DialogSessionSetting extends DialogFragment {
         btn_ensure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(!TextUtils.isEmpty(et.getText().toString())){
+                    addPrice = Integer.parseInt(et.getText().toString());
+                }
+                ToastUtil.showLong("加价:" + addPrice);
             }
         });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,6 +88,17 @@ public class DialogSessionSetting extends DialogFragment {
                 selectIndex = position;
                 et.clearFocus();
                 adapter.notifyDataSetChanged();
+                switch (position){
+                    case 0:
+                        addPrice = 0;
+                        break;
+                    case 1:
+                        addPrice = 10;
+                        break;
+                    case 2:
+                        addPrice = 20;
+                        break;
+                }
             }
         });
         et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -96,6 +114,7 @@ public class DialogSessionSetting extends DialogFragment {
                 }
             }
         });
+
     }
 
     @Override
@@ -129,7 +148,7 @@ public class DialogSessionSetting extends DialogFragment {
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
 
         @Override
@@ -154,7 +173,18 @@ public class DialogSessionSetting extends DialogFragment {
             } else {
                 vh = (ViewHolder) convertView.getTag();
             }
-            vh.tv.setText("不加价");
+            String text = "不加价";
+            switch (position){
+                case 0:
+                    break;
+                case 1:
+                    text = "加价10元";
+                    break;
+                case 2:
+                    text = "加价20元";
+                    break;
+            }
+            vh.tv.setText(text);
             if (selectIndex == position) {
                 vh.iv.setVisibility(View.VISIBLE);
             } else {

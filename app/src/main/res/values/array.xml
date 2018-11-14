@@ -11,4 +11,28 @@
         <item>购物</item>
         <item>我的</item>
     </string-array>
+
+    <string-array name="order">
+        <item>待付款</item>
+        <item>待发货</item>
+        <item>待收货</item>
+        <item>售后服务</item>
+    </string-array>
+
+    <string-array name="order_inside">
+        <item>全部</item>
+        <item>待付款</item>
+        <item>待发货</item>
+        <item>待收货</item>
+        <item>售后服务</item>
+    </string-array>
+
+    <string-array name="setting">
+        <item>提现管理</item>
+        <item>地址管理</item>
+        <item>我的优惠券</item>
+        <item>联系客服</item>
+        <item>系统设置</item>
+        <item>系统设置</item>
+    </string-array>
 </resources>

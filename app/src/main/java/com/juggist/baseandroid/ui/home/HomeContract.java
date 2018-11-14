@@ -23,6 +23,8 @@ public class HomeContract {
 
         void getSessionListEmptyFail(String extMsg);
         void getSessionListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+
+        void toSession(String group_name,String group_id);
     }
 
     public interface Present extends BasePresent {
@@ -31,5 +33,7 @@ public class HomeContract {
         void refreshSessionList();
 
         void loadMoreSessionList();
+
+        void toSession(int position);
     }
 }

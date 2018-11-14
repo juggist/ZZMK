@@ -48,6 +48,8 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
     private HomeContract.Present present;
     private HomeItemAdapter adapter;
 
+    private ViewModel viewModel;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_home;
@@ -77,7 +79,8 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                toSessionActivity();
+                //存在header，所以原来的position会增加一个
+                present.toSession(position - 1);
             }
         });
         //网络异常，点击屏幕重新加载
@@ -93,7 +96,8 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
 
     @Override
     protected void initData() {
-        new HomePresent(new ViewModel());
+        viewModel = new ViewModel();
+        new HomePresent(viewModel);
         initBanner();
         initAdapter();
         present.start();
@@ -115,13 +119,8 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
      * 跳转专场
      */
     @Override
-    public void toSessionActivity(String group_name,String group_id) {
-        Bundle bundle = new Bundle();
-        bundle.putString("group_name",group_name);
-        bundle.putString("group_id",group_id);
-        Intent intent = new Intent(getActivity(),SessionActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+    public void toSessionActivity(int position) {
+        present.toSession(position);
     }
 
     /**
@@ -206,6 +205,16 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
             } else {
                 srl.finishLoadMore();
             }
+        }
+
+        @Override
+        public void toSession(String group_name, String group_id) {
+            Bundle bundle = new Bundle();
+            bundle.putString("group_name",group_name);
+            bundle.putString("group_id",group_id);
+            Intent intent = new Intent(getActivity(),SessionActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
 
         @Override

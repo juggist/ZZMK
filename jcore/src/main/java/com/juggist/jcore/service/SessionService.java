@@ -3,14 +3,18 @@ package com.juggist.jcore.service;
 import com.juggist.jcore.Constants;
 import com.juggist.jcore.base.BaseService;
 import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.bean.OrderBean;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.SessionBean;
+import com.juggist.jcore.bean.ShopCarBean;
+import com.juggist.jcore.bean.UserInfo;
 import com.juggist.jcore.http.ApiServiceGenerator;
 import com.juggist.jcore.http.ErrorCode;
 import com.juggist.jcore.http.exception.ApiCodeErrorException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -78,4 +82,95 @@ public class SessionService extends BaseService implements ISessionService {
                     }
                 }, new ConsumerThrowable<>(callback));
     }
+
+    /**
+     * 购物车 增删改查
+     *
+     * @param callback
+     */
+    @Override
+    public void queryShopCar(final ResponseCallback<ArrayList<ShopCarBean>> callback) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("controller", "Member");
+        params.put("action", "getShoppingCardGoodsList");
+        params.put("user_id", UserInfo.userId());
+        params.put("token", UserInfo.token());
+        this.getFilterResponse(sessionServiceApi.getShopCar(params), Schedulers.io())
+                .map(new Function<ArrayList<ShopCarBean>, ArrayList<ShopCarBean>>() {
+                    @Override
+                    public ArrayList<ShopCarBean> apply(ArrayList<ShopCarBean> shopCarBeans) throws Exception {
+                        if (shopCarBeans != null) {
+                            return shopCarBeans;
+                        } else {
+                            throw new ApiCodeErrorException(ErrorCode.DATA_NULL);
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ArrayList<ShopCarBean>>() {
+                    @Override
+                    public void accept(ArrayList<ShopCarBean> shopCarBeans) throws Exception {
+                        callback.onSucceed(shopCarBeans);
+                    }
+                }, new ConsumerThrowable<>(callback));
+    }
+
+    @Override
+    public void addShopCar(String coupon_id, ResponseCallback<String> callback) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("controller", "Member");
+        params.put("action", "getShoppingCardGoodsList");
+        params.put("user_id", UserInfo.userId());
+        params.put("token", UserInfo.token());
+    }
+
+    @Override
+    public void deleteShopCar(String goods_id, ResponseCallback<String> callback) {
+
+    }
+
+    @Override
+    public void updateShopCar(String goods_id, String goods_num, ResponseCallback<String> callback) {
+
+    }
+
+    @Override
+    public void getOrderList(String page, String page_size, String condition, final ResponseCallback<List<OrderBean>> callback) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("controller", "Member");
+        params.put("action", "getOrdersList");
+        params.put("user_id", UserInfo.userId());
+        params.put("token", UserInfo.token());
+        params.put("page", page);
+        params.put("page_size", page_size);
+        params.put("condition", condition);
+        this.getFilterResponse(sessionServiceApi.getOrderList(params),Schedulers.io())
+                .map(new Function<List<OrderBean>, List<OrderBean>>() {
+                    @Override
+                    public List<OrderBean> apply(List<OrderBean> orderBeans) throws Exception {
+                        if(orderBeans != null){
+                            return orderBeans;
+                        }
+                        throw new ApiCodeErrorException(ErrorCode.DATA_NULL);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<OrderBean>>() {
+                    @Override
+                    public void accept(List<OrderBean> orderBeans) throws Exception {
+                        callback.onSucceed(orderBeans);
+                    }
+                },new ConsumerThrowable<>(callback));
+    }
+
+//    @Override
+//    public void updateShopCar(String goods_id, String goods_num) {
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("controller", "Member");
+//        params.put("action", "getShoppingCardGoodsList");
+//        params.put("user_id", UserInfo.userId());
+//        params.put("token", UserInfo.token());
+//        params.put("goods_id", goods_id);
+//        params.put("goods_num", goods_num);
+//    }
 }

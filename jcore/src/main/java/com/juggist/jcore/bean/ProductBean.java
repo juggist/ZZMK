@@ -91,6 +91,9 @@ public class ProductBean extends BaseBean {
             private String         price;
             private String         user_price;
             private String         wholesale_price;
+            private String mail_type;
+            private String mail_type_name;
+            private String shoppe;
             private String         sn;
             private List<String>   main_pic;
             private List<AttrBean> attr;
@@ -157,6 +160,30 @@ public class ProductBean extends BaseBean {
 
             public void setAttr(List<AttrBean> attr) {
                 this.attr = attr;
+            }
+
+            public String getMail_type() {
+                return mail_type;
+            }
+
+            public void setMail_type(String mail_type) {
+                this.mail_type = mail_type;
+            }
+
+            public String getMail_type_name() {
+                return mail_type_name;
+            }
+
+            public void setMail_type_name(String mail_type_name) {
+                this.mail_type_name = mail_type_name;
+            }
+
+            public String getShoppe() {
+                return shoppe;
+            }
+
+            public void setShoppe(String shoppe) {
+                this.shoppe = shoppe;
             }
 
             public static class AttrBean extends BaseBean{

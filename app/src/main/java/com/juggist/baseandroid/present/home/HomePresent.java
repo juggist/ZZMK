@@ -22,7 +22,7 @@ public class HomePresent implements HomeContract.Present {
     private ISystemService systemService;
     private ISessionService sessionService;
 
-    private int page = 0;
+    private int page = 1;
     private static final int page_size = 10;
 
     private ArrayList<String> banners = new ArrayList<>();//banner集合
@@ -72,13 +72,24 @@ public class HomePresent implements HomeContract.Present {
 
     @Override
     public void refreshSessionList() {
-        page = 0;
+        page = 1;
         getSessionList();
     }
 
     @Override
     public void loadMoreSessionList() {
         getSessionList();
+    }
+
+    @Override
+    public void toSession(int position) {
+        if(view == null)
+            return;
+        if(position <  totalSessionBeans.size()){
+            view.toSession(totalSessionBeans.get(position).getGroup_name(),totalSessionBeans.get(position).getId());
+        }else{
+            view.showErrorDialog(Constants.ERROR.DATA_OUT_OF_LENGTH);
+        }
     }
 
     @Override
@@ -101,7 +112,7 @@ public class HomePresent implements HomeContract.Present {
                      * 数据
                      */
                     //添加数据
-                    if(page == 0){//刷新
+                    if(page == 1){//刷新
                         totalSessionBeans.clear();
                     }
                     totalSessionBeans.addAll(sessionBeans);
@@ -113,7 +124,7 @@ public class HomePresent implements HomeContract.Present {
                     if(view == null)
                         return;
                     view.dismissLoading();
-                    if(page == 0){//刷新
+                    if(page == 1){//刷新
                         if(sessionBeans.size() == 0){ //页面数据为空
                             view.getSessionListEmpty();
                         }else if(sessionBeans.size() < page_size){
@@ -156,7 +167,7 @@ public class HomePresent implements HomeContract.Present {
         if(view == null)
             return;
         view.dismissLoading();
-        if(page == 0){//刷新
+        if(page == 1){//刷新
             if(totalSessionBeans.size() == 0){//无数据
                 view.getSessionListEmptyFail(extMsg);
             }else{//有数据
