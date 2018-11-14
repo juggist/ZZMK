@@ -1,128 +1,103 @@
 package com.juggist.baseandroid.ui.discover.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
-import com.juggist.baseandroid.view.NoScrollGridView;
+import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.bean.ArticleBean;
 import com.juggist.jcore.utils.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author juggist
  * @date 2018/11/7 11:35 AM
  */
-public class DiscoverAdapter extends BaseAdapter {
+public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
 
     private Context context;
     private Listener listener;
-    private ArrayList<ArticleBean> articleBeans;
+    private List<ArticleBean> articleBeans;
 
-    public DiscoverAdapter(Context context,Listener listener) {
+    public DiscoverAdapter(int layoutResId, @Nullable List<ArticleBean> data,Context context,Listener listener) {
+        super(layoutResId, data);
         this.context = context;
         this.listener = listener;
-        articleBeans = new ArrayList<>();
+        this.articleBeans = data;
     }
 
-    @Override
-    public int getCount() {
-        return articleBeans.size();
-    }
+
 
     @Override
-    public Object getItem(int position) {
-        return articleBeans.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder vh = null;
-        if(convertView == null){
-            vh = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.adapter_discover_item,null);
-            vh.iv_header = convertView.findViewById(R.id.iv_header);
-            vh.iv_prdocut = convertView.findViewById(R.id.iv_prdocut);
-            vh.tv_name = convertView.findViewById(R.id.tv_name);
-            vh.tv_time = convertView.findViewById(R.id.tv_time);
-            vh.tv_review = convertView.findViewById(R.id.tv_review);
-            vh.tv_title = convertView.findViewById(R.id.tv_title);
-            vh.tv_content = convertView.findViewById(R.id.tv_content);
-            vh.gv_product = convertView.findViewById(R.id.gv_product);
-            vh.ll_download = convertView.findViewById(R.id.ll_download);
-            vh.ll_share = convertView.findViewById(R.id.ll_share);
-
-            convertView.setTag(vh);
-        }else{
-            vh = (ViewHolder) convertView.getTag();
-        }
-        vh.ll_download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listener != null)
-                    listener.download();
-            }
-        });
-        vh.ll_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listener != null)
-                    listener.share();
-            }
-        });
-        final ArticleBean item = articleBeans.get(position);
-        Glide.with(context).load(item.getUser_headimg()).into(vh.iv_header);
-        vh.tv_name.setText(item.getUser_name());
-        vh.tv_time.setText(TimeUtils.millis2String(Long.parseLong(item.getArticle_time()),new SimpleDateFormat("HH:mm")));
-        vh.tv_review.setText(item.getLookCount());
-        vh.tv_title.setText(item.getArticle_name());
-        vh.tv_content.setText(item.getArticle_content());
-        vh.gv_product.setVisibility(View.GONE);
-        vh.iv_prdocut.setVisibility(View.GONE);
+    protected void convert(BaseViewHolder helper, final ArticleBean item) {
+        GlideApp.with(context).load(item.getUser_headimg()).into((ImageView) helper.getView(R.id.iv_header));
+        helper.setText(R.id.tv_name,item.getUser_name())
+        .setText(R.id.tv_time,TimeUtils.millis2String(Long.parseLong(item.getArticle_time()),new SimpleDateFormat("HH:mm")))
+        .setText(R.id.tv_review,item.getLookCount())
+        .setText(R.id.tv_title,item.getArticle_name())
+        .setText(R.id.tv_content,item.getArticle_content());
+        GridView gv_product = (GridView)helper.getView(R.id.gv_product);
+        ImageView iv_prdocut = (ImageView)helper.getView(R.id.iv_prdocut);
+        gv_product.setVisibility(View.GONE);
+        iv_prdocut.setVisibility(View.GONE);
         if(item.getPic_url().size() == 1){
-            vh.iv_prdocut.setVisibility(View.VISIBLE);
-            Glide.with(context).load(item.getPic_url().get(0)).into(vh.iv_prdocut);
+            iv_prdocut.setVisibility(View.VISIBLE);
+            Glide.with(context).load(item.getPic_url().get(0)).into(iv_prdocut);
         }else if(item.getPic_url().size() > 1){
-            vh.gv_product.setVisibility(View.VISIBLE);
-            vh.gv_product.setAdapter(new Adapter(item.getPic_url()));
+            gv_product.setVisibility(View.VISIBLE);
+            gv_product.setAdapter(new Adapter(item.getPic_url()));
         }
-        vh.iv_prdocut.setOnClickListener(new View.OnClickListener() {
+        iv_prdocut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(listener != null)
                     listener.toBigPic(item.getPic_url(),0);
             }
         });
-        vh.gv_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gv_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(listener != null)
                     listener.toBigPic(item.getPic_url(),position);
             }
         });
-        return convertView;
+        helper.getView(R.id.ll_download).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null)
+                    listener.download();
+            }
+        });
+        helper.getView(R.id.ll_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null)
+                    listener.share();
+            }
+        });
     }
 
-    private static class ViewHolder{
-        private ImageView iv_header,iv_prdocut;
-        private TextView tv_name,tv_time,tv_review,tv_title,tv_content;
-        private NoScrollGridView gv_product;
-        private LinearLayout ll_download,ll_share;
+
+
+    @Override
+    public void update(List<ArticleBean> t) {
+        this.articleBeans.clear();
+        this.articleBeans.addAll(t);
+        notifyDataSetChanged();
     }
 
     /**
@@ -157,7 +132,7 @@ public class DiscoverAdapter extends BaseAdapter {
             lp.width = context.getResources().getDimensionPixelOffset(R.dimen.dp_170);
             lp.height = context.getResources().getDimensionPixelOffset(R.dimen.dp_170);
             iv.setLayoutParams(lp);
-            Glide.with(context).load(urls.get(position)).into(iv);
+            GlideApp.with(context).load(urls.get(position)).into(iv);
             return iv;
         }
     }
@@ -167,9 +142,4 @@ public class DiscoverAdapter extends BaseAdapter {
         void toBigPic(ArrayList<String> urls,int position);
     }
 
-    public void update(ArrayList<ArticleBean> articleBeans){
-        this.articleBeans.clear();
-        this.articleBeans.addAll(articleBeans);
-        notifyDataSetChanged();
-    }
 }

@@ -1,13 +1,14 @@
 package com.juggist.baseandroid.present.discover;
 
 import com.juggist.baseandroid.ui.discover.DiscoverContract;
-import com.juggist.jcore.Constants;
-import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.base.BaseView;
+import com.juggist.jcore.base.SmartRefreshResponseCallback;
 import com.juggist.jcore.bean.ArticleBean;
 import com.juggist.jcore.service.ArticleService;
 import com.juggist.jcore.service.IArticleService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author juggist
@@ -42,61 +43,58 @@ public class DiscoverPresent implements DiscoverContract.Present {
     
     private void getArticleList(){
         showLoading();
-        articleService.getArticleList(String.valueOf(page), String.valueOf(page_size), new ResponseCallback<ArrayList<ArticleBean>>() {
+        articleService.getArticleList(String.valueOf(page), String.valueOf(page_size), new SmartRefreshResponseCallback<ArticleBean>() {
             @Override
-            public void onSucceed(ArrayList<ArticleBean> articleBeans) {
-                if(articleBeans != null){
-                    /**
-                     * 数据
-                     */
-                    //添加数据
-                    if(page == 0){//刷新
-                        totalArticleBeans.clear();
-                    }
-                    totalArticleBeans.addAll(articleBeans);
-                    
-                    
-                    /**
-                     * 视图
-                     */
-                    if(view == null)
-                        return;
-                    view.dismissLoading();
-                    if(page == 0){//刷新
-                        if(articleBeans.size() == 0){ //页面数据为空
-                            view.getArticleListEmpty();
-                        }else if(articleBeans.size() < page_size){
-                            view.getArticleListSucceedEnd(totalArticleBeans,true);
-                        }else{
-                            view.getArticleListSucceed(totalArticleBeans,true);
-                        }
-                    }else{//加载更多
-                        if(articleBeans.size() >= 0 && articleBeans.size() < page_size){
-                            view.getArticleListSucceedEnd(totalArticleBeans,false);
-                        }else{
-                            view.getArticleListSucceed(totalArticleBeans,false);
-                        }
-                    }
-                    
-                    /**
-                     * 设置page 
-                     */
-                    if(articleBeans.size() == page_size){
-                        page++;
-                    }
-                }else{
-                    getArticleListError(Constants.ERROR.DATA_IS_NULL);
-                }
+            public int getPage() {
+                return page;
+            }
+
+            @Override
+            public int getPageSize() {
+                return page_size;
+            }
+
+            @Override
+            public void setPage(int page) {
+                DiscoverPresent.this.page = page;
+            }
+
+            @Override
+            public void clearTotalList() {
+                totalArticleBeans.clear();
+            }
+
+            @Override
+            public List<ArticleBean> getTotalList() {
+                return totalArticleBeans;
+            }
+
+            @Override
+            public void setTotalList(List<ArticleBean> t) {
+                totalArticleBeans.addAll(t);
+            }
+
+            @Override
+            public BaseView getView() {
+                return view;
+            }
+
+            @Override
+            public void onSucceed(List<ArticleBean> t) {
+                super.onSucceed(t);
+                dismissLoading();
             }
 
             @Override
             public void onError(String message) {
-                getArticleListError(message);
+                super.onError(message);
+                dismissLoading();
             }
 
             @Override
             public void onApiError(String state, String message) {
-                getArticleListError(message + " : " + state);
+                super.onApiError(state, message);
+                dismissLoading();
             }
         });
     }
@@ -114,19 +112,8 @@ public class DiscoverPresent implements DiscoverContract.Present {
         if(view != null)
             view.showLoading();
     }
-    private void getArticleListError(String extMsg){
-        if(view == null)
-            return; 
-        view.dismissLoading();
-        if(page == 0){//刷新
-            if(totalArticleBeans.size() == 0){//无数据
-                  view.getArticleListEmptyFail(extMsg);
-            }else{//有数据
-                  view.getArticleListFail(extMsg,true);
-            }
-        }else{//加载更多
-            view.getArticleListFail(extMsg,false);
-        }        
-        
+    private void dismissLoading(){
+        if(view != null)
+            view.dismissLoading();
     }
 }

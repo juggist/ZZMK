@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.home.HomePresent;
@@ -28,24 +27,25 @@ import com.youth.banner.Banner;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
  * 首页
  */
-public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClickListener {
+public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.lv)
-    ListView lv;
+    RecyclerView lv;
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
-    @BindView(R.id.lv_iv)
-    ImageView lvIv;
-    @BindView(R.id.lv_tv)
-    TextView lvTv;
-    @BindView(R.id.lv_ll)
-    LinearLayout lvLl;
 
+    private LinearLayout statusView;
+    private ImageView statusIv;
+    private TextView statusTv;
+
+    private View headView;
     private Banner banner;
 
     private HomeContract.Present present;
@@ -60,10 +60,14 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
 
     @Override
     protected void initView() {
-        View headView = LayoutInflater.from(getActivity()).inflate(R.layout.view_banner, null);
+        headView = LayoutInflater.from(getActivity()).inflate(R.layout.view_banner, null);
         banner = headView.findViewById(R.id.banner);
-        lv.addHeaderView(headView);
-        lv.setEmptyView(lvLl);
+
+        statusView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.view_net_error,null);
+        statusIv = statusView.findViewById(R.id.lv_iv);
+        statusTv = statusView.findViewById(R.id.lv_tv);
+
+        lv.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -79,18 +83,12 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
                 present.refreshSessionList();
             }
         });
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //存在header，所以原来的position会增加一个
-                present.toSession(position - 1);
-            }
-        });
+
         //网络异常，点击屏幕重新加载
-        lvLl.setOnClickListener(new View.OnClickListener() {
+        statusView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lvTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))){
+                if(statusTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))){
                     present.start();
                 }
             }
@@ -118,13 +116,6 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
         banner.stopAutoPlay();
     }
 
-    /**
-     * 跳转专场
-     */
-    @Override
-    public void toSessionActivity(int position) {
-        present.toSession(position);
-    }
 
     /**
      * 初始化banner
@@ -140,7 +131,21 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
      * 初始化适配器
      */
     private void initAdapter() {
-        adapter = new HomeItemAdapter(getActivity(), this);
+        adapter = new HomeItemAdapter(R.layout.adapter_home_item,new ArrayList<SessionBean.DataBean>(),getActivity());
+        adapter.addHeaderView(headView);
+        adapter.setEmptyView(statusView);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                present.toSession(position);
+            }
+        });
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                present.toSession(position);
+            }
+        });
         lv.setAdapter(adapter);
     }
 
@@ -179,16 +184,16 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
         @Override
         public void getListEmpty() {
             super.getListEmpty();
-            lvTv.setText(getResources().getString(R.string.lv_data_empty));
-            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
+            statusTv.setText(getResources().getString(R.string.lv_data_empty));
+            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(statusIv);
         }
 
         @Override
         public void getListEmptyFail(String extMsg) {
             super.getListEmptyFail(extMsg);
             showErrorDialog(extMsg);
-            lvTv.setText(getResources().getString(R.string.lv_net_error));
-            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
+            statusTv.setText(getResources().getString(R.string.lv_net_error));
+            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(statusIv);
         }
 
         @Override
@@ -219,13 +224,26 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
 
         @Override
         public void showLoading() {
-            lvTv.setText(getResources().getString(R.string.lv_loading));
-            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
+            statusTv.setText(getResources().getString(R.string.lv_loading));
+            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(statusIv);
         }
 
         @Override
         public void dismissLoading() {
 
+
+//            List<String> list = new ArrayList<>();
+//            list.add("1520197***");
+//            //获取新数据
+//            String newPhone = "1520196***";
+//            //获取list最新数据
+//            String lastPhone = "";
+//            if(list.size() > 0){
+//                lastPhone = list.get(list.size() - 1);
+//            }
+//            if(!lastPhone .equals(newPhone)){
+//                list.add(newPhone);
+//            }
         }
     }
 }

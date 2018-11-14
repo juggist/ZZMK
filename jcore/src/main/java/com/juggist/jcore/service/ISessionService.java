@@ -16,7 +16,7 @@ import java.util.List;
 public interface ISessionService {
     void getSessionList(String user_id, String token, String page, String page_size, ResponseCallback<List<SessionBean.DataBean>> callback);
 
-    void getProductList(String user_id, String token, String page, String page_size, String group_id, ResponseCallback<ArrayList<ProductBean.DataBean.GoodsListBean>> callback);
+    void getProductList(String user_id, String token, String page, String page_size, String group_id, ResponseCallback<List<ProductBean.DataBean.GoodsListBean>> callback);
 
     void queryShopCar(ResponseCallback<ArrayList<ShopCarBean>> callback);
 

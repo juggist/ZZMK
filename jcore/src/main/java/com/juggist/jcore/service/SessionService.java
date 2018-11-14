@@ -55,7 +55,7 @@ public class SessionService extends BaseService implements ISessionService {
     }
 
     @Override
-    public void getProductList(String user_id, String token, String page, String page_size, String group_id, final ResponseCallback<ArrayList<ProductBean.DataBean.GoodsListBean>> callback) {
+    public void getProductList(String user_id, String token, String page, String page_size, String group_id, final ResponseCallback<List<ProductBean.DataBean.GoodsListBean>> callback) {
         HashMap<String, String> params = new HashMap<>();
         params.put("controller", "GoodsPublic");
         params.put("action", "getOnSellGoodsListByGroupId");

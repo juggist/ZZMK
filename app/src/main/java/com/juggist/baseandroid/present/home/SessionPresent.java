@@ -1,13 +1,15 @@
 package com.juggist.baseandroid.present.home;
 
 import com.juggist.baseandroid.ui.home.SessionContract;
-import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.base.BaseView;
+import com.juggist.jcore.base.SmartRefreshResponseCallback;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.UserInfo;
 import com.juggist.jcore.service.ISessionService;
 import com.juggist.jcore.service.SessionService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author juggist
@@ -44,57 +46,58 @@ public class SessionPresent implements SessionContract.Present {
     private void getProductList(){
         if(view != null)
             view.showLoading();
-        sessionService.getProductList(UserInfo.userId(), UserInfo.token(), String.valueOf(page), String.valueOf(page_size), group_id, new ResponseCallback<ArrayList<ProductBean.DataBean.GoodsListBean>>() {
+        sessionService.getProductList(UserInfo.userId(), UserInfo.token(), String.valueOf(page), String.valueOf(page_size), group_id, new SmartRefreshResponseCallback<ProductBean.DataBean.GoodsListBean>() {
             @Override
-            public void onSucceed(ArrayList<ProductBean.DataBean.GoodsListBean> goodsListBeans) {
-                /**
-                 * 数据
-                 */
-                //添加数据
-                if(page == 1){//刷新
-                    totalProducts.clear();
-                }
-                totalProducts.addAll(goodsListBeans);
+            public int getPage() {
+                return page;
+            }
 
+            @Override
+            public int getPageSize() {
+                return page_size;
+            }
 
-                /**
-                 * 视图
-                 */
-                if(view == null)
-                    return;
-                view.dismissLoading();
-                if(page == 1){//刷新
-                    if(goodsListBeans.size() == 0){ //页面数据为空
-                        view.getOnSellProductsListEmpty();
-                    }else if(goodsListBeans.size() < page_size){
-                        view.getOnSellProductsListSucceedEnd(totalProducts,true);
-                    }else{
-                        view.getOnSellProductsListSucceed(totalProducts,true);
-                    }
-                }else{//加载更多
-                    if(goodsListBeans.size() >= 0 && goodsListBeans.size() < page_size){
-                        view.getOnSellProductsListSucceedEnd(totalProducts,false);
-                    }else{
-                        view.getOnSellProductsListSucceed(totalProducts,false);
-                    }
-                }
-                
-                /**
-                 * 设置page 
-                 */
-                if(goodsListBeans.size() == page_size){
-                    page++;
-                }
+            @Override
+            public void setPage(int page) {
+                SessionPresent.this.page = page;
+            }
+
+            @Override
+            public void clearTotalList() {
+                totalProducts.clear();
+            }
+
+            @Override
+            public List<ProductBean.DataBean.GoodsListBean> getTotalList() {
+                return totalProducts;
+            }
+
+            @Override
+            public void setTotalList(List<ProductBean.DataBean.GoodsListBean> t) {
+                totalProducts.addAll(t);
+            }
+
+            @Override
+            public BaseView getView() {
+                return view;
+            }
+
+            @Override
+            public void onSucceed(List<ProductBean.DataBean.GoodsListBean> t) {
+                super.onSucceed(t);
+                dismissLoading();
             }
 
             @Override
             public void onError(String message) {
-                getProductListError(message);
+                super.onError(message);
+                dismissLoading();
             }
 
             @Override
             public void onApiError(String state, String message) {
-                getProductListError(message + " : " + state);
+                super.onApiError(state, message);
+                dismissLoading();
             }
         });
     }
@@ -107,18 +110,9 @@ public class SessionPresent implements SessionContract.Present {
     public void detach() {
         view = null;
     }
-    private void getProductListError(String extMsg){
-        if(view == null)
-            return;
-        view.dismissLoading();
-        if(page == 1){//刷新
-            if(totalProducts.size() == 0){//无数据
-                  view.getOnSellProductsListEmptyFail(extMsg);
-            }else{//有数据
-                  view.getOnSellProductsListFail(extMsg,true);
-            }
-        }else{//加载更多
-            view.getOnSellProductsListFail(extMsg,false);
-        }
+
+    private void dismissLoading(){
+        if(view != null)
+            view.dismissLoading();
     }
 }

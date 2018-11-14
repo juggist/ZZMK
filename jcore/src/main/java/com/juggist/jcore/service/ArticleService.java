@@ -7,6 +7,7 @@ import com.juggist.jcore.http.ApiServiceGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -22,7 +23,7 @@ public class ArticleService extends BaseService implements IArticleService {
     }
 
     @Override
-    public void getArticleList(String page_index, String page_size, final ResponseCallback<ArrayList<ArticleBean>> callback) {
+    public void getArticleList(String page_index, String page_size, final ResponseCallback<List<ArticleBean>> callback) {
         HashMap<String,String> params = new HashMap<>();
         params.put("controller","Article");
         params.put("action","getArticleList");

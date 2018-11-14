@@ -2,10 +2,10 @@ package com.juggist.baseandroid.ui.discover;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
@@ -16,15 +16,20 @@ import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.DialogDownload;
 import com.juggist.baseandroid.view.DialogShare;
 import com.juggist.jcore.base.BaseFragment;
+import com.juggist.jcore.base.BaseUpdateAdapter;
+import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ArticleBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
@@ -33,15 +38,13 @@ import butterknife.BindView;
 public class DiscoverFragment extends BaseFragment {
 
     @BindView(R.id.lv)
-    ListView lv;
+    RecyclerView lv;
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
-    @BindView(R.id.lv_iv)
-    ImageView lvIv;
-    @BindView(R.id.lv_tv)
-    TextView lvTv;
-    @BindView(R.id.lv_ll)
-    LinearLayout lvLl;
+
+    private LinearLayout statusView;
+    private ImageView statusIv;
+    private TextView statusTv;
 
     private DiscoverContract.Present present;
     private DiscoverAdapter adapter;
@@ -53,7 +56,15 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        lv.setEmptyView(lvLl);
+        statusView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.view_net_error,null);
+        statusIv = statusView.findViewById(R.id.lv_iv);
+        statusTv = statusView.findViewById(R.id.lv_tv);
+
+        lv.setLayoutManager(new LinearLayoutManager(getContext()));
+        lv.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
+                .color(getResources().getColor(R.color.item_bg))
+                .sizeResId(R.dimen.dp_20)
+                .build());
     }
 
     @Override
@@ -70,10 +81,10 @@ public class DiscoverFragment extends BaseFragment {
             }
         });
         //网络异常，点击屏幕重新加载
-        lvLl.setOnClickListener(new View.OnClickListener() {
+        statusView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lvTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))){
+                if(statusTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))){
                     present.start();
                 }
             }
@@ -82,8 +93,8 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        new DiscoverPresent(new ViewModel());
         initAdapter();
+        new DiscoverPresent(new ViewModel());
         present.start();
     }
 
@@ -98,7 +109,8 @@ public class DiscoverFragment extends BaseFragment {
      * 初始化适配器
      */
     private void initAdapter() {
-        adapter = new DiscoverAdapter(getActivity(), new AdapterListener());
+        adapter = new DiscoverAdapter(R.layout.adapter_discover_item,new ArrayList<ArticleBean>(),getActivity(),new AdapterListener());
+        adapter.setEmptyView(statusView);
         lv.setAdapter(adapter);
     }
 
@@ -132,50 +144,25 @@ public class DiscoverFragment extends BaseFragment {
         }
     }
 
-    private class ViewModel implements DiscoverContract.View {
+    private class ViewModel extends SmartRefreshViewModel<ArticleBean> implements DiscoverContract.View {
 
         @Override
-        public void getArticleListEmpty() {
-            srl.finishRefresh();
-            lvTv.setText(getResources().getString(R.string.lv_data_empty));
+        public void getListEmpty() {
+            super.getListEmpty();
+            statusTv.setText(getResources().getString(R.string.lv_data_empty));
         }
 
         @Override
-        public void getArticleListSucceed(ArrayList<ArticleBean> articleBeans, boolean refresh) {
-            adapter.update(articleBeans);
-            if (refresh) {
-                srl.finishRefresh();
-            } else {
-                srl.finishLoadMore();
-            }
-        }
-
-        @Override
-        public void getArticleListSucceedEnd(ArrayList<ArticleBean> articleBeans, boolean refresh) {
-            adapter.update(articleBeans);
-            if (refresh) {
-                srl.finishRefresh();
-                srl.setNoMoreData(true);
-            } else {
-                srl.finishLoadMoreWithNoMoreData();
-            }
-        }
-
-        @Override
-        public void getArticleListEmptyFail(String extMsg) {
+        public void getListEmptyFail(String extMsg) {
+            super.getListEmptyFail(extMsg);
             showErrorDialog(extMsg);
-            srl.finishRefresh();
-            lvTv.setText(getResources().getString(R.string.lv_net_error));
+            statusTv.setText(getResources().getString(R.string.lv_net_error));
         }
 
         @Override
-        public void getArticleListFail(String extMsg, boolean refresh) {
+        public void getListFail(String extMsg, boolean refresh) {
+            super.getListFail(extMsg,refresh);
             showErrorDialog(extMsg);
-            if (refresh) {
-                srl.finishRefresh();
-            } else {
-                srl.finishLoadMore();
-            }
         }
 
         @Override
@@ -185,18 +172,27 @@ public class DiscoverFragment extends BaseFragment {
 
         @Override
         public void showErrorDialog(String message)  {
-
             ToastUtil.showLong(message);
         }
 
         @Override
         public void showLoading() {
-            lvTv.setText(getResources().getString(R.string.lv_loading));
+            statusTv.setText(getResources().getString(R.string.lv_loading));
         }
 
         @Override
         public void dismissLoading() {
 
+        }
+
+        @Override
+        public SmartRefreshLayout getSmartRefreshLayout() {
+            return srl;
+        }
+
+        @Override
+        public BaseUpdateAdapter getBaseAdapter() {
+            return adapter;
         }
     }
 }

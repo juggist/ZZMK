@@ -4,7 +4,7 @@ import com.juggist.jcore.base.BasePresent;
 import com.juggist.jcore.base.BaseView;
 import com.juggist.jcore.bean.ProductBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author juggist
@@ -13,12 +13,12 @@ import java.util.ArrayList;
 public class SessionContract {
     public interface View extends BaseView<Present> {
         
-        void getOnSellProductsListEmpty();
-        void getOnSellProductsListSucceed(ArrayList<ProductBean.DataBean.GoodsListBean> dataBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
-        void getOnSellProductsListSucceedEnd(ArrayList<ProductBean.DataBean.GoodsListBean> dataBeans,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListEmpty();
+        void getListSucceed(List<ProductBean.DataBean.GoodsListBean> dataBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListSucceedEnd(List<ProductBean.DataBean.GoodsListBean> dataBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
-        void getOnSellProductsListEmptyFail(String extMsg);
-        void getOnSellProductsListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListEmptyFail(String extMsg);
+        void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
     }
 
     public interface Present extends BasePresent {

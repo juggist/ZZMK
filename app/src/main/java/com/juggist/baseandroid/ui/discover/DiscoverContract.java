@@ -4,7 +4,7 @@ import com.juggist.jcore.base.BasePresent;
 import com.juggist.jcore.base.BaseView;
 import com.juggist.jcore.bean.ArticleBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author juggist
@@ -13,12 +13,12 @@ import java.util.ArrayList;
 public class DiscoverContract {
     public interface View extends BaseView<Present> {
         
-        void getArticleListEmpty();
-        void getArticleListSucceed(ArrayList<ArticleBean> articleBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
-        void getArticleListSucceedEnd(ArrayList<ArticleBean> articleBeans,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListEmpty();
+        void getListSucceed(List<ArticleBean> articleBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListSucceedEnd(List<ArticleBean> articleBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
-        void getArticleListEmptyFail(String extMsg);
-        void getArticleListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListEmptyFail(String extMsg);
+        void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
     }
 
     public interface Present extends BasePresent {

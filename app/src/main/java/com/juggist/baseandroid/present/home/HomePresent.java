@@ -139,7 +139,7 @@ public class HomePresent implements HomeContract.Present {
 
             @Override
             public BaseView getView() {
-                return HomePresent.this.view;
+                return view;
             }
 
             @Override

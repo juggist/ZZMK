@@ -119,7 +119,10 @@ dependencies {
      * baseRecycleAdapter
      */
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-
+    //andriodx与baseRecycleAdapter不兼容，所以先引入recyclerview-v7,以后更新baseRecycleAdapter版本
+    api "com.android.support:recyclerview-v7:{rootProject.ext.supportLibVersion}"
+    //recycleview的divider插件
+    api 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     /**
      * tools
      */
