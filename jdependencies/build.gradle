@@ -115,6 +115,10 @@ dependencies {
     api 'com.jakewharton:butterknife:9.0.0-rc1'
     //这行必须写在appmodule里，否则报错
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+    /**
+     * baseRecycleAdapter
+     */
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
     /**
      * tools

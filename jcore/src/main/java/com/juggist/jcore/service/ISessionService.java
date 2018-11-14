@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2018/11/8 4:08 PM
  */
 public interface ISessionService {
-    void getSessionList(String user_id, String token, String page, String page_size, ResponseCallback<ArrayList<SessionBean.DataBean>> callback);
+    void getSessionList(String user_id, String token, String page, String page_size, ResponseCallback<List<SessionBean.DataBean>> callback);
 
     void getProductList(String user_id, String token, String page, String page_size, String group_id, ResponseCallback<ArrayList<ProductBean.DataBean.GoodsListBean>> callback);
 

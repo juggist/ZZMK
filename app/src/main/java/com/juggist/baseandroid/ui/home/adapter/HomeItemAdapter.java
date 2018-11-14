@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.juggist.baseandroid.R;
+import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.bean.SessionBean;
 import com.juggist.jcore.utils.TimeUtils;
 
@@ -23,10 +23,10 @@ import java.util.List;
  * @author juggist
  * @date 2018/11/5 4:48 PM
  */
-public class HomeItemAdapter extends BaseAdapter {
+public class HomeItemAdapter extends BaseUpdateAdapter<SessionBean.DataBean> {
     private Context context;
     private OnClickListener listener;
-    private ArrayList<SessionBean.DataBean> sessionBeans;
+    private List<SessionBean.DataBean> sessionBeans;
     private LinearLayout.LayoutParams lp;
 
     public HomeItemAdapter(Context context,OnClickListener listener) {
@@ -102,6 +102,14 @@ public class HomeItemAdapter extends BaseAdapter {
             parent.addView(view);
         }
     }
+
+    @Override
+    public void update(List<SessionBean.DataBean> t) {
+        sessionBeans.clear();
+        sessionBeans.addAll(t);
+        notifyDataSetChanged();
+    }
+
     private static class ViewHolder{
         private ImageView iv_session_icon;
         private TextView tv_session_theme,tv_session_start_time,tv_session_content,tv_session_end_time;
@@ -111,9 +119,5 @@ public class HomeItemAdapter extends BaseAdapter {
     public interface OnClickListener{
         void toSessionActivity(int position);
     }
-    public void update(ArrayList<SessionBean.DataBean> sessionBeans){
-        this.sessionBeans.clear();
-        this.sessionBeans.addAll(sessionBeans);
-        notifyDataSetChanged();
-    }
+
 }

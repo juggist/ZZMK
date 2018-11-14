@@ -33,7 +33,7 @@ public class SessionService extends BaseService implements ISessionService {
     }
 
     @Override
-    public void getSessionList(String user_id, String token, String page, String page_size, final ResponseCallback<ArrayList<SessionBean.DataBean>> callback) {
+    public void getSessionList(String user_id, String token, String page, String page_size, final ResponseCallback<List<SessionBean.DataBean>> callback) {
         HashMap<String, String> params = new HashMap<>();
         params.put("controller", "GoodsPublic");
         params.put("action", "indexPage");

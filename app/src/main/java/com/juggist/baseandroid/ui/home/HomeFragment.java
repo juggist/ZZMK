@@ -10,12 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.home.HomePresent;
 import com.juggist.baseandroid.ui.home.adapter.HomeItemAdapter;
 import com.juggist.baseandroid.utils.GlideImageLoader;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.jcore.base.BaseFragment;
+import com.juggist.jcore.base.BaseUpdateAdapter;
+import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.SessionBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -96,10 +99,10 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
 
     @Override
     protected void initData() {
-        viewModel = new ViewModel();
-        new HomePresent(viewModel);
         initBanner();
         initAdapter();
+        viewModel = new ViewModel();
+        new HomePresent(viewModel);
         present.start();
     }
 
@@ -150,7 +153,7 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
 
 
 
-    private class ViewModel implements HomeContract.View {
+    private class ViewModel extends SmartRefreshViewModel<SessionBean.DataBean> implements HomeContract.View<SessionBean.DataBean> {
 
 
         @Override
@@ -164,47 +167,34 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
         }
 
         @Override
-        public void getSessionListEmpty() {
-            srl.finishRefresh();
+        public SmartRefreshLayout getSmartRefreshLayout() {
+            return srl;
+        }
+
+        @Override
+        public BaseUpdateAdapter getBaseAdapter() {
+            return adapter;
+        }
+
+        @Override
+        public void getListEmpty() {
+            super.getListEmpty();
             lvTv.setText(getResources().getString(R.string.lv_data_empty));
+            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
         }
 
         @Override
-        public void getSessionListSucceed(ArrayList<SessionBean.DataBean> dataBeans, boolean refresh) {
-            adapter.update(dataBeans);
-            if (refresh) {
-                srl.finishRefresh();
-            } else {
-                srl.finishLoadMore();
-            }
-        }
-
-        @Override
-        public void getSessionListSucceedEnd(ArrayList<SessionBean.DataBean> dataBeans, boolean refresh) {
-            adapter.update(dataBeans);
-            if (refresh) {
-                srl.finishRefresh();
-                srl.setNoMoreData(true);
-            } else {
-                srl.finishLoadMoreWithNoMoreData();
-            }
-        }
-
-        @Override
-        public void getSessionListEmptyFail(String extMsg) {
+        public void getListEmptyFail(String extMsg) {
+            super.getListEmptyFail(extMsg);
             showErrorDialog(extMsg);
-            srl.finishRefresh();
             lvTv.setText(getResources().getString(R.string.lv_net_error));
+            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
         }
 
         @Override
-        public void getSessionListFail(String extMsg, boolean refresh) {
+        public void getListFail(String extMsg, boolean refresh) {
+            super.getListFail(extMsg,refresh);
             showErrorDialog(extMsg);
-            if (refresh) {
-                srl.finishRefresh();
-            } else {
-                srl.finishLoadMore();
-            }
         }
 
         @Override
@@ -230,6 +220,7 @@ public class HomeFragment extends BaseFragment implements HomeItemAdapter.OnClic
         @Override
         public void showLoading() {
             lvTv.setText(getResources().getString(R.string.lv_loading));
+            GlideApp.with(getActivity()).load(getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
         }
 
         @Override
