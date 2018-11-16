@@ -134,19 +134,19 @@ public class SessionService extends BaseService implements ISessionService {
         params.put("page", page);
         params.put("page_size", page_size);
         params.put("condition", condition);
-        this.getFilterResponse(sessionServiceApi.getOrderList(params),AndroidSchedulers.mainThread())
+        this.getFilterResponse(sessionServiceApi.getOrderList(params), AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<OrderBean>>() {
                     @Override
                     public void accept(List<OrderBean> orderBeans) throws Exception {
                         callback.onSucceed(orderBeans);
                     }
-                },new ConsumerThrowable<>(callback));
+                }, new ConsumerThrowable<>(callback));
     }
 
     @Override
     public void getDiscountCardList(int tag, String page, String page_size, final ResponseCallback<List<DiscountCardBean>> callback) {
         String action = "";
-        switch (tag){
+        switch (tag) {
             case 0:
                 action = "getCouponListByUserId";
                 break;
@@ -164,13 +164,18 @@ public class SessionService extends BaseService implements ISessionService {
         params.put("token", UserInfo.token());
         params.put("page", page);
         params.put("page_size", page_size);
-        this.getFilterResponse(sessionServiceApi.getDiscountCardList(params),AndroidSchedulers.mainThread())
+        this.getFilterResponse(sessionServiceApi.getDiscountCardList(params), AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<DiscountCardBean>>() {
                     @Override
                     public void accept(List<DiscountCardBean> discountCardBeans) throws Exception {
                         callback.onSucceed(discountCardBeans);
                     }
-                },new ConsumerThrowable<>(callback));
+                }, new ConsumerThrowable<>(callback));
+    }
+
+    @Override
+    public void getBatchForwardList(String user_id, String token, String page, String page_size, String group_id, final ResponseCallback<List<ProductBean.DataBean.GoodsListBean>> callback) {
+        getProductList(user_id, token, page, page_size, group_id, callback);
     }
 
 //    @Override

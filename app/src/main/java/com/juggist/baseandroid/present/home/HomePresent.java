@@ -84,6 +84,17 @@ public class HomePresent implements HomeContract.Present {
     }
 
     @Override
+    public void toShare(int position) {
+        if(view == null)
+            return;
+        if(position <  totalSessionBeans.size()){
+            view.toShare(totalSessionBeans.get(position).getId());
+        }else{
+            view.showErrorDialog(Constants.ERROR.DATA_OUT_OF_LENGTH);
+        }
+    }
+
+    @Override
     public void toSession(int position) {
         if(view == null)
             return;

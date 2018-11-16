@@ -14,6 +14,7 @@
     <string name="title_review_big_pic">查看大图</string>
     <string name="title_order">订单列表</string>
     <string name="title_discount_card">优惠券</string>
+    <string name="title_batch_forward">批量转发</string>
 
     <string name="tab_home">首页</string>
     <string name="tab_discover">发现</string>
@@ -60,6 +61,7 @@
     <string name="product_down">-</string>
     <string name="product_buy">立即购买</string>
     <string name="product_buy_all">全选</string>
+    <string name="product_batch_forward">批量转发(%s)</string>
 
 
     <string name="order_total_num">共%s件商品</string>

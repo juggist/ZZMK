@@ -29,7 +29,8 @@
         <activity android:name=".ui.buy.OrderSubmitActivity" />
         <activity android:name=".ui.BigViewPagerPhotoActivity" />
         <activity android:name=".ui.mine.OrderActivity" />
-        <activity android:name=".ui.mine.DiscountCardActivity"></activity>
+        <activity android:name=".ui.mine.DiscountCardActivity" />
+        <activity android:name=".ui.home.BatchForwardActivity"></activity>
     </application>
 
 </manifest>

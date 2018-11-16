@@ -25,6 +25,7 @@ public class HomeContract {
         void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
         void toSession(String group_name,String group_id);
+        void toShare(String group_id);
     }
 
     public interface Present extends BasePresent {
@@ -33,6 +34,8 @@ public class HomeContract {
         void refreshSessionList();
 
         void loadMoreSessionList();
+
+        void toShare(int position);
 
         void toSession(int position);
     }

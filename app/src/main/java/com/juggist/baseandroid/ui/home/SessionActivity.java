@@ -58,7 +58,11 @@ public class SessionActivity extends BackBaseActivity {
 
     private SessionItemAdapter adapter;
     private SessionContract.Present present;
-
+    @Override
+    protected void onDestroy() {
+        present.detach();
+        super.onDestroy();
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.activity_session;
@@ -141,11 +145,7 @@ public class SessionActivity extends BackBaseActivity {
         return null;
     }
 
-    @Override
-    protected void onDestroy() {
-        present.detach();
-        super.onDestroy();
-    }
+
 
     /**
      * 初始化适配器

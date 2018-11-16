@@ -31,4 +31,5 @@ public interface ISessionService {
 
     void getDiscountCardList(int tag,String page, String page_size, ResponseCallback<List<DiscountCardBean>> callback);
 
+    void getBatchForwardList(String user_id, String token, String page, String page_size, String group_id, ResponseCallback<List<ProductBean.DataBean.GoodsListBean>> callback);
 }

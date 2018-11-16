@@ -44,7 +44,8 @@ public class HomeItemAdapter extends BaseUpdateAdapter<SessionBean.DataBean> {
                 .setText(R.id.tv_session_start_time, item.getSort_number() + "款   " + TimeUtils.millis2String(Long.parseLong(item.getPublic_time()), new SimpleDateFormat("MM-dd")) + "  开场")
                 .setText(R.id.tv_session_content, item.getAlt())
                 .setText(R.id.tv_session_end_time, TimeUtils.millis2String(TimeUtils.string2Millis(item.getEnd_time()), new SimpleDateFormat("MM-dd HH:mm")))
-                .addOnClickListener(R.id.ibtn_session_join);
+                .addOnClickListener(R.id.ibtn_session_join)
+                .addOnClickListener(R.id.ibtn_session_share);
         updateProductViews((LinearLayout) helper.getView(R.id.ll_views), item.getGoods_list());
     }
 

@@ -149,7 +149,15 @@ public class HomeFragment extends BaseFragment {
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                present.toSession(position);
+                switch (view.getId()){
+                    case R.id.ibtn_session_share:
+                        present.toShare(position);
+                        break;
+                    case R.id.ibtn_session_join:
+                        present.toSession(position);
+                        break;
+                }
+
             }
         });
         lv.setAdapter(adapter);
@@ -214,6 +222,15 @@ public class HomeFragment extends BaseFragment {
             bundle.putString("group_name",group_name);
             bundle.putString("group_id",group_id);
             Intent intent = new Intent(getActivity(),SessionActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+
+        @Override
+        public void toShare(String group_id) {
+            Bundle bundle = new Bundle();
+            bundle.putString("group_id",group_id);
+            Intent intent = new Intent(getActivity(),BatchForwardActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         }

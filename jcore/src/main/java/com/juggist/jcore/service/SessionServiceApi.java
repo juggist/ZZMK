@@ -41,5 +41,9 @@ public interface SessionServiceApi {
     @FormUrlEncoded
     @POST("api.php")
     Observable<ResponseBean<List<DiscountCardBean>>> getDiscountCardList(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<ProductBean>> getBatchForwardList(@FieldMap HashMap<String,String> params);
 }
 
