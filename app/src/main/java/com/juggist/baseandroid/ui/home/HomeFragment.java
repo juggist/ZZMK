@@ -116,6 +116,12 @@ public class HomeFragment extends BaseFragment {
         banner.stopAutoPlay();
     }
 
+    @Override
+    public void onDestroy() {
+        present.detach();
+        super.onDestroy();
+
+    }
 
     /**
      * 初始化banner

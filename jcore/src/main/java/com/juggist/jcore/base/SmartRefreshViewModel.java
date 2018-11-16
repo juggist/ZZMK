@@ -18,6 +18,7 @@ public abstract class SmartRefreshViewModel<T>{
     public void getListEmpty() {
         if(getSmartRefreshLayout() != null){
             getSmartRefreshLayout().finishRefresh();
+            getSmartRefreshLayout().setNoMoreData(true);
         }else{
             try {
                 throw new Exception(" srl is null");

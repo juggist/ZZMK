@@ -13,6 +13,7 @@
     <string name="title_order_submit">确认订单</string>
     <string name="title_review_big_pic">查看大图</string>
     <string name="title_order">订单列表</string>
+    <string name="title_discount_card">优惠券</string>
 
     <string name="tab_home">首页</string>
     <string name="tab_discover">发现</string>
@@ -69,6 +70,18 @@
     <string name="order_sale_cash">优惠券</string>
     <string name="order_sale_cash_empty">暂无可用</string>
     <string name="order_total_money_2">小计</string>
+    <string name="order_total_money_3">应付总额:</string>
+    <string name="order_review">查看订单</string>
+    <string name="order_confrim">确认收货</string>
+    <string name="order_transport">查看物流</string>
+    <string name="order_comment">评论</string>
+    <string name="order_delete">删除订单</string>
+    <string name="order_mine">我的订单</string>
+    <string name="order_mine_all">查看全部订单</string>
+    <string name="order_to_money">待付款</string>
+    <string name="order_to_transport">待发货</string>
+    <string name="order_to_reciver">待收货</string>
+    <string name="order_to_service">售后服务</string>
 
     <string name="toast_login_phone_empty">请输入手机号码</string>
     <string name="toast_login_phone_un_right">请输入正确的手机号码</string>
@@ -82,15 +95,10 @@
     <string name="lv_data_empty">当前暂无数据</string>
     <string name="lv_net_error">没有网络了，点击屏幕重试</string>
     <string name="lv_shopcar_empty">您的购物车还没添加宝贝哦</string>
+    <string name="lv_discount_card_empty">您还没有优惠券哦</string>
 
     <string name="sale_money">销售额</string>
     <string name="sale_num">今日订单数</string>
-    <string name="order_mine">我的订单</string>
-    <string name="order_mine_all">查看全部订单</string>
-    <string name="order_to_money">待付款</string>
-    <string name="order_to_transport">待发货</string>
-    <string name="order_to_reciver">待收货</string>
-    <string name="order_to_service">售后服务</string>
     <string name="setting_to_cash">提现管理</string>
     <string name="setting_to_location">地址管理</string>
     <string name="setting_to_discount_card">我的优惠券</string>

@@ -42,7 +42,7 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
     @Override
     protected void convert(BaseViewHolder helper, final ProductBean.DataBean.GoodsListBean item) {
 
-        ArrayList<String> mainPics = (ArrayList<String>) item.getMain_pic();
+        final ArrayList<String> mainPics = (ArrayList<String>) item.getMain_pic();
         if (mainPics != null && mainPics.size() > 0) {
             GlideApp.with(context).load(mainPics.get(0)).into((ImageView) helper.getView(R.id.iv_session_icon));
             ((GridView) helper.getView(R.id.gv)).setAdapter(new Adapter(mainPics));
@@ -78,7 +78,7 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (listener != null)
-                    listener.toBigPic((ArrayList<String>) item.getMain_pic(), position);
+                    listener.toBigPic(mainPics, position);
             }
         });
 

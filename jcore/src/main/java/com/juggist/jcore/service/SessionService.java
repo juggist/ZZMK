@@ -3,6 +3,7 @@ package com.juggist.jcore.service;
 import com.juggist.jcore.Constants;
 import com.juggist.jcore.base.BaseService;
 import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.bean.DiscountCardBean;
 import com.juggist.jcore.bean.OrderBean;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.SessionBean;
@@ -95,18 +96,7 @@ public class SessionService extends BaseService implements ISessionService {
         params.put("action", "getShoppingCardGoodsList");
         params.put("user_id", UserInfo.userId());
         params.put("token", UserInfo.token());
-        this.getFilterResponse(sessionServiceApi.getShopCar(params), Schedulers.io())
-                .map(new Function<ArrayList<ShopCarBean>, ArrayList<ShopCarBean>>() {
-                    @Override
-                    public ArrayList<ShopCarBean> apply(ArrayList<ShopCarBean> shopCarBeans) throws Exception {
-                        if (shopCarBeans != null) {
-                            return shopCarBeans;
-                        } else {
-                            throw new ApiCodeErrorException(ErrorCode.DATA_NULL);
-                        }
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
+        this.getFilterResponse(sessionServiceApi.getShopCar(params), AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArrayList<ShopCarBean>>() {
                     @Override
                     public void accept(ArrayList<ShopCarBean> shopCarBeans) throws Exception {
@@ -144,21 +134,41 @@ public class SessionService extends BaseService implements ISessionService {
         params.put("page", page);
         params.put("page_size", page_size);
         params.put("condition", condition);
-        this.getFilterResponse(sessionServiceApi.getOrderList(params),Schedulers.io())
-                .map(new Function<List<OrderBean>, List<OrderBean>>() {
-                    @Override
-                    public List<OrderBean> apply(List<OrderBean> orderBeans) throws Exception {
-                        if(orderBeans != null){
-                            return orderBeans;
-                        }
-                        throw new ApiCodeErrorException(ErrorCode.DATA_NULL);
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
+        this.getFilterResponse(sessionServiceApi.getOrderList(params),AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<OrderBean>>() {
                     @Override
                     public void accept(List<OrderBean> orderBeans) throws Exception {
                         callback.onSucceed(orderBeans);
+                    }
+                },new ConsumerThrowable<>(callback));
+    }
+
+    @Override
+    public void getDiscountCardList(int tag, String page, String page_size, final ResponseCallback<List<DiscountCardBean>> callback) {
+        String action = "";
+        switch (tag){
+            case 0:
+                action = "getCouponListByUserId";
+                break;
+            case 1:
+                action = "getCouponListByUserIdUsed";
+                break;
+            case 2:
+                action = "getCouponListByUserIdExpire";
+                break;
+        }
+        HashMap<String, String> params = new HashMap<>();
+        params.put("controller", "Member");
+        params.put("action", action);
+        params.put("user_id", UserInfo.userId());
+        params.put("token", UserInfo.token());
+        params.put("page", page);
+        params.put("page_size", page_size);
+        this.getFilterResponse(sessionServiceApi.getDiscountCardList(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<DiscountCardBean>>() {
+                    @Override
+                    public void accept(List<DiscountCardBean> discountCardBeans) throws Exception {
+                        callback.onSucceed(discountCardBeans);
                     }
                 },new ConsumerThrowable<>(callback));
     }

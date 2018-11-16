@@ -1,6 +1,7 @@
 package com.juggist.jcore.service;
 
 import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.bean.DiscountCardBean;
 import com.juggist.jcore.bean.OrderBean;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.SessionBean;
@@ -27,5 +28,7 @@ public interface ISessionService {
     void updateShopCar(String goods_id,String goods_num,ResponseCallback<String> callback);
 
     void getOrderList(String page, String page_size, String condition, ResponseCallback<List<OrderBean>> callback);
+
+    void getDiscountCardList(int tag,String page, String page_size, ResponseCallback<List<DiscountCardBean>> callback);
 
 }

@@ -1,5 +1,6 @@
 package com.juggist.jcore.service;
 
+import com.juggist.jcore.bean.DiscountCardBean;
 import com.juggist.jcore.bean.OrderBean;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.ResponseBean;
@@ -35,5 +36,10 @@ public interface SessionServiceApi {
     @FormUrlEncoded
     @POST("api.php")
     Observable<ResponseBean<List<OrderBean>>> getOrderList(@FieldMap HashMap<String,String> params);
+
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<List<DiscountCardBean>>> getDiscountCardList(@FieldMap HashMap<String,String> params);
 }
 

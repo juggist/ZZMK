@@ -1,6 +1,7 @@
 package com.juggist.jcore.base;
 
 import com.juggist.jcore.bean.ResponseBean;
+import com.juggist.jcore.http.ErrorCode;
 import com.juggist.jcore.http.exception.ApiCodeErrorException;
 import com.juggist.jcore.service.ext.FilterResponseFunc;
 import com.orhanobut.logger.Logger;
@@ -8,6 +9,7 @@ import com.orhanobut.logger.Logger;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -29,6 +31,16 @@ public class BaseService {
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .map(new FilterResponseFunc<T>())
+                .observeOn(Schedulers.io())
+                .map(new Function<T, T>() {
+                    @Override
+                    public T apply(T t) throws Exception {
+                        if(t != null){
+                            return t;
+                        }
+                        throw new ApiCodeErrorException(ErrorCode.DATA_NULL);
+                    }
+                })
                 .observeOn(callBackScheduler);
     }
 

@@ -28,7 +28,8 @@
         <activity android:name=".ui.home.SessionActivity" />
         <activity android:name=".ui.buy.OrderSubmitActivity" />
         <activity android:name=".ui.BigViewPagerPhotoActivity" />
-        <activity android:name=".ui.mine.OrderActivity"></activity>
+        <activity android:name=".ui.mine.OrderActivity" />
+        <activity android:name=".ui.mine.DiscountCardActivity"></activity>
     </application>
 
 </manifest>

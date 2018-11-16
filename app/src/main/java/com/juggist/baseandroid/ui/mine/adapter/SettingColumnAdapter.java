@@ -48,7 +48,7 @@ public class SettingColumnAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
         if (convertView == null) {
             vh = new ViewHolder();
@@ -73,5 +73,7 @@ public class SettingColumnAdapter extends BaseAdapter {
     private static class ViewHolder {
         private TextView tv_setting;
     }
+
+
 }
 

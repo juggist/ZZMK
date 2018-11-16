@@ -3,6 +3,7 @@ package com.juggist.baseandroid.ui.mine;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -51,7 +52,24 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-
+        gvSetting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        startActivity(new Intent(getActivity(),DiscountCardActivity.class));
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+            }
+        });
     }
 
     @Override
