@@ -9,6 +9,12 @@ import com.juggist.jcore.base.BaseActivity;
 import com.juggist.jcore.bean.UserInfo;
 import com.juggist.jcore.utils.SPUtil;
 
+/**
+ *
+ * 测试账号
+ * 17718397309
+ * 123456
+ */
 public class SplashActivity extends BaseActivity {
 
     @Override
@@ -44,4 +50,6 @@ public class SplashActivity extends BaseActivity {
     protected void initSystemStatusBar() {
         super.initSystemStatusBar();
     }
+
+
 }

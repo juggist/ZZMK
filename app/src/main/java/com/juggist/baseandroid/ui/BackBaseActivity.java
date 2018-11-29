@@ -1,13 +1,14 @@
 package com.juggist.baseandroid.ui;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
 import com.juggist.jcore.base.BaseActivity;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author juggist

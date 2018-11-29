@@ -1,5 +1,6 @@
 package com.juggist.baseandroid.ui.home;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +20,15 @@ import com.juggist.baseandroid.ui.HomeActivity;
 import com.juggist.baseandroid.ui.home.adapter.SessionItemAdapter;
 import com.juggist.baseandroid.ui.home.adapter.SessionItemAdapter.Listener;
 import com.juggist.baseandroid.utils.ToastUtil;
+import com.juggist.baseandroid.view.AlertDialog;
 import com.juggist.baseandroid.view.DialogDownload;
 import com.juggist.baseandroid.view.DialogForBuy;
 import com.juggist.baseandroid.view.DialogSessionSetting;
+import com.juggist.baseandroid.view.LoadingDialog;
 import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ProductBean;
+import com.juggist.jcore.utils.AppUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -40,7 +44,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 
+@RuntimePermissions
 public class SessionActivity extends BackBaseActivity {
 
     @BindView(R.id.lv)
@@ -58,11 +69,14 @@ public class SessionActivity extends BackBaseActivity {
 
     private SessionItemAdapter adapter;
     private SessionContract.Present present;
+    private LoadingDialog loadingDialog;
+
     @Override
     protected void onDestroy() {
         present.detach();
         super.onDestroy();
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_session;
@@ -82,6 +96,8 @@ public class SessionActivity extends BackBaseActivity {
                 .color(getResources().getColor(R.color.item_bg))
                 .sizeResId(R.dimen.dp_30)
                 .build());
+
+
     }
 
     @Override
@@ -146,7 +162,6 @@ public class SessionActivity extends BackBaseActivity {
     }
 
 
-
     /**
      * 初始化适配器
      */
@@ -156,23 +171,29 @@ public class SessionActivity extends BackBaseActivity {
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
                 switch (view.getId()) {
                     case R.id.ibtn_sale:
                         break;
-                    case R.id.ibtn_download:
-                        FragmentTransaction ft = SessionActivity.this.getSupportFragmentManager().beginTransaction();
-                        DialogDownload dd = new DialogDownload();
-                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                        dd.show(ft, "dd");
-                        break;
                 }
-
             }
         });
         lv.setAdapter(adapter);
     }
 
+    /**
+     * loading
+     */
+    private void showLoading() {
+        loadingDialog = LoadingDialog.newInstance();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        loadingDialog.show(ft, "loadingDialog");
+    }
+
+    private void dismissLoading() {
+        if (loadingDialog != null)
+            loadingDialog.dismiss();
+    }
 
     /**
      * 适配器listener
@@ -196,6 +217,15 @@ public class SessionActivity extends BackBaseActivity {
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             dfb.show(ft, "dfb");
         }
+
+        @Override
+        public void toDownload(int position) {
+            present.preparDownload(position);
+            FragmentTransaction ft = SessionActivity.this.getSupportFragmentManager().beginTransaction();
+            DialogDownload dd = new DialogDownload(new DownLoadListener());
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            dd.show(ft, "dd");
+        }
     }
 
     private class ViewModel extends SmartRefreshViewModel<ProductBean.DataBean.GoodsListBean> implements SessionContract.View {
@@ -208,6 +238,7 @@ public class SessionActivity extends BackBaseActivity {
         public BaseUpdateAdapter getBaseAdapter() {
             return adapter;
         }
+
         @Override
         public void getListEmpty() {
             super.getListEmpty();
@@ -223,9 +254,21 @@ public class SessionActivity extends BackBaseActivity {
 
         @Override
         public void getListFail(String extMsg, boolean refresh) {
-            super.getListFail(extMsg,refresh);
+            super.getListFail(extMsg, refresh);
             showErrorDialog(extMsg);
 
+        }
+
+        @Override
+        public void downloadShareSucceed() {
+            ToastUtil.showLong(getResources().getString(R.string.save_bitmap_succeed_todo));
+            SessionActivity.this.dismissLoading();
+        }
+
+        @Override
+        public void downloadShareFail(final String msg) {
+            showErrorDialog(msg);
+            SessionActivity.this.dismissLoading();
         }
 
         @Override
@@ -247,7 +290,72 @@ public class SessionActivity extends BackBaseActivity {
         public void dismissLoading() {
 
         }
-
-
     }
+
+    /**
+     * 下载监听事件
+     */
+    private class DownLoadListener implements DialogDownload.Listener {
+
+        @Override
+        public void startDownload() {
+            SessionActivityPermissionsDispatcher.saveShareBitmapWithPermissionCheck(SessionActivity.this);
+        }
+    }
+
+    /**
+     * 动态权限
+     */
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmap() {
+        showLoading();
+        present.startDownload();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        SessionActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmapRationale(final PermissionRequest request) {
+        showPermissionSaveShareBitmapFail();
+    }
+
+    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmapDenied() {
+        showPermissionSaveShareBitmapFail();
+    }
+
+    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmapNever() {
+        showPermissionSaveShareBitmapFail();
+    }
+
+    private void showPermissionSaveShareBitmapFail() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog(SessionActivity.this).builder()
+                        .setTitle(getResources().getString(R.string.save_bitmap_permission_fail))
+                        .setMsg(getResources().getString(R.string.save_bitmap_permission_todo))
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        })
+                        .setPositiveButton("去设置", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //跳转到自己app设置页面
+                                AppUtil.toSetting(SessionActivity.this);
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+
 }

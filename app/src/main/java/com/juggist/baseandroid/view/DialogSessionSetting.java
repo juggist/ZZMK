@@ -1,5 +1,6 @@
 package com.juggist.baseandroid.view;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,7 +22,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
-import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.jcore.utils.KeyboardUtils;
 
 import androidx.annotation.NonNull;
@@ -41,10 +41,20 @@ public class DialogSessionSetting extends DialogFragment {
     private Button btn_ensure;
     private EditText et;
 
+    private SettingListener listener;
 
     private int selectIndex = -1;
 
     private int addPrice = 0;
+
+    public DialogSessionSetting() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public DialogSessionSetting(SettingListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +89,11 @@ public class DialogSessionSetting extends DialogFragment {
                 if(!TextUtils.isEmpty(et.getText().toString())){
                     addPrice = Integer.parseInt(et.getText().toString());
                 }
-                ToastUtil.showLong("加价:" + addPrice);
+                if( listener != null)
+                    listener.addPrice(addPrice);
+                //隐藏软键盘
+                KeyboardUtils.hideSoftInput(et);
+                dismiss();
             }
         });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -198,5 +212,8 @@ public class DialogSessionSetting extends DialogFragment {
     private static class ViewHolder {
         private TextView tv;
         private ImageView iv;
+    }
+    public interface SettingListener{
+        void addPrice(int addPrice);
     }
 }

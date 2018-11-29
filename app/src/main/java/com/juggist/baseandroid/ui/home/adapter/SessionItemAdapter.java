@@ -40,7 +40,7 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final ProductBean.DataBean.GoodsListBean item) {
+    protected void convert(final BaseViewHolder helper, final ProductBean.DataBean.GoodsListBean item) {
 
         final ArrayList<String> mainPics = (ArrayList<String>) item.getMain_pic();
         if (mainPics != null && mainPics.size() > 0) {
@@ -54,8 +54,7 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
                 .setText(R.id.tv_session_counter_price, item.getShoppe() == null ? "" : "专柜价:￥" + item.getShoppe())
                 .setText(R.id.tv_session_no, "货号:" + item.getSn())
                 .setText(R.id.tv_session_vip_price, "升级享受会员价格:￥" + item.getWholesale_price())
-                .addOnClickListener(R.id.ibtn_sale)
-                .addOnClickListener(R.id.ibtn_download);
+                .addOnClickListener(R.id.ibtn_sale);
 
         ((TextView) helper.getView(R.id.tv_session_counter_price)).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -67,6 +66,13 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
                 helper.setText(R.id.tv_session_weight, spes.get(0).getAttrname() + ":" + valus.get(0).getContent());
             }
         }
+        helper.getView(R.id.ibtn_download).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null)
+                    listener.toDownload(helper.getLayoutPosition());
+            }
+        });
         helper.getView(R.id.ibtn_buy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,5 +142,6 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
     public interface Listener {
         void toBigPic(ArrayList<String> pics, int position);
         void toBuy(ProductBean.DataBean.GoodsListBean goodsListBean);
+        void toDownload(int position);
     }
 }

@@ -92,6 +92,7 @@
     <string name="toast_auth_code">验证码发送成功</string>
     <string name="toast_protocol_check">请阅读并同意《用户协议》</string>
     <string name="toast_out_of_shop_maxnum">您已经购买最大数量</string>
+    <string name="toast_choose_share_goods">请您选择批量转发的商品</string>
 
     <string name="lv_loading">正在加载数据中...</string>
     <string name="lv_data_empty">当前暂无数据</string>
@@ -106,4 +107,10 @@
     <string name="setting_to_discount_card">我的优惠券</string>
     <string name="setting_to_line">联系客服</string>
     <string name="setting_to_app">系统设置</string>
+
+
+    <string name="save_bitmap_succeed">保存成功</string>
+    <string name="save_bitmap_succeed_todo">分享图片已经保存在相册</string>
+    <string name="save_bitmap_permission_fail">保存图片失败</string>
+    <string name="save_bitmap_permission_todo">请去系统设置里打开权限</string>
 </resources>

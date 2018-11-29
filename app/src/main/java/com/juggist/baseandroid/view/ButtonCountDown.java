@@ -8,12 +8,14 @@ import com.juggist.baseandroid.R;
 import com.juggist.jcore.utils.SPUtil;
 import com.juggist.jcore.utils.StringUtil;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 /**
  * @author juggist
  * @date 2018/11/8 9:40 AM
  * 自定义倒计时按钮
  */
-public class ButtonCountDown extends androidx.appcompat.widget.AppCompatButton {
+public class ButtonCountDown extends AppCompatButton {
     private Context context;
     private String tag;
     private long millisInFuture, countDownInterval;

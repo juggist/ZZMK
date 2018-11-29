@@ -43,4 +43,17 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_30" />
     </LinearLayout>
+
+    <com.juggist.baseandroid.view.CreateShareView
+        android:background="@android:color/white"
+        android:id="@+id/createShareView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:paddingTop="@dimen/dp_100"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top"></com.juggist.baseandroid.view.CreateShareView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

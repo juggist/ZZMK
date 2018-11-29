@@ -254,19 +254,6 @@ public class HomeFragment extends BaseFragment {
         @Override
         public void dismissLoading() {
 
-
-//            List<String> list = new ArrayList<>();
-//            list.add("1520197***");
-//            //获取新数据
-//            String newPhone = "1520196***";
-//            //获取list最新数据
-//            String lastPhone = "";
-//            if(list.size() > 0){
-//                lastPhone = list.get(list.size() - 1);
-//            }
-//            if(!lastPhone .equals(newPhone)){
-//                list.add(newPhone);
-//            }
         }
     }
 }

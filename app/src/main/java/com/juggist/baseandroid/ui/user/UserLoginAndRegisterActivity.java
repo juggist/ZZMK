@@ -1,7 +1,5 @@
 package com.juggist.baseandroid.ui.user;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.juggist.baseandroid.R;
@@ -10,6 +8,8 @@ import com.juggist.baseandroid.ui.user.fragment.UserRegisterFragment;
 import com.juggist.baseandroid.view.NavigationTabStrip;
 import com.juggist.jcore.base.BaseActivity;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 
 /**

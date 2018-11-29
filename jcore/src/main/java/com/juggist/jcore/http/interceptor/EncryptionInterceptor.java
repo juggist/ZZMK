@@ -1,7 +1,6 @@
 package com.juggist.jcore.http.interceptor;
 
 import android.os.Build;
-import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.juggist.jcore.utils.EncryptUtil;
@@ -15,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.RequiresApi;
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.Request;

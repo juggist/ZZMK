@@ -1,11 +1,9 @@
 package com.juggist.baseandroid.view;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -19,6 +17,10 @@ import android.widget.ImageView;
 
 import com.juggist.baseandroid.R;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 /**
  * @author juggist
  * @date 2018/11/6 5:50 PM
@@ -28,6 +30,16 @@ public class DialogDownload extends DialogFragment {
 
     private ImageView iv_close;
     private Button btn_download;
+
+    private Listener listener;
+
+    public DialogDownload() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public DialogDownload(Listener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +63,14 @@ public class DialogDownload extends DialogFragment {
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
+            }
+        });
+        btn_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null)
+                    listener.startDownload();
                 dismiss();
             }
         });
@@ -80,4 +100,7 @@ public class DialogDownload extends DialogFragment {
         });
     }
 
+    public interface Listener {
+        void startDownload();
+    }
 }

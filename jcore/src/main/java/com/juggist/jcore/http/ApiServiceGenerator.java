@@ -21,4 +21,14 @@ public class ApiServiceGenerator {
     public static <T> T createService(Class<T> tClass){
         return builder.build().create(tClass);
     }
+
+    /**
+     * 创建带响应进度(下载进度)回调的service
+     */
+    public static <T> T createResponseService(Class<T> tClass, ProgressResponseListener listener) {
+        return builder
+                .client(HttpClient.addProgressResponseListener(listener))
+                .build()
+                .create(tClass);
+    }
 }

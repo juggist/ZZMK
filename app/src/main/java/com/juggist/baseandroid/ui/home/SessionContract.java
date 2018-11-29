@@ -19,6 +19,9 @@ public class SessionContract {
 
         void getListEmptyFail(String extMsg);
         void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+
+        void downloadShareSucceed();
+        void downloadShareFail(String msg);
     }
 
     public interface Present extends BasePresent {
@@ -26,5 +29,8 @@ public class SessionContract {
         void refreshOnSellProductsList();
 
         void loadMoreOnSellProductsList();
+
+        void preparDownload(int position);
+        void startDownload();
     }
 }

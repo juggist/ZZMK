@@ -75,6 +75,7 @@ public class OrderActivity extends BackBaseActivity {
 
     private void initIndicator(){
         commonNavigator = new CommonNavigator(this);
+        commonNavigator.setAdjustMode(true);//设置等分
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
@@ -87,7 +88,6 @@ public class OrderActivity extends BackBaseActivity {
                 simplePagerTitleView.setNormalColor(getResources().getColor(R.color.font_normal));
                 simplePagerTitleView.setSelectedColor(getResources().getColor(R.color.font_select));
                 simplePagerTitleView.setTextSize(getResources().getDimension(R.dimen.sp_20));
-                simplePagerTitleView.setPadding(getResources().getDimensionPixelOffset(R.dimen.dp_30),0,getResources().getDimensionPixelOffset(R.dimen.dp_30),0);
                 simplePagerTitleView.setText(titles[i]);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override

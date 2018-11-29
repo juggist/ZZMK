@@ -1,8 +1,14 @@
 package com.juggist.baseandroid.ui.mine;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.BackBaseActivity;
 import com.juggist.baseandroid.ui.mine.adapter.DiscountCardViewPagerAdapter;
@@ -21,6 +27,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
@@ -65,6 +72,17 @@ public class DiscountCardActivity extends BackBaseActivity {
         initAdapter();
         ViewPagerHelper.bind(mi,vp);
         vp.setCurrentItem(0);
+        GlideApp.with(this).asBitmap().load("").addListener(new RequestListener<Bitmap>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                return false;
+            }
+        });
     }
 
     @Override

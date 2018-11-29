@@ -82,4 +82,13 @@ public class BatchForwardItemAdapter extends BaseUpdateAdapter<ProductBean.DataB
             }
         }
     }
+    public List<ProductBean.DataBean.GoodsListBean> getSelectList(){
+        List<ProductBean.DataBean.GoodsListBean> selectList = new ArrayList<>();
+        for(int i = 0;i < select.size();i++){
+            if(select.get(i) && i < data.size()){
+                selectList.add(data.get(i));
+            }
+        }
+        return selectList;
+    }
 }

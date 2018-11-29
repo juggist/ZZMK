@@ -60,6 +60,7 @@ public class HomeItemAdapter extends BaseUpdateAdapter<SessionBean.DataBean> {
             tv.setText(String.format("￥%s", goodsListBean.getPrice()));
             parent.addView(view);
         }
+
     }
 
     @Override

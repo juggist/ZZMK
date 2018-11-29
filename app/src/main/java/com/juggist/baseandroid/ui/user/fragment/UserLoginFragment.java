@@ -49,7 +49,6 @@ public class UserLoginFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
     }
 
     @Override

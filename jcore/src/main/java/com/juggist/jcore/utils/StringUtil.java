@@ -45,4 +45,15 @@ public class StringUtil {
     public static int ceilInt(double number) {
         return (int) Math.ceil(number);
     }
+
+    /**
+     * 从url截取name
+     * @param url
+     * @return
+     */
+    public static String getPNGNameFromUrl(String url){
+        String[] splites = url.split("/");
+        return splites[splites.length - 1];
+    }
+
 }

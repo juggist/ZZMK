@@ -24,9 +24,9 @@ public class UserService extends BaseService implements IUserService{
     public void login(String cellphone, String cellphone_code, final ResponseCallback<UserBean> callback){
         HashMap<String,String> params = new HashMap<>();
         params.put("controller","Member");
-        params.put("action","cellphoneLogin");
+        params.put("action","passwordLogin");
         params.put("cellphone",cellphone);
-        params.put("cellphone_code",cellphone_code);
+        params.put("password",cellphone_code);
         this.getFilterResponse(userAPI.loginAndRegister(params),AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<UserBean[]>() {
                     @Override
