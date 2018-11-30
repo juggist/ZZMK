@@ -1,4 +1,4 @@
-package com.juggist.jcore.base;
+package com.juggist.baseandroid.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,11 +8,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.juggist.baseandroid.view.AlertDialog;
+import com.juggist.baseandroid.view.LoadingDialog;
 import com.juggist.jcore.R;
+import com.juggist.jcore.utils.AppUtil;
 import com.juggist.jcore.utils.DynamicDensityGenerate;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
 
 /**
@@ -21,10 +25,12 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
     protected ImmersionBar immersionBar;
+    private LoadingDialog loadingDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //动态注入denisty，适配ui，放在super前
-        DynamicDensityGenerate.setCustomDensity(this,getApplication());
+        DynamicDensityGenerate.setCustomDensity(this, getApplication());
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
@@ -38,10 +44,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public void onBackPressed() {
         this.finish();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -50,27 +58,42 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract int getLayoutId();
+
     protected abstract void initView();
+
     protected abstract void initListener();
+
     protected abstract void initData();
 
     /**
      * 沉浸式状态栏
      */
-    protected void initSystemStatusBar(){
+    protected void initSystemStatusBar() {
         immersionBar = ImmersionBar.with(this);
-        immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true,R.color.white).keyboardEnable(true).init();
+        immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
     }
 
     /**
      * nav导航栏
      */
-    protected void  initNavView(){};
-    protected void initNavListener(){};
-    protected void initNavData(){};
+    protected void initNavView() {
+    }
+
+    ;
+
+    protected void initNavListener() {
+    }
+
+    ;
+
+    protected void initNavData() {
+    }
+
+    ;
 
     /**
      * 点击屏幕空白区域 收起软键盘
+     *
      * @param ev
      * @return
      */
@@ -88,6 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         return super.dispatchTouchEvent(ev);
     }
+
     // Return whether touch the view.
     private boolean isShouldHideKeyboard(View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {
@@ -103,5 +127,51 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * loading
+     */
+    protected void showLoading() {
+        loadingDialog = LoadingDialog.newInstance();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        loadingDialog.show(ft, "loadingDialog");
+    }
+
+    protected void dismissLoading() {
+        if (loadingDialog != null)
+            loadingDialog.dismiss();
+    }
+
+
+    /**
+     * 请求保存图片
+     * WRITE_EXTERNAL_STORAGE
+     * READ_EXTERNAL_STORAGE
+     * 权限拒绝
+     */
+    protected void showPermissionSaveShareBitmapFail() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog(BaseActivity.this).builder()
+                        .setTitle(getResources().getString(com.juggist.baseandroid.R.string.save_bitmap_permission_fail))
+                        .setMsg(getResources().getString(com.juggist.baseandroid.R.string.save_bitmap_permission_todo))
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        })
+                        .setPositiveButton("去设置", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //跳转到自己app设置页面
+                                AppUtil.toSetting(BaseActivity.this);
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
 
 }

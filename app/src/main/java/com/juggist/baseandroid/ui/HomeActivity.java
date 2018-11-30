@@ -13,7 +13,6 @@ import com.juggist.baseandroid.ui.discover.DiscoverFragment;
 import com.juggist.baseandroid.ui.home.HomeFragment;
 import com.juggist.baseandroid.ui.mine.MineFragment;
 import com.juggist.baseandroid.view.FragmentTabHost;
-import com.juggist.jcore.base.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

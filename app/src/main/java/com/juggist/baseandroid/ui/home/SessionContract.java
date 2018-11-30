@@ -31,6 +31,7 @@ public class SessionContract {
         void loadMoreOnSellProductsList();
 
         void preparDownload(int position);
+
         void startDownload();
     }
 }

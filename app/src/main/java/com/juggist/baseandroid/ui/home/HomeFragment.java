@@ -15,7 +15,7 @@ import com.juggist.baseandroid.present.home.HomePresent;
 import com.juggist.baseandroid.ui.home.adapter.HomeItemAdapter;
 import com.juggist.baseandroid.utils.GlideImageLoader;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.jcore.base.BaseFragment;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.SessionBean;

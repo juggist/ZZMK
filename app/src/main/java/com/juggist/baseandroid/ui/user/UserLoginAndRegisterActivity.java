@@ -6,7 +6,7 @@ import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.user.fragment.UserLoginFragment;
 import com.juggist.baseandroid.ui.user.fragment.UserRegisterFragment;
 import com.juggist.baseandroid.view.NavigationTabStrip;
-import com.juggist.jcore.base.BaseActivity;
+import com.juggist.baseandroid.ui.BaseActivity;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;

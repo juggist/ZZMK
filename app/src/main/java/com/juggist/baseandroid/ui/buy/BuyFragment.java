@@ -12,7 +12,7 @@ import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.buy.BuyPresent;
 import com.juggist.baseandroid.ui.buy.adapter.BuyAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.jcore.base.BaseFragment;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.bean.ShopCarBean;
 
 import java.util.ArrayList;

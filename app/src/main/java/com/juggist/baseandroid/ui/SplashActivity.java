@@ -5,7 +5,6 @@ import android.content.Intent;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.user.UserLoginAndRegisterActivity;
 import com.juggist.jcore.Constants;
-import com.juggist.jcore.base.BaseActivity;
 import com.juggist.jcore.bean.UserInfo;
 import com.juggist.jcore.utils.SPUtil;
 

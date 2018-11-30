@@ -13,6 +13,7 @@ import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.UserInfo;
 import com.juggist.jcore.service.ISessionService;
 import com.juggist.jcore.service.SessionService;
+import com.juggist.jcore.utils.ClipboardUtils;
 import com.juggist.jcore.utils.StringUtil;
 import com.orhanobut.logger.Logger;
 
@@ -91,6 +92,7 @@ public class SessionPresent implements SessionContract.Present {
             return;
         }
 //        生成需要下载任务的mission集合
+        final ProductBean.DataBean.GoodsListBean item = totalProducts.get(downloadPosition);
         final List<String> downLoadUrls = totalProducts.get(downloadPosition).getMain_pic();
         List<Flowable<Status>> flowables = new ArrayList<>();
         for (final String downloadUrl : downLoadUrls) {
@@ -152,6 +154,10 @@ public class SessionPresent implements SessionContract.Present {
                                 intent.setData(uri);
                                 MyBaseApplication.getInstance().sendBroadcast(intent);
                             }
+                            ClipboardUtils.copyText(item.getGoods_name() + "\n"
+                                    + "代购价:￥" + item.getPrice() + "\n"
+                                    + "货号:" + item.getSn()
+                            );
                             return "succeed";
                         }
                         return "";
@@ -161,7 +167,7 @@ public class SessionPresent implements SessionContract.Present {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Logger.d("s : %s",s);
+                        Logger.d("s : %s", s);
                         if (view == null)
                             return;
                         if (s.equals("succeed")) {

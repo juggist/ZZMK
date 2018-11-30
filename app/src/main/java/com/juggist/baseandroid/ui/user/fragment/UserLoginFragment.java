@@ -15,7 +15,7 @@ import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.ButtonCountDown;
 import com.juggist.baseandroid.view.ClearEditText;
 import com.juggist.jcore.Constants;
-import com.juggist.jcore.base.BaseFragment;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.utils.KeyboardUtils;
 import com.juggist.jcore.utils.RegexUtils;
 

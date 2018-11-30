@@ -12,7 +12,7 @@ import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.mine.adapter.OrderColumnAdapter;
 import com.juggist.baseandroid.ui.mine.adapter.SettingColumnAdapter;
 import com.juggist.baseandroid.view.RoundImageView;
-import com.juggist.jcore.base.BaseFragment;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.bean.UserInfo;
 
 import butterknife.BindView;

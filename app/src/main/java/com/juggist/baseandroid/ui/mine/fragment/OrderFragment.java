@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.mine.OrderPresent;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.jcore.base.BaseFragment;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.bean.OrderBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;

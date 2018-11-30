@@ -12,7 +12,7 @@ import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.home.DiscountCardPresent;
 import com.juggist.baseandroid.ui.mine.adapter.DiscountCardAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.jcore.base.BaseFragment;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.DiscountCardBean;

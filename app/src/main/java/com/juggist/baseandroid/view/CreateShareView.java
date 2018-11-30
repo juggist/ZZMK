@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.AttributeSet;
@@ -23,11 +22,9 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.juggist.baseandroid.R;
-import com.juggist.jcore.Constants;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.utils.CreateBitmapByViewUtil;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
@@ -156,8 +153,6 @@ public class CreateShareView extends LinearLayout {
                                                 bitmap, item.getGoods_name(), null);
                                         //发送广播通知相册刷新，否则相册内看不到新增的图片
                                         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                                        Uri uri = Uri.fromFile(new File(Constants.PATH.PATH_SAVE_SHARE_PIC + item.getGoods_name()));
-                                        intent.setData(uri);
                                         context.sendBroadcast(intent);
                                         if (context instanceof SaveBitmapListener) {
                                             SaveBitmapListener listener = (SaveBitmapListener) context;

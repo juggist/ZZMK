@@ -43,7 +43,7 @@ public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
 
 
     @Override
-    protected void convert(BaseViewHolder helper, final ArticleBean item) {
+    protected void convert(final BaseViewHolder helper, final ArticleBean item) {
         GlideApp.with(context).load(item.getUser_headimg()).into((ImageView) helper.getView(R.id.iv_header));
         helper.setText(R.id.tv_name,item.getUser_name())
         .setText(R.id.tv_time,TimeUtils.millis2String(Long.parseLong(item.getArticle_time()),new SimpleDateFormat("HH:mm")))
@@ -79,7 +79,7 @@ public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
             @Override
             public void onClick(View v) {
                 if(listener != null)
-                    listener.download();
+                    listener.download(helper.getLayoutPosition());
             }
         });
         helper.getView(R.id.ll_share).setOnClickListener(new View.OnClickListener() {
@@ -138,7 +138,7 @@ public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
     }
     public interface Listener{
         void share();
-        void download();
+        void download(int position);
         void toBigPic(ArrayList<String> urls,int position);
     }
 

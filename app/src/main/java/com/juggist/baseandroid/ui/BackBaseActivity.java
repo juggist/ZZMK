@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
-import com.juggist.jcore.base.BaseActivity;
 
 import androidx.annotation.Nullable;
 

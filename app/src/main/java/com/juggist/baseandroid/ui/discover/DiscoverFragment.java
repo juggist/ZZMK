@@ -1,5 +1,7 @@
 package com.juggist.baseandroid.ui.discover;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +12,12 @@ import android.widget.TextView;
 
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.discover.DiscoverPresent;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.BigViewPagerPhotoActivity;
 import com.juggist.baseandroid.ui.discover.adapter.DiscoverAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.DialogDownload;
 import com.juggist.baseandroid.view.DialogShare;
-import com.juggist.jcore.base.BaseFragment;
 import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ArticleBean;
@@ -31,10 +33,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 
 /**
  *
  */
+@RuntimePermissions
 public class DiscoverFragment extends BaseFragment {
 
     @BindView(R.id.lv)
@@ -125,8 +134,9 @@ public class DiscoverFragment extends BaseFragment {
         }
 
         @Override
-        public void download() {
-            DialogDownload dd = new DialogDownload();
+        public void download(int position) {
+            present.preparDownload(position);
+            DialogDownload dd = new DialogDownload(new DownLoadListener());
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             dd.show(ft, "dd");
@@ -141,6 +151,16 @@ public class DiscoverFragment extends BaseFragment {
             intent.putExtras(bundle);
             startActivity(intent);
 
+        }
+    }
+    /**
+     * 下载监听事件
+     */
+    private class DownLoadListener implements DialogDownload.Listener {
+
+        @Override
+        public void startDownload() {
+            DiscoverFragmentPermissionsDispatcher.saveShareBitmapWithPermissionCheck(DiscoverFragment.this);
         }
     }
 
@@ -164,6 +184,18 @@ public class DiscoverFragment extends BaseFragment {
             super.getListFail(extMsg,refresh);
             showErrorDialog(extMsg);
         }
+        @Override
+        public void downloadShareSucceed() {
+            ToastUtil.showLong(getResources().getString(R.string.save_bitmap_succeed_todo));
+            DiscoverFragment.this.dismissLoading();
+        }
+
+        @Override
+        public void downloadShareFail(final String msg) {
+            showErrorDialog(msg);
+            DiscoverFragment.this.dismissLoading();
+        }
+
 
         @Override
         public void setPresent(DiscoverContract.Present present) {
@@ -195,4 +227,36 @@ public class DiscoverFragment extends BaseFragment {
             return adapter;
         }
     }
+
+    /**
+     * 动态权限
+     */
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmap() {
+        showLoading();
+        present.startDownload();
+    }
+
+    @SuppressLint("NeedOnRequestPermissionsResult")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        DiscoverFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmapRationale(final PermissionRequest request) {
+        showPermissionSaveShareBitmapFail();
+    }
+
+    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmapDenied() {
+        showPermissionSaveShareBitmapFail();
+    }
+
+    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void saveShareBitmapNever() {
+        showPermissionSaveShareBitmapFail();
+    }
+
 }

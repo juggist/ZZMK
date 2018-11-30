@@ -53,8 +53,8 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
                 .setText(R.id.tv_session_location, item.getMail_type_name())
                 .setText(R.id.tv_session_counter_price, item.getShoppe() == null ? "" : "专柜价:￥" + item.getShoppe())
                 .setText(R.id.tv_session_no, "货号:" + item.getSn())
-                .setText(R.id.tv_session_vip_price, "升级享受会员价格:￥" + item.getWholesale_price())
-                .addOnClickListener(R.id.ibtn_sale);
+                .setText(R.id.tv_session_vip_price, "升级享受会员价格:￥" + item.getWholesale_price());
+
 
         ((TextView) helper.getView(R.id.tv_session_counter_price)).setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -66,6 +66,14 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
                 helper.setText(R.id.tv_session_weight, spes.get(0).getAttrname() + ":" + valus.get(0).getContent());
             }
         }
+
+        helper.getView(R.id.ibtn_buy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null)
+                    listener.toBuy(item);
+            }
+        });
         helper.getView(R.id.ibtn_download).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,11 +81,11 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
                     listener.toDownload(helper.getLayoutPosition());
             }
         });
-        helper.getView(R.id.ibtn_buy).setOnClickListener(new View.OnClickListener() {
+        helper.getView(R.id.ibtn_sale).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(listener != null)
-                    listener.toBuy(item);
+                    listener.toSale(item);
             }
         });
         ((GridView) helper.getView(R.id.gv)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -143,5 +151,6 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
         void toBigPic(ArrayList<String> pics, int position);
         void toBuy(ProductBean.DataBean.GoodsListBean goodsListBean);
         void toDownload(int position);
+        void toSale(ProductBean.DataBean.GoodsListBean goodsListBean);
     }
 }

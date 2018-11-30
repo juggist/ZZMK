@@ -1,6 +1,6 @@
 package com.juggist.baseandroid;
 
-import com.juggist.jcore.base.BaseActivity;
+import com.juggist.baseandroid.ui.BaseActivity;
 
 
 public class MainActivity extends BaseActivity {

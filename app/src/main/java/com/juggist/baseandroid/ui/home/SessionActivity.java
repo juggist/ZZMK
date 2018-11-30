@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.eventbus.HomeTabChangeEvent;
 import com.juggist.baseandroid.present.home.SessionPresent;
@@ -21,14 +20,14 @@ import com.juggist.baseandroid.ui.home.adapter.SessionItemAdapter;
 import com.juggist.baseandroid.ui.home.adapter.SessionItemAdapter.Listener;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.AlertDialog;
+import com.juggist.baseandroid.view.CreateShareView;
 import com.juggist.baseandroid.view.DialogDownload;
 import com.juggist.baseandroid.view.DialogForBuy;
 import com.juggist.baseandroid.view.DialogSessionSetting;
-import com.juggist.baseandroid.view.LoadingDialog;
 import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ProductBean;
-import com.juggist.jcore.utils.AppUtil;
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -52,7 +51,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class SessionActivity extends BackBaseActivity {
+public class SessionActivity extends BackBaseActivity implements CreateShareView.SaveBitmapListener{
 
     @BindView(R.id.lv)
     RecyclerView lv;
@@ -62,6 +61,8 @@ public class SessionActivity extends BackBaseActivity {
     TextView tvShoppingNum;
     @BindView(R.id.shoppingCart)
     ConstraintLayout shoppingCart;
+    @BindView(R.id.createShareView)
+    CreateShareView createShareView;
 
     private LinearLayout statusView;
     private ImageView statusIv;
@@ -69,8 +70,13 @@ public class SessionActivity extends BackBaseActivity {
 
     private SessionItemAdapter adapter;
     private SessionContract.Present present;
-    private LoadingDialog loadingDialog;
 
+    private int addPrice = 0;//加价
+    private ProductBean.DataBean.GoodsListBean goodsListBean;//当前选择的商品
+
+    private static final int PERMISSION_MEGER_PIC = 0;//合并图片
+    private static final int PERMISSION_PIC = 1;//直接保存合并图片
+    private int permissionTag = PERMISSION_MEGER_PIC;
     @Override
     protected void onDestroy() {
         present.detach();
@@ -105,7 +111,7 @@ public class SessionActivity extends BackBaseActivity {
         iv_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogSessionSetting dss = new DialogSessionSetting();
+                DialogSessionSetting dss = new DialogSessionSetting(new MySettingListener());
                 FragmentTransaction ft = SessionActivity.this.getSupportFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 dss.show(ft, "dss");
@@ -152,8 +158,6 @@ public class SessionActivity extends BackBaseActivity {
         initAdapter();
         new SessionPresent(new ViewModel(), group_id);
         present.start();
-
-
     }
 
     @Override
@@ -168,31 +172,31 @@ public class SessionActivity extends BackBaseActivity {
     private void initAdapter() {
         adapter = new SessionItemAdapter(R.layout.adapter_session_item, new ArrayList<ProductBean.DataBean.GoodsListBean>(), this, new AdapterListener());
         adapter.setEmptyView(statusView);
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.ibtn_sale:
-                        break;
-                }
-            }
-        });
         lv.setAdapter(adapter);
     }
 
-    /**
-     * loading
-     */
-    private void showLoading() {
-        loadingDialog = LoadingDialog.newInstance();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        loadingDialog.show(ft, "loadingDialog");
-    }
 
-    private void dismissLoading() {
-        if (loadingDialog != null)
-            loadingDialog.dismiss();
+    /**
+     * 保存图片返回结果
+     * @param saveAble
+     */
+    @Override
+    public void saveResult(boolean saveAble) {
+        dismissLoading();
+        if (saveAble) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dismissLoading();
+                    new AlertDialog(SessionActivity.this).builder()
+                            .setTitle(getResources().getString(R.string.save_bitmap_succeed))
+                            .setMsg(getResources().getString(R.string.save_bitmap_succeed_todo))
+                            .show();
+                }
+            });
+        } else {
+            Logger.d("保存失败，请重试");
+        }
     }
 
     /**
@@ -226,8 +230,37 @@ public class SessionActivity extends BackBaseActivity {
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             dd.show(ft, "dd");
         }
+
+        @Override
+        public void toSale(ProductBean.DataBean.GoodsListBean goodsListBean) {
+            SessionActivity.this.goodsListBean = goodsListBean;
+            permissionTag = PERMISSION_MEGER_PIC;
+            SessionActivityPermissionsDispatcher.saveShareBitmapWithPermissionCheck(SessionActivity.this);
+        }
     }
 
+    /**
+     * 下载监听事件
+     */
+    private class DownLoadListener implements DialogDownload.Listener {
+
+        @Override
+        public void startDownload() {
+            permissionTag = PERMISSION_PIC;
+            SessionActivityPermissionsDispatcher.saveShareBitmapWithPermissionCheck(SessionActivity.this);
+        }
+    }
+
+    /**
+     * 设置按钮回调事件
+     */
+    private class MySettingListener implements DialogSessionSetting.SettingListener {
+
+        @Override
+        public void addPrice(int addPrice) {
+            SessionActivity.this.addPrice = addPrice;
+        }
+    }
     private class ViewModel extends SmartRefreshViewModel<ProductBean.DataBean.GoodsListBean> implements SessionContract.View {
         @Override
         public SmartRefreshLayout getSmartRefreshLayout() {
@@ -292,16 +325,6 @@ public class SessionActivity extends BackBaseActivity {
         }
     }
 
-    /**
-     * 下载监听事件
-     */
-    private class DownLoadListener implements DialogDownload.Listener {
-
-        @Override
-        public void startDownload() {
-            SessionActivityPermissionsDispatcher.saveShareBitmapWithPermissionCheck(SessionActivity.this);
-        }
-    }
 
     /**
      * 动态权限
@@ -309,7 +332,12 @@ public class SessionActivity extends BackBaseActivity {
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     void saveShareBitmap() {
         showLoading();
-        present.startDownload();
+        if(permissionTag == PERMISSION_MEGER_PIC){
+            createShareView.setData(goodsListBean,addPrice);
+        }else if(permissionTag == PERMISSION_PIC){
+            present.startDownload();
+        }
+
     }
 
     @Override
@@ -333,29 +361,5 @@ public class SessionActivity extends BackBaseActivity {
         showPermissionSaveShareBitmapFail();
     }
 
-    private void showPermissionSaveShareBitmapFail() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new AlertDialog(SessionActivity.this).builder()
-                        .setTitle(getResources().getString(R.string.save_bitmap_permission_fail))
-                        .setMsg(getResources().getString(R.string.save_bitmap_permission_todo))
-                        .setNegativeButton("取消", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
-                        })
-                        .setPositiveButton("去设置", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //跳转到自己app设置页面
-                                AppUtil.toSetting(SessionActivity.this);
-                            }
-                        })
-                        .show();
-            }
-        });
-    }
 
 }
