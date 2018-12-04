@@ -1,9 +1,11 @@
 package com.juggist.jcore.service;
 
+import com.juggist.jcore.bean.AddressBean;
 import com.juggist.jcore.bean.ResponseBean;
 import com.juggist.jcore.bean.UserBean;
 
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.FieldMap;
@@ -18,4 +20,20 @@ public interface UserServiceApi {
     @FormUrlEncoded
     @POST("api.php")
     Observable<ResponseBean<UserBean[]>> loginAndRegister(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<List<AddressBean>>> getAddressList(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> setDefaultAddress(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> deleteAddress(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> addAddress(@FieldMap HashMap<String,String> params);
 }

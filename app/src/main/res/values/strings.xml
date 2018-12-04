@@ -5,6 +5,7 @@
     <string name="user_register">注册</string>
     <string name="finish">完成</string>
     <string name="ensure">确定</string>
+    <string name="cancle">取消</string>
     <string name="quit">退出</string>
 
     <string name="unit">元</string>
@@ -19,6 +20,7 @@
     <string name="title_order_refund_all">退货退款</string>
     <string name="title_discount_card">优惠券</string>
     <string name="title_batch_forward">批量转发</string>
+    <string name="title_address">地址管理</string>
 
     <string name="tab_home">首页</string>
     <string name="tab_discover">发现</string>
@@ -131,6 +133,13 @@
     <string name="setting_to_discount_card">我的优惠券</string>
     <string name="setting_to_line">联系客服</string>
     <string name="setting_to_app">系统设置</string>
+
+    <string name="address_add">添加地址</string>
+    <string name="address_set_normal">设为默认</string>
+    <string name="address_set_delete">删除</string>
+    <string name="address_set_edit">编辑</string>
+    <string name="address_set_default_title">是否设置为默认地址</string>
+    <string name="address_set_delete_title">是否删除该地址</string>
 
 
     <string name="save_bitmap_succeed">保存成功</string>

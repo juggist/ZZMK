@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:fitsSystemWindows="true"
+    tools:context=".ui.mine.AddressListActivity">
+
+    <include
+        android:id="@+id/navigation"
+        layout="@layout/common_navigation_bar" />
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/lv"
+        android:background="@color/item_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="@dimen/dp_130"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigation"></androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btn_address_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginRight="@dimen/dp_45"
+        android:layout_marginBottom="@dimen/common_margin"
+        android:background="@drawable/btn_corner_bg"
+        android:text="@string/address_add"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

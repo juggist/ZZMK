@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
@@ -26,21 +26,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.HomeActivity" />
         <activity android:name=".ui.user.UserLoginAndRegisterActivity" />
         <activity android:name=".ui.user.UserPasswordForgetActivity" />
-        <activity android:name=".ui.HomeActivity" />
         <activity android:name=".ui.home.SessionActivity" />
+        <activity android:name=".ui.home.BatchForwardActivity" />
         <activity android:name=".ui.buy.OrderSubmitActivity" />
-        <activity android:name=".ui.BigViewPagerPhotoActivity" />
         <activity android:name=".ui.mine.OrderActivity" />
         <activity android:name=".ui.mine.DiscountCardActivity" />
-        <activity android:name=".ui.home.BatchForwardActivity" />
         <activity android:name=".ui.mine.OrderRefundActivity" />
         <activity android:name=".ui.mine.OrderTransportActivity" />
-        <activity android:name=".ui.mine.OrderRefundAllActivity"/>
-        <activity android:name=".view.chooseImg.ImageBucketActivity"/>
-        <activity android:name=".view.chooseImg.ImageGridActivity"/>
-        <activity android:name=".view.chooseImg.PhotoActivity"/>
+        <activity android:name=".ui.mine.OrderRefundAllActivity" />
+        <activity android:name=".ui.mine.AddressListActivity"></activity>
+        <activity android:name=".ui.BigViewPagerPhotoActivity" />
+        <activity android:name=".view.chooseImg.ImageBucketActivity" />
+        <activity android:name=".view.chooseImg.ImageGridActivity" />
+        <activity android:name=".view.chooseImg.PhotoActivity" />
     </application>
 
 </manifest>
