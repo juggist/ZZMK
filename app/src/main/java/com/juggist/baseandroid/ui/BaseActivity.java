@@ -1,6 +1,8 @@
 package com.juggist.baseandroid.ui;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -172,6 +174,35 @@ public abstract class BaseActivity extends AppCompatActivity {
                         .show();
             }
         });
+    }
+    /**
+     * activity跳转
+     * @param clazz
+     */
+    protected void gotoActivity(Class<? extends Activity> clazz) {
+        gotoActivity(clazz, false);
+    }
+
+    protected void gotoActivity(Class<? extends Activity> clazz, Bundle bundle) {
+        gotoActivity(clazz, false, bundle);
+    }
+    protected void gotoActivity(Class<? extends Activity> clazz, boolean finish) {
+        Intent intent = new Intent(this, clazz);
+        this.startActivity(intent);
+        if (finish) {
+            this.finish();
+        }
+    }
+    protected void gotoActivity(Class<? extends Activity> clazz, boolean finish, Bundle pBundle) {
+        Intent intent = new Intent(this, clazz);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+
+        this.startActivity(intent);
+        if (finish) {
+            this.finish();
+        }
     }
 
 }

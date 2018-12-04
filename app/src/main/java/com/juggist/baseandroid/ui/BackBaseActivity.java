@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
  */
 public abstract class BackBaseActivity extends BaseActivity {
     public ImageView iv_back,iv_setting;
-    public TextView tv_title;
+    public TextView tv_title,tv_right;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public abstract class BackBaseActivity extends BaseActivity {
         iv_back = findViewById(R.id.iv_back);
         iv_setting = findViewById(R.id.iv_setting);
         tv_title = findViewById(R.id.tv_title);
+        tv_right = findViewById(R.id.tv_right);
     }
     protected void initNavListener(){
         iv_back.setOnClickListener(new View.OnClickListener() {

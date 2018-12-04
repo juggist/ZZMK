@@ -34,6 +34,8 @@ public class MyBaseApplication extends Application {
 
         setRxDownload();
 
+        initCrash();
+
     }
 
     /**
@@ -86,5 +88,9 @@ public class MyBaseApplication extends Application {
 
         DownloadConfig.INSTANCE.init(builder);
 
+    }
+    private void initCrash(){
+        CrashHandler crashHandler = CrashHandler.getsInstance();
+        crashHandler.init(this);
     }
 }

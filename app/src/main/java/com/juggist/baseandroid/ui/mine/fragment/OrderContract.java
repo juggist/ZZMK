@@ -14,12 +14,12 @@ public class OrderContract {
     public interface View extends BaseView<Present> {
 
 
-        void getOrderListEmpty();
-        void getOrderListSucceed(List<OrderBean> orderBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
-        void getOrderListSucceedEnd(List<OrderBean> orderBeans,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListEmpty();
+        void getListSucceed(List<OrderBean> orderBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListSucceedEnd(List<OrderBean> orderBeans,boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
-        void getOrderListEmptyFail(String extMsg);
-        void getOrderListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
+        void getListEmptyFail(String extMsg);
+        void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
     }
 

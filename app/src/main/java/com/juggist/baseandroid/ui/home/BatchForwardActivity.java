@@ -21,7 +21,6 @@ import com.juggist.baseandroid.view.CreateShareView;
 import com.juggist.baseandroid.view.DialogSessionSetting;
 import com.juggist.baseandroid.view.LoadingDialog;
 import com.juggist.jcore.bean.ProductBean;
-import com.juggist.jcore.utils.AppUtil;
 import com.orhanobut.logger.Logger;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -208,16 +207,6 @@ public class BatchForwardActivity extends BackBaseActivity implements CreateShar
     private void updateButtonInfo(){
         tvBatchForward.setText(String.format(getResources().getString(R.string.product_batch_forward), String.valueOf(selectCount) + (addPrice == 0 ? "" : "/加价:" + addPrice)));
     }
-    private void showLoading(){
-        loadingDialog = LoadingDialog.newInstance();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        loadingDialog.show(ft, "loadingDialog");
-    }
-    private void dismissLoading(){
-        if(loadingDialog != null)
-            loadingDialog.dismiss();
-    }
     private class ViewModel implements BatchForwardContract.View {
 
         @Override
@@ -313,29 +302,5 @@ public class BatchForwardActivity extends BackBaseActivity implements CreateShar
         showPermissionSaveShareBitmapFail();
     }
 
-    private void showPermissionSaveShareBitmapFail() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new AlertDialog(BatchForwardActivity.this).builder()
-                        .setTitle(getResources().getString(R.string.save_bitmap_permission_fail))
-                        .setMsg(getResources().getString(R.string.save_bitmap_permission_todo))
-                        .setNegativeButton("取消", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
-                        })
-                        .setPositiveButton("去设置", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //跳转到自己app设置页面
-                                AppUtil.toSetting(BatchForwardActivity.this);
-                            }
-                        })
-                        .show();
-            }
-        });
-    }
 
 }

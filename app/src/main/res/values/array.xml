@@ -41,4 +41,10 @@
         <item>已使用</item>
         <item>已过期</item>
     </string-array>
+    <string-array name="refund_all_reason">
+        <item>个人原因</item>
+        <item>货物损坏</item>
+        <item>未收到货</item>
+        <item>质量原因</item>
+    </string-array>
 </resources>

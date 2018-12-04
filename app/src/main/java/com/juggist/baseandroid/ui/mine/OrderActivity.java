@@ -1,7 +1,6 @@
 package com.juggist.baseandroid.ui.mine;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 
 import com.juggist.baseandroid.R;
@@ -56,11 +55,8 @@ public class OrderActivity extends BackBaseActivity {
         DensityConst.initDensity(this);
         titles = getResources().getStringArray(R.array.order_inside);
         for(int i = 0;i < titles.length;i++){
-            OrderFragment fragment = new OrderFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("position",i);
-            fragment.setArguments(bundle);
-            fragmentList.add(new OrderFragment());
+            OrderFragment fragment = OrderFragment.newInstance(i);
+            fragmentList.add(fragment);
         }
         initIndicator();
         initAdapter();

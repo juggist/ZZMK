@@ -44,7 +44,7 @@ public class DiscoverPresent implements DiscoverContract.Present {
     private DiscoverContract.View view;
     private IArticleService articleService;
 
-    private int page = 0;
+    private int page = 1;
     private static final int page_size = 10;
     private int downloadPosition = -1;
 
@@ -61,7 +61,7 @@ public class DiscoverPresent implements DiscoverContract.Present {
 
     @Override
     public void refreshArticleList() {
-        page = 0;
+        page = 1;
         getArticleList();
     }
 

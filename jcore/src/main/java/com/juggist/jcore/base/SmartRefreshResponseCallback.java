@@ -46,7 +46,7 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
                     view.getListSucceed(getTotalList(),true);
                 }
             }else{//加载更多
-                if(t.size() >= 0 && t.size() < getPage()){
+                if(t.size() >= 0 && t.size() < getPageSize()){
                     view.getListSucceedEnd(getTotalList(),false);
                 }else{
                     view.getListSucceed(getTotalList(),false);

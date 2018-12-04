@@ -64,6 +64,7 @@ public class Constants {
         public static final String PATH_SAVE_SESSION_PIC = BASE_PATH +  "SESSION_PIC/";//商品图片地址
         public static final String PATH_SAVE_SHARE_PIC = BASE_PATH +  "SHARE_PIC/";//商品图片分享地址
         public static final String PATH_SAVE_SHARE_MERGER_PIC = BASE_PATH +  "SHARE_MERGER_PIC/";//商品图片合成分享地址
+        public static final String PATH_REFUND_PIC = BASE_PATH +  "SHARE_REFUND_PIC/";//退货退款图片地址
 
 
     }

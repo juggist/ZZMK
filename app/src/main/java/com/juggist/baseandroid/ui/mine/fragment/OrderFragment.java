@@ -1,44 +1,49 @@
 package com.juggist.baseandroid.ui.mine.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.mine.OrderPresent;
-import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.ui.BaseFragment;
+import com.juggist.baseandroid.ui.mine.OrderRefundActivity;
+import com.juggist.baseandroid.ui.mine.OrderRefundAllActivity;
+import com.juggist.baseandroid.ui.mine.OrderTransportActivity;
+import com.juggist.baseandroid.ui.mine.adapter.OrderAdapter;
+import com.juggist.baseandroid.utils.ToastUtil;
+import com.juggist.jcore.base.BaseUpdateAdapter;
+import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.OrderBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  */
 public class OrderFragment extends BaseFragment {
 
     @BindView(R.id.lv)
-    ListView lv;
+    RecyclerView lv;
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
-    @BindView(R.id.lv_iv)
-    ImageView lvIv;
-    @BindView(R.id.lv_tv)
-    TextView lvTv;
-    @BindView(R.id.lv_ll)
-    LinearLayout lvLl;
-
+    private LinearLayout statusView;
+    private ImageView statusIv;
+    private TextView statusTv;
 
     private static final String ARG_PARAM1 = "position";
     private int position;
@@ -47,6 +52,8 @@ public class OrderFragment extends BaseFragment {
 
 
     private OrderContract.Present present;
+    private OrderAdapter adapter;
+
     public OrderFragment() {
         // Required empty public constructor
     }
@@ -66,6 +73,7 @@ public class OrderFragment extends BaseFragment {
             position = getArguments().getInt(ARG_PARAM1);
         }
     }
+
     @Override
     public void onDestroyView() {
         present.detach();
@@ -80,7 +88,15 @@ public class OrderFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        lv.setEmptyView(lvLl);
+        statusView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.view_net_error, null);
+        statusIv = statusView.findViewById(R.id.lv_iv);
+        statusTv = statusView.findViewById(R.id.lv_tv);
+
+        lv.setLayoutManager(new LinearLayoutManager(getContext()));
+        lv.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
+                .color(getResources().getColor(R.color.item_bg))
+                .sizeResId(R.dimen.dp_20)
+                .build());
     }
 
     @Override
@@ -96,21 +112,31 @@ public class OrderFragment extends BaseFragment {
                 present.refreshOrderList();
             }
         });
+        //网络异常，点击屏幕重新加载
+        statusView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (statusTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))) {
+                    present.start();
+                }
+            }
+        });
     }
 
     @Override
     protected void initData() {
-
-        new OrderPresent(new ViewModel(),getCondition());
+        initAdapter();
+        new OrderPresent(new ViewModel(), getCondition());
         present.start();
     }
 
     /**
      * 根据下标获取condition
+     *
      * @return
      */
-    private String getCondition(){
-        switch (position){
+    private String getCondition() {
+        switch (position) {
             case 0:
                 return "all";
             case 1:
@@ -125,62 +151,57 @@ public class OrderFragment extends BaseFragment {
         }
         return "all";
     }
-    @OnClick({R.id.lv_iv})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.lv_iv:
-                if(lvTv.getText().toString().equals(getActivity().getResources().getString(R.string.lv_net_error)))
-                    present.start();
-                break;
 
-        }
+    private void initAdapter() {
+        adapter = new OrderAdapter(getActivity(),R.layout.adapter_order, new ArrayList<OrderBean>());
+        adapter.setEmptyView(statusView);
+        lv.setAdapter(adapter);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.btn_order_refund_about:
+                        Intent intent = new Intent(getActivity(),OrderRefundActivity.class);
+                        intent.putExtra("refundId",OrderFragment.this.adapter.getRefundId(position));
+                        getActivity().startActivity(intent);
+                        break;
+                    case R.id.btn_order_transport:
+                        Intent intent2 = new Intent(getActivity(),OrderTransportActivity.class);
+                        intent2.putExtra("orderId",OrderFragment.this.adapter.getOrderId(position));
+                        getActivity().startActivity(intent2);
+                        break;
+                    case R.id.btn_order_refund:
+                        Intent intent3 = new Intent(getActivity(),OrderRefundAllActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("order",OrderFragment.this.adapter.getOrder(position));
+                        intent3.putExtras(bundle);
+                        getActivity().startActivity(intent3);
+                        break;
+                }
+            }
+        });
     }
-    private class ViewModel implements OrderContract.View {
+
+
+    private class ViewModel extends SmartRefreshViewModel<OrderBean> implements OrderContract.View {
 
         @Override
-        public void getOrderListEmpty() {
-//            adapter.update(new ArrayList<ShopCarBean>());
-            lvTv.setText(getActivity().getResources().getString(R.string.lv_data_empty));
-            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.order_pic_default)).into(lvIv);
+        public void getListEmpty() {
+            super.getListEmpty();
+            statusTv.setText(getResources().getString(R.string.lv_data_empty));
         }
 
         @Override
-        public void getOrderListSucceed(List<OrderBean> orderBeans, boolean refresh) {
-//            adapter.update(articleBeans);
-            if (refresh) {
-                srl.finishRefresh();
-            } else {
-                srl.finishLoadMore();
-            }
-        }
-
-        @Override
-        public void getOrderListSucceedEnd(List<OrderBean> orderBeans, boolean refresh) {
-//            adapter.update(articleBeans);
-            if (refresh) {
-                srl.finishRefresh();
-                srl.setNoMoreData(true);
-            } else {
-                srl.finishLoadMoreWithNoMoreData();
-            }
-        }
-
-        @Override
-        public void getOrderListEmptyFail(String extMsg) {
+        public void getListEmptyFail(String extMsg) {
+            super.getListEmptyFail(extMsg);
             showErrorDialog(extMsg);
-            srl.finishRefresh();
-            lvTv.setText(getResources().getString(R.string.lv_net_error));
-            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.order_pic_default)).into(lvIv);
+            statusTv.setText(getResources().getString(R.string.lv_net_error));
         }
 
         @Override
-        public void getOrderListFail(String extMsg, boolean refresh) {
+        public void getListFail(String extMsg, boolean refresh) {
+            super.getListFail(extMsg, refresh);
             showErrorDialog(extMsg);
-            if (refresh) {
-                srl.finishRefresh();
-            } else {
-                srl.finishLoadMore();
-            }
         }
 
         @Override
@@ -195,13 +216,22 @@ public class OrderFragment extends BaseFragment {
 
         @Override
         public void showLoading() {
-            lvTv.setText(getResources().getString(R.string.lv_loading));
-            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.order_pic_default)).into(lvIv);
+            statusTv.setText(getResources().getString(R.string.lv_loading));
         }
 
         @Override
         public void dismissLoading() {
 
+        }
+
+        @Override
+        public SmartRefreshLayout getSmartRefreshLayout() {
+            return srl;
+        }
+
+        @Override
+        public BaseUpdateAdapter getBaseAdapter() {
+            return adapter;
         }
     }
 }

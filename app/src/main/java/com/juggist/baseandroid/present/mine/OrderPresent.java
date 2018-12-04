@@ -1,7 +1,8 @@
 package com.juggist.baseandroid.present.mine;
 
 import com.juggist.baseandroid.ui.mine.fragment.OrderContract;
-import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.base.BaseView;
+import com.juggist.jcore.base.SmartRefreshResponseCallback;
 import com.juggist.jcore.bean.OrderBean;
 import com.juggist.jcore.service.ISessionService;
 import com.juggist.jcore.service.SessionService;
@@ -18,7 +19,7 @@ public class OrderPresent implements OrderContract.Present {
     private String condition;
     private ISessionService sessionService;
 
-    private int page = 0;
+    private int page = 1;
     private static final int page_size = 10;
     private List<OrderBean> totalOrderBeans = new ArrayList<>();
 
@@ -31,7 +32,7 @@ public class OrderPresent implements OrderContract.Present {
 
     @Override
     public void refreshOrderList() {
-        page = 0;
+        page = 1;
         getOrderList();
     }
 
@@ -43,74 +44,60 @@ public class OrderPresent implements OrderContract.Present {
     private void getOrderList(){
         if(view != null)
             view.showLoading();
-        sessionService.getOrderList(String.valueOf(page), String.valueOf(page_size), condition, new ResponseCallback<List<OrderBean>>() {
+        sessionService.getOrderList(String.valueOf(page), String.valueOf(page_size), condition, new SmartRefreshResponseCallback<OrderBean>() {
             @Override
-            public void onSucceed(List<OrderBean> orderBeans) {
-                /**
-                 * 数据
-                 */
-                //添加数据
-                if(page == 0){//刷新
-                    totalOrderBeans.clear();
-                }
-                totalOrderBeans.addAll(orderBeans);
-                
-                
-                /**
-                 * 视图
-                 */
-                if(view == null)
-                    return;
-                view.dismissLoading();
-                if(page == 0){//刷新
-                    if(orderBeans.size() == 0){ //页面数据为空
-                        view.getOrderListEmpty();
-                    }else if(orderBeans.size() < page_size){
-                        view.getOrderListSucceedEnd(totalOrderBeans,true);
-                    }else{
-                        view.getOrderListSucceed(totalOrderBeans,true);
-                    }
-                }else{//加载更多
-                    if(orderBeans.size() >= 0 && orderBeans.size() < page_size){
-                        view.getOrderListSucceedEnd(totalOrderBeans,false);
-                    }else{
-                        view.getOrderListSucceed(totalOrderBeans,false);
-                    }
-                }
-                
-                /**
-                 * 设置page 
-                 */
-                if(orderBeans.size() == page_size){
-                    page++;
-                }
+            public int getPage() {
+                return page;
+            }
+
+            @Override
+            public int getPageSize() {
+                return page_size;
+            }
+
+            @Override
+            public void setPage(int page) {
+                OrderPresent.this.page = page;
+            }
+
+            @Override
+            public void clearTotalList() {
+                totalOrderBeans.clear();
+            }
+
+            @Override
+            public List<OrderBean> getTotalList() {
+                return totalOrderBeans;
+            }
+
+            @Override
+            public void setTotalList(List<OrderBean> t) {
+                totalOrderBeans.addAll(t);
+            }
+
+            @Override
+            public BaseView getView() {
+                return view;
+            }
+
+            @Override
+            public void onSucceed(List<OrderBean> t) {
+                super.onSucceed(t);
+                dismissLoading();
             }
 
             @Override
             public void onError(String message) {
-                getOrderListFail(message);
+                super.onError(message);
+                dismissLoading();
             }
 
             @Override
             public void onApiError(String state, String message) {
-                getOrderListFail(message + " : " + state);
+                super.onApiError(state, message);
+                dismissLoading();
             }
         });
-    }
-    private void getOrderListFail(String extMsg){
-        if(view == null)
-            return;
-        view.dismissLoading();
-        if(page == 0){//刷新
-            if(totalOrderBeans.size() == 0){//无数据
-                  view.getOrderListEmptyFail(extMsg);
-            }else{//有数据
-                  view.getOrderListFail(extMsg,true);
-            }
-        }else{//加载更多
-            view.getOrderListFail(extMsg,false);
-        }
-
     }
     @Override
     public void start() {
@@ -121,5 +108,9 @@ public class OrderPresent implements OrderContract.Present {
     public void detach() {
         view = null;
 
+    }
+    private void dismissLoading() {
+        if (view != null)
+            view.dismissLoading();
     }
 }

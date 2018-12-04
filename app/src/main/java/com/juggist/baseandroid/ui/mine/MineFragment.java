@@ -47,7 +47,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        tvOrderMore.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.dp_20));
     }
 
     @Override

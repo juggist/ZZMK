@@ -19,15 +19,28 @@
         android:layout_centerInParent="true"
         android:textColor="@color/color_invitecode"
         android:textSize="@dimen/sp_32" />
+
     <ImageView
         android:id="@+id/iv_setting"
-        android:visibility="gone"
-        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/common_margin"
         android:src="@drawable/nav_icon_set"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_right"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/common_margin"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_32"
+        android:visibility="gone" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"

@@ -5,6 +5,7 @@
     <string name="user_register">注册</string>
     <string name="finish">完成</string>
     <string name="ensure">确定</string>
+    <string name="quit">退出</string>
 
     <string name="unit">元</string>
     <string name="custom_price">自定义</string>
@@ -13,6 +14,9 @@
     <string name="title_order_submit">确认订单</string>
     <string name="title_review_big_pic">查看大图</string>
     <string name="title_order">订单列表</string>
+    <string name="title_order_refund">退款详情</string>
+    <string name="title_order_transport">物流详情</string>
+    <string name="title_order_refund_all">退货退款</string>
     <string name="title_discount_card">优惠券</string>
     <string name="title_batch_forward">批量转发</string>
 
@@ -73,6 +77,17 @@
     <string name="order_sale_cash_empty">暂无可用</string>
     <string name="order_total_money_2">小计</string>
     <string name="order_total_money_3">应付总额:</string>
+    <string name="order_pay">去付款</string>
+    <string name="order_refund">退款</string>
+    <string name="order_refund_about">退款详情</string>
+    <string name="order_refund_no">退货单号:</string>
+    <string name="order_refund_time">申请时间:</string>
+    <string name="order_refund_money">退款金额:</string>
+    <string name="order_refund_progress">当前进度</string>
+    <string name="order_refund_progress_02">当前进度:</string>
+    <string name="order_refund_answer">平台回复:</string>
+    <string name="order_refund_detail_get_fail_title">获取退款详情失败</string>
+    <string name="order_refund_detail_get_fail_msg">是否重新获取</string>
     <string name="order_review">查看订单</string>
     <string name="order_confrim">确认收货</string>
     <string name="order_transport">查看物流</string>
@@ -84,6 +99,15 @@
     <string name="order_to_transport">待发货</string>
     <string name="order_to_reciver">待收货</string>
     <string name="order_to_service">售后服务</string>
+    <string name="order_dot">*</string>
+    <string name="order_refund_reason">退款原因</string>
+    <string name="order_refund_detail">问题描述:</string>
+    <string name="order_refund_reason_choose">请选择</string>
+    <string name="order_refund_pic">上传凭证(最多三张)</string>
+    <string name="order_refund_reason_empty">请选择退款原因</string>
+    <string name="order_refund_dialog_title">退货原因</string>
+    <string name="order_refund_dialog_succeed_title">提交成功</string>
+
 
     <string name="toast_login_phone_empty">请输入手机号码</string>
     <string name="toast_login_phone_un_right">请输入正确的手机号码</string>
@@ -113,4 +137,11 @@
     <string name="save_bitmap_succeed_todo">分享图片已经保存在相册</string>
     <string name="save_bitmap_permission_fail">保存图片失败</string>
     <string name="save_bitmap_permission_todo">请去系统设置里打开权限</string>
+
+    <string name="album">相册</string>
+    <string name="choose_pic">选择图片</string>
+    <string name="choose_pic_from_album">我的相册中选择</string>
+    <string name="choose_pic_from_camera">拍摄</string>
+    <string name="choose_pic_permission_fail">选取图片失败</string>
+    <string name="choose_pic_permission_todo">请去系统设置里打开权限</string>
 </resources>
