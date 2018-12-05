@@ -31,7 +31,7 @@ public class UserBean extends BaseBean {
     private String      sex;
     private String      token;
     private String      balance;
-    private Object      e_money;
+    private String      e_money;
     private String      level;
     private String      cellphone;
     private String      level_name;
@@ -88,11 +88,11 @@ public class UserBean extends BaseBean {
         this.balance = balance;
     }
 
-    public Object getE_money() {
+    public String getE_money() {
         return e_money;
     }
 
-    public void setE_money(Object e_money) {
+    public void setE_money(String e_money) {
         this.e_money = e_money;
     }
 

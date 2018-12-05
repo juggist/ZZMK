@@ -104,6 +104,10 @@ dependencies {
      * 导航栏
      */
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
+    /**
+     * 三级联动选择器
+     */
+    api 'com.contrarywind:Android-PickerView:4.1.6'
 
     /**
      * 自动注解view

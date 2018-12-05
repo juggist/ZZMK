@@ -19,4 +19,5 @@ public interface IUserService {
     void setDefaultAddress(String address_id,ResponseCallback<String> callback);
     void deleteAddress(String address_id,ResponseCallback<String> callback);
     void addAddress(String detail,String province_id,String city_id,String area_id,String cellphone,String consignee,String is_default ,ResponseCallback<String> callback);
+    void changeAddress(String address_id,String detail,String province_id,String city_id,String area_id, String cellphone, String consignee, String is_default,ResponseCallback<String> callback);
 }

@@ -61,6 +61,10 @@ public class AddressListPresent implements AddressListContract.Present {
         });
     }
 
+    /**
+     * 校验是否可以删除地址
+     * @param position
+     */
     @Override
     public void checkDeleteAddress(int position){
         selectIndex = position;
@@ -100,15 +104,18 @@ public class AddressListPresent implements AddressListContract.Present {
         });
     }
 
+    /**
+     * 校验是否可以设置默认地址
+     * @param position
+     */
     @Override
     public void checkDefaultAddress(int position) {
         selectIndex = position;
-        boolean selectAble = totalAddressBeans.get(selectIndex).getAuto_id().equals("0")?false:true;
+        boolean selectAble = totalAddressBeans.get(selectIndex).getIs_default().equals("0")?false:true;
         if(!selectAble && view != null){
             view.showSetDefaultAddressDialog();
         }
     }
-
 
     @Override
     public void setDefaultAddress() {

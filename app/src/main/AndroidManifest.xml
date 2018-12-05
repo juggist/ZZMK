@@ -37,11 +37,12 @@
         <activity android:name=".ui.mine.OrderRefundActivity" />
         <activity android:name=".ui.mine.OrderTransportActivity" />
         <activity android:name=".ui.mine.OrderRefundAllActivity" />
-        <activity android:name=".ui.mine.AddressListActivity"></activity>
+        <activity android:name=".ui.mine.AddressListActivity" />
         <activity android:name=".ui.BigViewPagerPhotoActivity" />
         <activity android:name=".view.chooseImg.ImageBucketActivity" />
         <activity android:name=".view.chooseImg.ImageGridActivity" />
         <activity android:name=".view.chooseImg.PhotoActivity" />
+        <activity android:name=".ui.mine.AddressAddActivity"></activity>
     </application>
 
 </manifest>

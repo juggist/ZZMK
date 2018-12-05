@@ -50,7 +50,7 @@ public class GsonResponseBodyConvert<T> implements Converter<ResponseBody,T> {
             throw new ApiCodeErrorException(ErrorCode.NET_ERROR);
         }
         String response = value.string();
-        ResponseStatus responseStatus = gson.fromJson(response, ResponseStatus.class);
+        ResponseStatus responseStatus = gson.fromJson(response.trim(), ResponseStatus.class);
         //errorCode !=200 认为是异常
         if (!responseStatus.getStatus().contentEquals(Constants.REQUEST_SUCCESS)) {
             value.close();

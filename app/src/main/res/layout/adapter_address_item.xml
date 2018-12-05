@@ -57,8 +57,8 @@
 
         <ImageView
             android:id="@+id/ibtn_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_38"
+            android:layout_height="@dimen/dp_38"
             android:layout_marginLeft="@dimen/common_margin"
             android:src="@drawable/ibtn_address_select_bg"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,6 +66,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_20"

@@ -36,4 +36,8 @@ public interface UserServiceApi {
     @FormUrlEncoded
     @POST("api.php")
     Observable<ResponseBean<String>> addAddress(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> changeAddress(@FieldMap HashMap<String,String> params);
 }

@@ -141,5 +141,29 @@ public class UserService extends BaseService implements IUserService{
                 },new ConsumerThrowable<>(callback));
     }
 
+    @Override
+    public void changeAddress(String address_id,String detail, String province_id, String city_id, String area_id, String cellphone, String consignee, String is_default, final ResponseCallback<String> callback) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("controller","Member");
+        params.put("action","updateOrdersAddress");
+        params.put("user_id",UserInfo.userId());
+        params.put("token",UserInfo.token());
+        params.put("detail",detail);
+        params.put("province_id",province_id);
+        params.put("city_id",city_id);
+        params.put("area_id",area_id);
+        params.put("cellphone",cellphone);
+        params.put("consignee",consignee);
+        params.put("is_default",is_default);
+        params.put("address_id",address_id);
+        this.getFilterResponse(userAPI.changeAddress(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        callback.onSucceed(s);
+                    }
+                },new ConsumerThrowable<>(callback));
+    }
+
 
 }

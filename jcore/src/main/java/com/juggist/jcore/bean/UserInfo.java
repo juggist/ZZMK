@@ -68,7 +68,7 @@ public class UserInfo extends BaseBean {
     public static String phone(){
         UserBean userBean = SPUtil.getObjectFromShare(Constants.SP.USER_INFO);
         if(userBean != null){
-            return userBean.getPhoto();
+            return userBean.getCellphone();
         }else{
             return "";
         }

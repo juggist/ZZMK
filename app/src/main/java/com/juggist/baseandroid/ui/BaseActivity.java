@@ -133,15 +133,24 @@ public abstract class BaseActivity extends AppCompatActivity {
      * loading
      */
     protected void showLoading() {
-        loadingDialog = LoadingDialog.newInstance();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        loadingDialog.show(ft, "loadingDialog");
+        try{
+            loadingDialog = LoadingDialog.newInstance();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            loadingDialog.show(ft, "loadingDialog");
+        }catch (Exception e){
+
+        }
     }
 
     protected void dismissLoading() {
-        if (loadingDialog != null)
-            loadingDialog.dismiss();
+        try{
+            if (loadingDialog != null)
+                loadingDialog.dismiss();
+        }catch (Exception e){
+
+        }
+
     }
 
 

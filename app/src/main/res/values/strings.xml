@@ -21,6 +21,8 @@
     <string name="title_discount_card">优惠券</string>
     <string name="title_batch_forward">批量转发</string>
     <string name="title_address">地址管理</string>
+    <string name="title_address_add">新增收货地址</string>
+    <string name="title_address_edit">编辑收货地址</string>
 
     <string name="tab_home">首页</string>
     <string name="tab_discover">发现</string>
@@ -35,6 +37,9 @@
     <string name="hint_code">请输入验证码</string>
     <string name="hint_newPsw">请输入新密码6~8位</string>
     <string name="hint_inviteCode">请输入邀请码</string>
+    <string name="hint_address_person_name">请输入收货人的姓名</string>
+    <string name="hint_address_person_phone">请输入收货人的手机号码</string>
+    <string name="hint_address_person_detail">请输入收货人的详细地址</string>
 
     <string name="psw_forget">忘记密码?</string>
     <string name="code_send">获取验证码</string>
@@ -119,6 +124,7 @@
     <string name="toast_protocol_check">请阅读并同意《用户协议》</string>
     <string name="toast_out_of_shop_maxnum">您已经购买最大数量</string>
     <string name="toast_choose_share_goods">请您选择批量转发的商品</string>
+    <string name="toast_un_empty">请输入完整信息</string>
 
     <string name="lv_loading">正在加载数据中...</string>
     <string name="lv_data_empty">当前暂无数据</string>
@@ -135,11 +141,22 @@
     <string name="setting_to_app">系统设置</string>
 
     <string name="address_add">添加地址</string>
+    <string name="address_choose">请选择</string>
     <string name="address_set_normal">设为默认</string>
     <string name="address_set_delete">删除</string>
     <string name="address_set_edit">编辑</string>
     <string name="address_set_default_title">是否设置为默认地址</string>
     <string name="address_set_delete_title">是否删除该地址</string>
+    <string name="address_person_name">收货人</string>
+    <string name="address_person_phone">联系电话</string>
+    <string name="address_person_address">所在地址</string>
+    <string name="address_person_address_detail">详细地址</string>
+    <string name="address_person_set_default">设置为默认地址</string>
+    <string name="address_choose_fail">获取地理数据失败，请重新获取</string>
+    <string name="address_set_succeed">设置地址成功</string>
+    <string name="address_update_succeed">修改地址成功</string>
+    <string name="address_set_fail">设置地址失败，请重试</string>
+    <string name="address_update_fail">修改地址失败，请重试</string>
 
 
     <string name="save_bitmap_succeed">保存成功</string>

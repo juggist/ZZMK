@@ -1,5 +1,6 @@
 package com.juggist.baseandroid.ui.mine;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.R;
+import com.juggist.baseandroid.eventbus.AddressEvent;
 import com.juggist.baseandroid.present.mine.AddressListPresent;
 import com.juggist.baseandroid.ui.BackBaseActivity;
 import com.juggist.baseandroid.ui.mine.adapter.AddressListAdapter;
@@ -16,6 +18,9 @@ import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.AlertDialog;
 import com.juggist.jcore.bean.AddressBean;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +50,7 @@ public class AddressListActivity extends BackBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         present.detach();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -70,7 +76,9 @@ public class AddressListActivity extends BackBaseActivity {
         btnAddressAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("tag",0);
+                gotoActivity(AddressAddActivity.class,bundle);
             }
         });
         //网络异常，点击屏幕重新加载
@@ -87,6 +95,7 @@ public class AddressListActivity extends BackBaseActivity {
 
     @Override
     protected void initData() {
+        EventBus.getDefault().register(this);
         initAdapter();
         new AddressListPresent(new ViewModel());
         present.start();
@@ -108,6 +117,7 @@ public class AddressListActivity extends BackBaseActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
+                    case R.id.tv_select:
                     case R.id.ibtn_select:
                         present.checkDefaultAddress(position);
                         break;
@@ -117,6 +127,10 @@ public class AddressListActivity extends BackBaseActivity {
                         break;
                     case R.id.tv_edit_title:
                     case R.id.tv_edit:
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("tag",1);
+                        bundle.putSerializable("addressBean",AddressListActivity.this.adapter.getAddressBean(position));
+                        AddressListActivity.this.gotoActivity(AddressAddActivity.class,bundle);
                         break;
                 }
             }
@@ -227,4 +241,9 @@ public class AddressListActivity extends BackBaseActivity {
             AddressListActivity.this.dismissLoading();
         }
     }
+    @Subscribe
+    public void updateAddressList(AddressEvent.AddressListUpdate event){
+        present.start();
+    }
+
 }
