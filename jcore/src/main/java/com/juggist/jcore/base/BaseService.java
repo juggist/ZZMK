@@ -1,9 +1,11 @@
 package com.juggist.jcore.base;
 
+import com.juggist.jcore.CoreInject;
 import com.juggist.jcore.bean.ResponseBean;
 import com.juggist.jcore.http.ErrorCode;
 import com.juggist.jcore.http.exception.ApiCodeErrorException;
 import com.juggist.jcore.service.ext.FilterResponseFunc;
+import com.juggist.jcore.service.ext.TokenErrorListener;
 import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
@@ -35,7 +37,7 @@ public class BaseService {
                 .map(new Function<T, T>() {
                     @Override
                     public T apply(T t) throws Exception {
-                        if(t != null){
+                        if (t != null) {
                             return t;
                         }
                         throw new ApiCodeErrorException(ErrorCode.DATA_NULL);
@@ -46,6 +48,7 @@ public class BaseService {
 
     /**
      * 异常处理分发
+     *
      * @param <T> 定义泛型
      */
     protected class ConsumerThrowable<T> implements Consumer<Throwable> {
@@ -56,13 +59,20 @@ public class BaseService {
         }
 
         @Override
-        public void accept(Throwable throwable){
+        public void accept(Throwable throwable) {
             if (callback == null) {
                 return;
             }
             if (throwable instanceof ApiCodeErrorException) {
-                Logger.t("ApiCodeErrorException").e("state:%s ; msg:%s ", ((ApiCodeErrorException) throwable).getState(), ((ApiCodeErrorException) throwable).getMsg());
-                callback.onApiError(((ApiCodeErrorException) throwable).getState(), ((ApiCodeErrorException) throwable).getMsg());
+                String state = ((ApiCodeErrorException) throwable).getState();
+                String message = ((ApiCodeErrorException) throwable).getMsg();
+                Logger.t("ApiCodeErrorException").e("state:%s ; msg:%s ", state, message);
+                if (state.equals("302") && message.equals("token错误!")) {
+                    TokenErrorListener tokenErrorListener = CoreInject.getInstance().getTokenErrorListener();
+                    if (tokenErrorListener != null)
+                        tokenErrorListener.tokenError();
+                }
+                callback.onApiError(state, message);
             } else {
                 Logger.t("ThrowableException").e(throwable.toString());
                 callback.onError(throwable.toString());

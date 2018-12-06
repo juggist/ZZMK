@@ -14,7 +14,7 @@ import com.juggist.jcore.utils.SPUtil;
  * 17718397309
  * 123456
  */
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity{
 
     @Override
     protected int getLayoutId() {

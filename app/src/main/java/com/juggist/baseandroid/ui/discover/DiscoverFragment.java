@@ -107,13 +107,12 @@ public class DiscoverFragment extends BaseFragment {
         present.start();
     }
 
-
-
     @Override
-    public void onDestroyView() {
+    public void onDetach() {
         present.detach();
-        super.onDestroyView();
+        super.onDetach();
     }
+
     /**
      * 初始化适配器
      */

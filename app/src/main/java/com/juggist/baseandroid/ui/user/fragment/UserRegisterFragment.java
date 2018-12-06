@@ -2,7 +2,6 @@ package com.juggist.baseandroid.ui.user.fragment;
 
 import android.content.Intent;
 import android.os.Handler;
-import androidx.fragment.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,16 +9,17 @@ import android.widget.CheckBox;
 
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.user.UserRegisterPresent;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.HomeActivity;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.ButtonCountDown;
 import com.juggist.baseandroid.view.ClearEditText;
 import com.juggist.baseandroid.view.DialogInviteCodeToGet;
 import com.juggist.jcore.Constants;
-import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.utils.KeyboardUtils;
 import com.juggist.jcore.utils.RegexUtils;
 
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -83,6 +83,12 @@ public class UserRegisterFragment extends BaseFragment {
     public void onDestroyView() {
         btnCodeSend.destory();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        present.detach();
     }
 
     @Override

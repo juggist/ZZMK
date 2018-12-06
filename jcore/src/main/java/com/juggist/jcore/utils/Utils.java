@@ -13,7 +13,6 @@ import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.core.content.FileProvider;
 import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
@@ -22,6 +21,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.core.content.FileProvider;
 
 /**
  * <pre>
@@ -85,6 +86,7 @@ public final class Utils {
             }
             sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
         }
+
     }
 
     /**
@@ -121,15 +123,15 @@ public final class Utils {
         throw new NullPointerException("u should init first");
     }
 
-    static ActivityLifecycleImpl getActivityLifecycle() {
+    public static ActivityLifecycleImpl getActivityLifecycle() {
         return ACTIVITY_LIFECYCLE;
     }
 
-    static LinkedList<Activity> getActivityList() {
+    public static LinkedList<Activity> getActivityList() {
         return ACTIVITY_LIFECYCLE.mActivityList;
     }
 
-    static Context getTopActivityOrApp() {
+    public static Context getTopActivityOrApp() {
         if (isAppForeground()) {
             Activity topActivity = ACTIVITY_LIFECYCLE.getTopActivity();
             return topActivity == null ? Utils.getApp() : topActivity;
@@ -138,6 +140,9 @@ public final class Utils {
         }
     }
 
+    public static Activity getTopActivity(){
+        return ACTIVITY_LIFECYCLE.getTopActivity();
+    }
     static boolean isAppForeground() {
         ActivityManager am =
                 (ActivityManager) Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
@@ -294,7 +299,7 @@ public final class Utils {
             }
         }
 
-        Activity getTopActivity() {
+        public Activity getTopActivity() {
             if (!mActivityList.isEmpty()) {
                 final Activity topActivity = mActivityList.getLast();
                 if (topActivity != null) {

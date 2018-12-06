@@ -11,6 +11,7 @@ import android.util.Base64;
 
 import com.juggist.baseandroid.ui.mine.OrderRefundAllContract;
 import com.juggist.baseandroid.view.chooseImg.config.Bimp;
+import com.juggist.baseandroid.view.chooseImg.ustils.FileUtils;
 import com.juggist.jcore.Constants;
 import com.juggist.jcore.base.ResponseCallback;
 import com.juggist.jcore.bean.OrderBean;
@@ -131,5 +132,14 @@ public class OrderRefundAllPresent implements OrderRefundAllContract.Present {
     @Override
     public void detach() {
         view = null;
+        //数据reset
+        Bimp.max = 0;
+        Bimp.act_bool = false;
+        //清空图片数据(内存图片)
+        Bimp.bmp.clear();
+        //清空图片地址数据（sd卡路径）
+        Bimp.drr.clear();
+        //删除压缩处理的图片
+        FileUtils.deleteDir();
     }
 }

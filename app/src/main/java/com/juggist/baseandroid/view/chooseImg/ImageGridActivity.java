@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.BackBaseActivity;
+import com.juggist.baseandroid.ui.mine.OrderRefundAllActivity;
+import com.juggist.baseandroid.utils.ActivityUtils;
 import com.juggist.baseandroid.view.chooseImg.adapter.ImageGridAdapter;
 import com.juggist.baseandroid.view.chooseImg.config.Bimp;
 import com.juggist.baseandroid.view.chooseImg.model.ImageItem;
@@ -91,7 +93,7 @@ public class ImageGridActivity extends BackBaseActivity {
 						Bimp.drr.add(list.get(i));
 					}
 				}
-				finish();
+				ActivityUtils.finishToActivity(OrderRefundAllActivity.class,false);
 			}
 
 		});

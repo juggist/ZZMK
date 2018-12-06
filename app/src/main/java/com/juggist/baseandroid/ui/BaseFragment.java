@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.juggist.baseandroid.R;
+import com.juggist.baseandroid.ui.user.UserLoginAndRegisterActivity;
 import com.juggist.baseandroid.view.AlertDialog;
 import com.juggist.baseandroid.view.LoadingDialog;
 import com.juggist.jcore.utils.AppUtil;
@@ -25,6 +26,7 @@ import butterknife.Unbinder;
 public abstract class BaseFragment  extends Fragment {
     Unbinder unbinder;
     private LoadingDialog loadingDialog;
+    private boolean destory = false;
 
     public BaseFragment() {
         // Required empty public constructor
@@ -61,6 +63,7 @@ public abstract class BaseFragment  extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        destory = true;
     }
     @Override
     public void onDestroyView() {
@@ -118,5 +121,11 @@ public abstract class BaseFragment  extends Fragment {
                         .show();
             }
         });
+    }
+    protected void onApiError(String state, String message){
+        if(state.equals("302") && message.equals("token错误!")){
+            if(!destory && getActivity() != null)
+                ((BaseActivity)getActivity()).gotoActivity(UserLoginAndRegisterActivity.class);
+        }
     }
 }
