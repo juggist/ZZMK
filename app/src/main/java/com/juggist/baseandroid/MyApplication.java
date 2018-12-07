@@ -17,7 +17,7 @@ public class MyApplication extends MyBaseApplication {
     public void onCreate() {
         super.onCreate();
         //注册token异常事件
-        CoreInject.getInstance().setTokenErrorListener(new TokenError());
+        CoreInject.getInstance().registerTokenErrorListener(new TokenError());
 
     }
     /**

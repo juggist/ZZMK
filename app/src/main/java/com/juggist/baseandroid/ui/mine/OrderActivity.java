@@ -7,7 +7,6 @@ import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.BackBaseActivity;
 import com.juggist.baseandroid.ui.mine.adapter.OrderViewPagerAdapter;
 import com.juggist.baseandroid.ui.mine.fragment.OrderFragment;
-import com.juggist.jcore.utils.DensityConst;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -52,7 +51,7 @@ public class OrderActivity extends BackBaseActivity {
 
     @Override
     protected void initData() {
-        DensityConst.initDensity(this);
+        int position = getIntent().getExtras().getInt("position",0);
         titles = getResources().getStringArray(R.array.order_inside);
         for(int i = 0;i < titles.length;i++){
             OrderFragment fragment = OrderFragment.newInstance(i);
@@ -61,7 +60,7 @@ public class OrderActivity extends BackBaseActivity {
         initIndicator();
         initAdapter();
         ViewPagerHelper.bind(mi,vp);
-        vp.setCurrentItem(0);
+        vp.setCurrentItem(position);
     }
 
     @Override

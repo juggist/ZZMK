@@ -1,8 +1,9 @@
 package com.juggist.jcore.http.interceptor;
 
+import com.juggist.jcore.Constants;
+
 import java.io.EOFException;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.concurrent.TimeUnit;
@@ -243,8 +244,11 @@ public final class HttpLoggingInterceptor implements Interceptor {
 
                 if (contentLength != 0) {
                     logger.log("");
-                    logger.log(URLDecoder.decode(buffer.clone().readString(charset),"utf-8" ));
-
+                    if(Constants.DEBUG){
+                        logger.log(ascii2Native(buffer.clone().readString(charset)));
+                    }else{
+                        logger.log(buffer.clone().readString(charset));
+                    }
                 }
 
                 logger.log("<-- END HTTP (" + buffer.size() + "-byte body)");
@@ -281,6 +285,35 @@ public final class HttpLoggingInterceptor implements Interceptor {
     private boolean bodyEncoded(Headers headers) {
         String contentEncoding = headers.get("Content-Encoding");
         return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity");
+    }
+    private  String PREFIX = "\\u";
+    private  String ascii2Native(String str) {
+        StringBuilder sb = new StringBuilder();
+        int begin = 0;
+        int index = str.indexOf(PREFIX);
+        while (index != -1) {
+            sb.append(str.substring(begin, index));
+            sb.append(ascii2Char(str.substring(index, index + 6)));
+            begin = index + 6;
+            index = str.indexOf(PREFIX, begin);
+        }
+        sb.append(str.substring(begin));
+        return sb.toString();
+    }
+    private  char ascii2Char(String str) {
+        if (str.length() != 6) {
+            throw new IllegalArgumentException(
+                    "Ascii string of a native character must be 6 character.");
+        }
+        if (!PREFIX.equals(str.substring(0, 2))) {
+            throw new IllegalArgumentException(
+                    "Ascii string of a native character must start with \"\\u\".");
+        }
+        String tmp = str.substring(2, 4);
+        int code = Integer.parseInt(tmp, 16) << 8;
+        tmp = str.substring(4, 6);
+        code += Integer.parseInt(tmp, 16);
+        return (char) code;
     }
 }
 

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.eventbus.HomeTabChangeEvent;
 import com.juggist.baseandroid.ui.buy.BuyFragment;
@@ -99,19 +100,19 @@ public class HomeActivity extends BaseActivity {
         switch (position){
             case PAGE_HOME:
                 tabhost.setCurrentTab(PAGE_HOME);
-                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
+                ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
                 break;
             case PAGE_DISCOVER:
                 tabhost.setCurrentTab(PAGE_DISCOVER);
-                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
+                ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
                 break;
             case PAGE_BUY:
                 tabhost.setCurrentTab(PAGE_BUY);
-                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
+                ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.white).keyboardEnable(true).init();
                 break;
             case PAGE_MINE:
                 tabhost.setCurrentTab(PAGE_MINE);
-                immersionBar.statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.font_select).keyboardEnable(true).init();
+                ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).fitsSystemWindows(true, R.color.font_select).keyboardEnable(true).init();
 
                 break;
         }

@@ -24,7 +24,7 @@ public class CoreInject {
         return tokenErrorListener;
     }
 
-    public void setTokenErrorListener(TokenErrorListener tokenErrorListener) {
+    public void registerTokenErrorListener(TokenErrorListener tokenErrorListener) {
         this.tokenErrorListener = tokenErrorListener;
     }
 }

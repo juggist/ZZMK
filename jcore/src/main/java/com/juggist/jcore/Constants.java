@@ -11,11 +11,13 @@ import java.io.File;
  * @date 2018/10/30 3:15 PM
  */
 public class Constants {
+    public static final boolean DEBUG = true;
     /**
      * 网络请求状态码；
      */
     public static final String REQUEST_SUCCESS = "200";//网络请求成功;
     public static final String REQUEST_FAIL = "-1";//网络请求失败;
+
 
 
     /**
@@ -24,8 +26,12 @@ public class Constants {
     public static final String SERVICE_BUSY = "服务器繁忙，请稍后重试。";
 
     public static class ERROR{
+        public static final String TOKEN_ERROR_CODE = "302";
+        public static final String TOKEN_ERROR_MSG = "token错误!";
+
         public static final String DATA_IS_NULL = "数据获取失败";
         public static final String DATA_OUT_OF_LENGTH = "数据不存在";
+        public static final String DATA_GOSN_ERROR = "服务器数据异常";
 
         public static final String SHOPCAR_UPDATE_NUM_OUT_OF_LENGTH = "修改商品数量异常";
 
@@ -33,8 +39,8 @@ public class Constants {
 
     }
     public static class URL{
-        public static final String BASE = "http://47.106.109.194//";//UAT
-//        public static final String BASE = "http://47.106.64.20//";//线上
+//        public static final String BASE = "http://47.106.109.194//";//UAT
+        public static final String BASE = "http://47.106.64.20//";//线上
     }
 
     public static class CountDownTime{

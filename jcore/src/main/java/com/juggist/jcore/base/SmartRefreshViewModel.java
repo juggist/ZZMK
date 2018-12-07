@@ -1,5 +1,6 @@
 package com.juggist.jcore.base;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public abstract class SmartRefreshViewModel<T>{
 
     public abstract SmartRefreshLayout getSmartRefreshLayout();
 
-    public abstract BaseUpdateAdapter getBaseAdapter();
+    public abstract BaseQuickAdapter getBaseAdapter();
 
 
     public void getListEmpty() {
@@ -31,7 +32,11 @@ public abstract class SmartRefreshViewModel<T>{
 
     public void getListSucceed(List<T> beans, boolean refresh) {
         if(getBaseAdapter() != null){
-            getBaseAdapter().update(beans);
+            if( getBaseAdapter() instanceof BaseUpdateAdapter){
+                ((BaseUpdateAdapter)getBaseAdapter()).update(beans);
+            }else if(getBaseAdapter() instanceof BaseUpdateMultiItemAdapter){
+                ((BaseUpdateMultiItemAdapter)getBaseAdapter()).update(beans);
+            }
         }else{
             try {
                 throw new Exception(" adapter is null");
@@ -59,7 +64,11 @@ public abstract class SmartRefreshViewModel<T>{
 
     public void getListSucceedEnd(List<T> beans, boolean refresh) {
         if(getBaseAdapter() != null){
-            getBaseAdapter().update(beans);
+            if( getBaseAdapter() instanceof BaseUpdateAdapter){
+                ((BaseUpdateAdapter)getBaseAdapter()).update(beans);
+            }else if(getBaseAdapter() instanceof BaseUpdateMultiItemAdapter){
+                ((BaseUpdateMultiItemAdapter)getBaseAdapter()).update(beans);
+            }
         }else{
             try {
                 throw new Exception(" adapter is null");

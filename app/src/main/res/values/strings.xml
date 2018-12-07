@@ -50,6 +50,7 @@
     <string name="inviteCode_tip1">1.关注 众妆美库 微信公众号。</string>
     <string name="inviteCode_tip2">2.回复【邀请码】即得限量邀请码。</string>
 
+    <string name="session_hot_brand">人气品牌</string>
     <string name="session_end">专场结束时间</string>
     <string name="session_share">批量转发</string>
     <string name="session_join">进入专场</string>
@@ -128,7 +129,7 @@
 
     <string name="lv_loading">正在加载数据中...</string>
     <string name="lv_data_empty">当前暂无数据</string>
-    <string name="lv_net_error">没有网络了，点击屏幕重试</string>
+    <string name="lv_net_error">获取数据失败，点击屏幕重试</string>
     <string name="lv_shopcar_empty">您的购物车还没添加宝贝哦</string>
     <string name="lv_discount_card_empty">您还没有优惠券哦</string>
 

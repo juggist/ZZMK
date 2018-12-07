@@ -44,7 +44,7 @@ public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
 
     @Override
     protected void convert(final BaseViewHolder helper, final ArticleBean item) {
-        GlideApp.with(context).load(item.getUser_headimg()).into((ImageView) helper.getView(R.id.iv_header));
+        GlideApp.with(context).load(R.drawable.app_icon).into((ImageView) helper.getView(R.id.iv_header));
         helper.setText(R.id.tv_name,item.getUser_name())
         .setText(R.id.tv_time,TimeUtils.millis2String(Long.parseLong(item.getArticle_time()),new SimpleDateFormat("HH:mm")))
         .setText(R.id.tv_review,item.getLookCount())

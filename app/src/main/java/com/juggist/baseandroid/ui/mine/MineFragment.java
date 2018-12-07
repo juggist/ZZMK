@@ -2,6 +2,7 @@ package com.juggist.baseandroid.ui.mine;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -9,10 +10,10 @@ import android.widget.TextView;
 
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.mine.adapter.OrderColumnAdapter;
 import com.juggist.baseandroid.ui.mine.adapter.SettingColumnAdapter;
 import com.juggist.baseandroid.view.RoundImageView;
-import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.bean.UserInfo;
 
 import butterknife.BindView;
@@ -52,6 +53,16 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
+        gvOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("position",position + 1);
+                Intent intent = new Intent(getActivity(),OrderActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         gvSetting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,7 +102,11 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_header:
                 break;
             case R.id.tv_order_more:
-                startActivity(new Intent(getActivity(),OrderActivity.class));
+                Bundle bundle = new Bundle();
+                bundle.putInt("position",0);
+                Intent intent = new Intent(getActivity(),OrderActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
 
         }

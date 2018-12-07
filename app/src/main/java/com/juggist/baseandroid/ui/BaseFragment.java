@@ -128,4 +128,5 @@ public abstract class BaseFragment  extends Fragment {
                 ((BaseActivity)getActivity()).gotoActivity(UserLoginAndRegisterActivity.class);
         }
     }
+
 }

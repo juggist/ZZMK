@@ -38,5 +38,7 @@ public class HomeContract {
         void toShare(int position);
 
         void toSession(int position);
+
+        void toSession(String groupName,String id);
     }
 }

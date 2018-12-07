@@ -12,17 +12,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.home.HomePresent;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.home.adapter.HomeItemAdapter;
 import com.juggist.baseandroid.utils.GlideImageLoader;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.baseandroid.ui.BaseFragment;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.SessionBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.youth.banner.Banner;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 
@@ -68,6 +68,10 @@ public class HomeFragment extends BaseFragment {
         statusTv = statusView.findViewById(R.id.lv_tv);
 
         lv.setLayoutManager(new LinearLayoutManager(getContext()));
+        lv.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
+                .color(getActivity().getResources().getColor(R.color.item_bg))
+                .sizeResId(R.dimen.dp_30)
+                .build());
     }
 
     @Override
@@ -137,7 +141,7 @@ public class HomeFragment extends BaseFragment {
      * 初始化适配器
      */
     private void initAdapter() {
-        adapter = new HomeItemAdapter(R.layout.adapter_home_item,new ArrayList<SessionBean.DataBean>(),getActivity());
+        adapter = new HomeItemAdapter(new ArrayList<SessionBean.DataBean>(),getActivity(),new AdapterListener());
         adapter.addHeaderView(headView);
         adapter.setEmptyView(statusView);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -146,6 +150,7 @@ public class HomeFragment extends BaseFragment {
                 present.toSession(position);
             }
         });
+
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -170,7 +175,21 @@ public class HomeFragment extends BaseFragment {
         super.onDestroyView();
     }
 
+    /**
+     * 适配器回调事件
+     */
+    class AdapterListener implements HomeItemAdapter.Listener{
 
+        @Override
+        public void itemRecommendClick(int position) {
+            present.toSession(position);
+        }
+
+        @Override
+        public void itemRecommendClick(String groupName, String id) {
+            present.toSession(groupName,id);
+        }
+    }
 
     private class ViewModel extends SmartRefreshViewModel<SessionBean.DataBean> implements HomeContract.View<SessionBean.DataBean> {
 
@@ -191,7 +210,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         @Override
-        public BaseUpdateAdapter getBaseAdapter() {
+        public BaseQuickAdapter getBaseAdapter() {
             return adapter;
         }
 

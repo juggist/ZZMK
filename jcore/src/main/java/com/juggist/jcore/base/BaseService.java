@@ -1,5 +1,7 @@
 package com.juggist.jcore.base;
 
+import com.google.gson.JsonSyntaxException;
+import com.juggist.jcore.Constants;
 import com.juggist.jcore.CoreInject;
 import com.juggist.jcore.bean.ResponseBean;
 import com.juggist.jcore.http.ErrorCode;
@@ -67,7 +69,7 @@ public class BaseService {
                 String state = ((ApiCodeErrorException) throwable).getState();
                 String message = ((ApiCodeErrorException) throwable).getMsg();
                 Logger.t("ApiCodeErrorException").e("state:%s ; msg:%s ", state, message);
-                if (state.equals("302") && message.equals("token错误!")) {
+                if (state.equals(Constants.ERROR.TOKEN_ERROR_CODE) && message.equals(Constants.ERROR.TOKEN_ERROR_MSG)) {
                     TokenErrorListener tokenErrorListener = CoreInject.getInstance().getTokenErrorListener();
                     if (tokenErrorListener != null)
                         tokenErrorListener.tokenError();
@@ -75,7 +77,11 @@ public class BaseService {
                 callback.onApiError(state, message);
             } else {
                 Logger.t("ThrowableException").e(throwable.toString());
-                callback.onError(throwable.toString());
+                if(throwable instanceof JsonSyntaxException){
+                    callback.onError(Constants.ERROR.DATA_GOSN_ERROR);
+                }else{
+                    callback.onError(throwable.toString());
+                }
             }
         }
     }
