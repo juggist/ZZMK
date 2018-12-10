@@ -20,21 +20,12 @@ public class BuyContract {
 
         void queryShopCarFail(String extMsg);
 
-
-        void updateGoodsNumSucceed();
-        void addGoodsNumMax();
-        void minusGoodsNumMin();
-
-        void updateGoodsNumFail(String extMsg);
-
     }
 
 
 
     public interface Present extends BasePresent {
         void queryShopCar();
-        void addGoodsNum(int position);
-        void miunsGoodsNum(int position);
 
     }
 }

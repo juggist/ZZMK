@@ -1,22 +1,25 @@
 package com.juggist.baseandroid.ui.buy;
 
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.buy.BuyPresent;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.buy.adapter.BuyAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.jcore.bean.ShopCarBean;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -26,19 +29,19 @@ import butterknife.OnClick;
 public class BuyFragment extends BaseFragment {
 
     @BindView(R.id.lv)
-    ListView lv;
+    RecyclerView lv;
     @BindView(R.id.iv_select)
     ImageView ivSelect;
     @BindView(R.id.tv_total_money)
     TextView tvTotalMoney;
     @BindView(R.id.tv_calculate)
     TextView tvCalculate;
-    @BindView(R.id.lv_iv)
-    ImageView lvIv;
-    @BindView(R.id.lv_tv)
-    TextView lvTv;
-    @BindView(R.id.lv_ll)
-    LinearLayout lvLl;
+
+
+    private LinearLayout statusView;
+    private ImageView statusIv;
+    private TextView statusTv;
+
 
     private BuyAdapter adapter;
     private BuyContract.Present present;
@@ -46,6 +49,7 @@ public class BuyFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         present.detach();
+        adapter.destory();
         super.onDestroyView();
     }
 
@@ -56,49 +60,78 @@ public class BuyFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        lv.setEmptyView(lvLl);
+        statusView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.view_net_error,null);
+        statusIv = statusView.findViewById(R.id.lv_iv);
+        statusTv = statusView.findViewById(R.id.lv_tv);
+
+        lv.setLayoutManager(new LinearLayoutManager(getContext()));
+        lv.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
+                .color(getResources().getColor(R.color.item_bg))
+                .sizeResId(R.dimen.dp_1)
+                .build());
     }
 
     @Override
     protected void initListener() {
-
+        //网络异常，点击屏幕重新加载
+        statusView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(statusTv.getText().toString().equals(getResources().getString(R.string.lv_net_error))){
+                    present.start();
+                }
+            }
+        });
     }
 
     @Override
     protected void initData() {
-        new BuyPresent(new ViewModel());
         initAdapter();
+        new BuyPresent(new ViewModel());
         present.queryShopCar();
 
     }
 
     private void initAdapter(){
-        adapter = new BuyAdapter(getActivity());
+        adapter = new BuyAdapter(R.layout.adapter_buy_item,new ArrayList<ShopCarBean>(),getActivity(),new AdapterListener());
+        adapter.setEmptyView(statusView);
         lv.setAdapter(adapter);
     }
-    @OnClick({R.id.iv_select, R.id.tv_calculate,R.id.lv_iv})
+    @OnClick({R.id.iv_select, R.id.tv_calculate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_select:
+                adapter.updateSelect(true);
+
                 break;
             case R.id.tv_calculate:
                 startActivity(new Intent(getActivity(), OrderSubmitActivity.class));
                 break;
-            case R.id.lv_iv:
-                if(lvTv.getText().toString().equals(getActivity().getResources().getString(R.string.lv_net_error)))
-                    present.queryShopCar();
-                break;
-
         }
     }
 
+    /**
+     * 适配器事件回调
+     */
+    private class AdapterListener implements BuyAdapter.Listener{
+
+        @Override
+        public void updateSelectAll(boolean select) {
+            ivSelect.setSelected(select);
+        }
+
+        @Override
+        public void updateSelectMoney(String money) {
+            tvTotalMoney.setText("合计:$"+money);
+        }
+    }
     private class ViewModel implements BuyContract.View {
 
         @Override
         public void queryShopCarEmpty() {
             adapter.update(new ArrayList<ShopCarBean>());
-            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.shoppingcart_pic_default)).into(lvIv);
-            lvTv.setText(getActivity().getResources().getString(R.string.lv_data_empty));
+            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.shoppingcart_pic_default)).into(statusIv);
+            statusTv.setText(getActivity().getResources().getString(R.string.lv_data_empty));
         }
 
         @Override
@@ -109,28 +142,8 @@ public class BuyFragment extends BaseFragment {
         @Override
         public void queryShopCarFail(String extMsg) {
             showErrorDialog(extMsg);
-            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.home_pic_nonet)).into(lvIv);
-            lvTv.setText(getActivity().getResources().getString(R.string.lv_net_error));
-        }
-
-        @Override
-        public void updateGoodsNumSucceed() {
-
-        }
-
-        @Override
-        public void addGoodsNumMax() {
-
-        }
-
-        @Override
-        public void minusGoodsNumMin() {
-
-        }
-
-        @Override
-        public void updateGoodsNumFail(String extMsg) {
-
+            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.home_pic_nonet)).into(statusIv);
+            statusTv.setText(getActivity().getResources().getString(R.string.lv_net_error));
         }
 
         @Override
@@ -145,8 +158,8 @@ public class BuyFragment extends BaseFragment {
 
         @Override
         public void showLoading() {
-            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.shoppingcart_pic_default)).into(lvIv);
-            lvTv.setText(getActivity().getResources().getString(R.string.lv_loading));
+            Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.shoppingcart_pic_default)).into(statusIv);
+            statusTv.setText(getActivity().getResources().getString(R.string.lv_loading));
         }
 
         @Override

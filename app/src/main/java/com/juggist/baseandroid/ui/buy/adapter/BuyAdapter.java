@@ -1,126 +1,67 @@
 package com.juggist.baseandroid.ui.buy.adapter;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.utils.ToastUtil;
+import com.juggist.baseandroid.view.AddOrMinusButton;
+import com.juggist.baseandroid.view.AlertDialog;
+import com.juggist.jcore.base.BaseUpdateAdapter;
+import com.juggist.jcore.base.ResponseCallback;
 import com.juggist.jcore.bean.ShopCarBean;
+import com.juggist.jcore.service.AccountService;
+import com.juggist.jcore.service.IAccountService;
 import com.orhanobut.logger.Logger;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.HashMap;
+import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author juggist
  * @date 2018/11/7 2:01 PM
  * 购物车适配器
  */
-public class BuyAdapter extends BaseAdapter {
-    private final ExecutorService task;
+public class BuyAdapter extends BaseUpdateAdapter<ShopCarBean> implements AddOrMinusButton.Listener {
     private Context context;
-    private MyHandler myHandler;
+    private IAccountService accountService;
+    private Listener listener;
 
-    private ArrayList<ShopCarBean> shopCarBeans;
-    private static final int maxNum = 99;
-    private static final int minNum = 0;
-    private ArrayList<ShopCarBean> selectArray;
-    private int key = 0;
-    private static ArrayList<Integer> keys = new ArrayList<>();
+    private List<ShopCarBean> shopCarBeans;
+    private List<ShopCarBean> selectArray;
+    private HashMap<Integer, List<ShopCarBean>> waitPostMap = new HashMap<>();//请求队列
+    private HashMap<Integer, List<Integer>> stepCountMap = new HashMap<>();//对应请求队列的stepcount
 
-    class MyHandler extends Handler {
-        WeakReference<Context> weakReference;
-
-        public MyHandler(Context context) {
-            this.weakReference = new WeakReference<>(context);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            final Context context1 = weakReference.get();
-            if (context1 == null)
-                return;
-            int position = msg.arg1;
-            if (keys.get(0) % 4 == 1) {
-                shopCarBeans.get(position).setGoods_number(String.valueOf(Integer.parseInt(shopCarBeans.get(position).getGoods_number() ) - 1));
-                notifyDataSetChanged();
-                Logger.d("%s:fail", String.valueOf(keys.get(0)));
-            } else {
-                Logger.d("%s:succeed", String.valueOf(keys.get(0)));
-            }
-            keys.remove(0);
-        }
-    }
-
-    public BuyAdapter(Context context) {
+    public BuyAdapter(int layoutResId, @Nullable List<ShopCarBean> data, Context context, Listener listener) {
+        super(layoutResId, data);
         this.context = context;
-        shopCarBeans = new ArrayList<>();
+        this.listener = listener;
+        shopCarBeans = data;
         selectArray = new ArrayList<>();
-        task = Executors.newSingleThreadExecutor();
-        myHandler = new MyHandler(context);
-
+        accountService = new AccountService();
     }
 
     @Override
-    public int getCount() {
-        return shopCarBeans.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return shopCarBeans.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder vh = null;
-        if (convertView == null) {
-            vh = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.adapter_buy_item, null);
-            vh.iv_select = convertView.findViewById(R.id.iv_select);
-            vh.iv = convertView.findViewById(R.id.iv);
-            vh.iv_add = convertView.findViewById(R.id.iv_add);
-            vh.iv_minus = convertView.findViewById(R.id.iv_minus);
-            vh.tv_content = convertView.findViewById(R.id.tv_content);
-            vh.tv_price = convertView.findViewById(R.id.tv_price);
-            vh.tv_spes = convertView.findViewById(R.id.tv_spes);
-            vh.tv_num = convertView.findViewById(R.id.tv_num);
-            convertView.setTag(vh);
-        } else {
-            vh = (ViewHolder) convertView.getTag();
-        }
-
-        final ShopCarBean item = shopCarBeans.get(position);
-
-        Glide.with(context).load(item.getMain_pic()).into(vh.iv);
-        vh.tv_num.setText(item.getGoods_number());
-        vh.tv_content.setText(item.getGoods_name());
+    protected void convert(BaseViewHolder helper, final ShopCarBean item) {
+        Glide.with(context).load(item.getMain_pic()).into((ImageView) helper.getView(R.id.iv));
+        helper.setText(R.id.tv_content, item.getGoods_name())
+                .setText(R.id.tv_price, item.getUser_price());
         if (item.getAttr() != null && item.getAttr().size() > 0) {
-            vh.tv_spes.setText(item.getAttr().get(0).getAttr_name() + ":" + item.getAttr().get(0).getValue());
+            helper.setText(R.id.tv_spes, item.getAttr().get(0).getAttr_name() + ":" + item.getAttr().get(0).getValue());
         }
         if (selectArray.contains(item)) {
-            vh.iv_select.setSelected(true);
+            helper.getView(R.id.iv_select).setSelected(true);
         } else {
-            vh.iv_select.setSelected(false);
+            helper.getView(R.id.iv_select).setSelected(false);
         }
 
-        vh.iv_select.setOnClickListener(new View.OnClickListener() {
+        helper.getView(R.id.iv_select).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (selectArray.contains(item)) {
@@ -128,62 +69,190 @@ public class BuyAdapter extends BaseAdapter {
                 } else {
                     selectArray.add(item);
                 }
-                notifyDataSetChanged();
+                updateSelect(false);
 
             }
         });
-        vh.iv_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.parseInt(item.getGoods_number()) < maxNum) {
-                    item.setGoods_number(String.valueOf(Integer.parseInt(item.getGoods_number()) + 1));
-                    notifyDataSetChanged();
-
-                    task.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            keys.add(key++);
-                            Logger.d("%s:enter key", String.valueOf(keys.get(0)));
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            Message msg = new Message();
-                            msg.arg1 = position;
-                            myHandler.sendMessage(msg);
-                        }
-
-                    });
-                } else {
-                    ToastUtil.showLong(context.getResources().getString(R.string.toast_out_of_shop_maxnum));
-                }
-
-            }
-        });
-        vh.iv_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Integer.parseInt(item.getGoods_number()) > minNum) {
-                    item.setGoods_number(String.valueOf(Integer.parseInt(item.getGoods_number()) - 1));
-                    notifyDataSetChanged();
-                    Logger.d("shopCard:" + selectArray.toString());
-                } else {
-                }
-
-            }
-        });
-        return convertView;
+        ((AddOrMinusButton) helper.getView(R.id.addOrMinus)).init(helper.getLayoutPosition(), item.getGoods_number(), this);
     }
 
-    private static class ViewHolder {
-        private ImageView iv_select, iv, iv_add, iv_minus;
-        private TextView tv_content, tv_price, tv_spes, tv_num;
-    }
 
-    public void update(ArrayList<ShopCarBean> shopCarBeans) {
-        this.shopCarBeans.clear();
-        this.shopCarBeans.addAll(shopCarBeans);
+    /**
+     * 加减按钮回调事件
+     *
+     * @param position
+     * @param num
+     */
+    @Override
+    public void changeNum(int position, int num) {
+        shopCarBeans.get(position).setGoods_number(String.valueOf(num));
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void addOrMinusEnd(int position, int stepCount) {
+        final ShopCarBean item = shopCarBeans.get(position);
+        if (waitPostMap.get(position) == null) {
+            List<ShopCarBean> list = new ArrayList<>();
+            List<Integer> stepCountList = new ArrayList<>();
+            list.add(item);
+            stepCountList.add(stepCount);
+            waitPostMap.put(position, list);
+            stepCountMap.put(position, stepCountList);
+            postUpdateshopNum(position, stepCount);
+        } else {
+            waitPostMap.get(position).add(item);
+            stepCountMap.get(position).add(stepCount);
+        }
+    }
+
+    @Override
+    public void delete(final int position) {
+        final ShopCarBean item = shopCarBeans.get(position);
+        if (context != null) {
+            new AlertDialog(context).builder()
+                    .setTitle(context.getResources().getString(R.string.toast_delete_product))
+                    .setNegativeButton(context.getResources().getString(R.string.cancle), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    })
+                    .setPositiveButton(context.getResources().getString(R.string.ensure), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            accountService.deleteShop(shopCarBeans.get(position).getGoods_id(), new ResponseCallback<String>() {
+                                @Override
+                                public void onSucceed(String s) {
+                                    shopCarBeans.remove(item);
+                                    if (selectArray.contains(item))
+                                        selectArray.remove(item);
+                                    updateSelect(false);
+
+                                }
+
+                                @Override
+                                public void onError(String message) {
+                                    ToastUtil.showLong(message);
+                                }
+
+                                @Override
+                                public void onApiError(String state, String message) {
+                                    ToastUtil.showLong(message + " ; " + state);
+                                }
+                            });
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    /**
+     * 发起更新商品数据的请求
+     *
+     * @param position
+     * @param stepCount
+     */
+    private void postUpdateshopNum(final int position, final int stepCount) {
+        final ShopCarBean item = shopCarBeans.get(position);
+        accountService.updateShopNum(item.getGoods_id(), item.getGoods_number(), new ResponseCallback<String>() {
+            @Override
+            public void onSucceed(String s) {
+                updateSelectTotalMoney();
+                removeRequest(position);
+            }
+
+            @Override
+            public void onError(String message) {
+                removeRequest(position);
+                changeNum(position, Integer.valueOf(item.getGoods_number()) - stepCount);
+                ToastUtil.showLong(message);
+            }
+
+            @Override
+            public void onApiError(String state, String message) {
+                removeRequest(position);
+                changeNum(position, Integer.valueOf(item.getGoods_number()) - stepCount);
+                ToastUtil.showLong(message + " ; " + state);
+            }
+        });
+
+    }
+
+    /**
+     * 请求结束后从map移除
+     *
+     * @param position
+     */
+    private void removeRequest(int position) {
+        waitPostMap.get(position).remove(0);
+        stepCountMap.get(position).remove(0);
+        if (waitPostMap.get(position).size() > 0) {
+            postUpdateshopNum(position, stepCountMap.get(position).get(0));
+        } else {
+            waitPostMap.remove(position);
+            stepCountMap.remove(position);
+        }
+    }
+
+    @Override
+    public void update(List<ShopCarBean> t) {
+        selectArray.clear();
+        shopCarBeans.clear();
+        shopCarBeans.addAll(t);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 是否全选后者全不选
+     *
+     * @param all
+     */
+    public void updateSelect(boolean all) {
+        if (selectArray.containsAll(shopCarBeans)) {
+            if (all) {
+                selectArray.clear();
+                if (listener != null)
+                    listener.updateSelectAll(false);
+            } else {
+                if (listener != null)
+                    listener.updateSelectAll(true);
+            }
+        } else {
+            if (all) {
+                selectArray.addAll(shopCarBeans);
+                if (listener != null)
+                    listener.updateSelectAll(true);
+            } else {
+                if (listener != null)
+                    listener.updateSelectAll(false);
+            }
+        }
+        notifyDataSetChanged();
+        updateSelectTotalMoney();
+    }
+
+    /**
+     * 刷新总订单金额
+     */
+    private void updateSelectTotalMoney() {
+        float selectTotalMoney = 0;
+        for (ShopCarBean item : selectArray) {
+            selectTotalMoney = selectTotalMoney + Float.parseFloat(item.getUser_price()) * Integer.parseInt(item.getGoods_number());
+        }
+        Logger.d("money = " + selectTotalMoney);
+        if (listener != null)
+            listener.updateSelectMoney(String.valueOf(selectTotalMoney));
+    }
+
+    public void destory() {
+        listener = null;
+        context = null;
+    }
+
+    public interface Listener {
+        void updateSelectAll(boolean select);
+
+        void updateSelectMoney(String money);
     }
 }

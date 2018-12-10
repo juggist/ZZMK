@@ -3,25 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".ui.discover.DiscoverFragment">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/dp_80"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/tab_discover"
-            android:textColor="@color/color_invitecode"
-            android:textSize="@dimen/sp_32" />
-    </RelativeLayout>
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/tab_discover"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_32" />
 
     <View
         android:layout_width="match_parent"
@@ -29,24 +24,20 @@
         android:layout_alignParentBottom="true"
         android:background="@color/font_normal" />
 
-    <FrameLayout
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/srl"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/item_bg"
-                android:dividerHeight="@dimen/dp_20"
-                android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-    </FrameLayout>
+            android:layout_height="match_parent"
+            android:divider="@color/item_bg"
+            android:dividerHeight="@dimen/dp_20"
+            android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

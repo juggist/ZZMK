@@ -123,7 +123,8 @@
     <string name="toast_auth_code_empty">请输入验证码</string>
     <string name="toast_auth_code">验证码发送成功</string>
     <string name="toast_protocol_check">请阅读并同意《用户协议》</string>
-    <string name="toast_out_of_shop_maxnum">您已经购买最大数量</string>
+    <string name="toast_out_of_shop_max_num">您已经购买最大数量</string>
+    <string name="toast_delete_product">是否删除该商品</string>
     <string name="toast_choose_share_goods">请您选择批量转发的商品</string>
     <string name="toast_un_empty">请输入完整信息</string>
 

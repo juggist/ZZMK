@@ -39,8 +39,8 @@ public class Constants {
 
     }
     public static class URL{
-//        public static final String BASE = "http://47.106.109.194//";//UAT
-        public static final String BASE = "http://47.106.64.20//";//线上
+        public static final String BASE = "http://47.106.109.194//";//UAT
+//        public static final String BASE = "http://47.106.64.20//";//线上
     }
 
     public static class CountDownTime{

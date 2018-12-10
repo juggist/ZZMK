@@ -35,4 +35,13 @@ public interface AccountServiceApi {
     @FormUrlEncoded
     @POST("api.php")
     Observable<ResponseBean<String>> refundDispatched(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> updateShopNum(@FieldMap HashMap<String,String> params);
+
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> deleteShop(@FieldMap HashMap<String,String> params);
+
 }

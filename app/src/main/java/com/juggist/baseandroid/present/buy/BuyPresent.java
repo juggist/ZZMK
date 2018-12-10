@@ -1,7 +1,6 @@
 package com.juggist.baseandroid.present.buy;
 
 import com.juggist.baseandroid.ui.buy.BuyContract;
-import com.juggist.jcore.Constants;
 import com.juggist.jcore.base.ResponseCallback;
 import com.juggist.jcore.bean.ShopCarBean;
 import com.juggist.jcore.service.ISessionService;
@@ -73,64 +72,7 @@ public class BuyPresent implements BuyContract.Present {
         });
     }
 
-    @Override
-    public void addGoodsNum(int position) {
-        //商品不存在
-        if(position >= shopCarBeans.size()){
-            if(view != null)
-                view.updateGoodsNumFail(Constants.ERROR.SHOPCAR_UPDATE_NUM_OUT_OF_LENGTH);
-            return;
-        }
-        ShopCarBean shopCarBean = shopCarBeans.get(position);
-        int goods_number = Integer.parseInt(shopCarBean.getGoods_number());
-        //购买数量大于预设最大数
-        if(goods_number >= maxNum){
-            if(view != null)
-                view.addGoodsNumMax();
-            return;
-        }
-        updateGoodsNum(shopCarBean.getGoods_id(),String.valueOf(++goods_number));
-    }
 
-    @Override
-    public void miunsGoodsNum(int position) {
-        //商品不存在
-        if(position >= shopCarBeans.size()){
-            if(view != null)
-                view.updateGoodsNumFail(Constants.ERROR.SHOPCAR_UPDATE_NUM_OUT_OF_LENGTH);
-            return;
-        }
-        ShopCarBean shopCarBean = shopCarBeans.get(position);
-        int goods_number = Integer.parseInt(shopCarBean.getGoods_number());
-        //购买数量大于预设最大数
-        if(goods_number <= minNum){
-            if(view != null)
-                view.minusGoodsNumMin();
-            return;
-        }
-        updateGoodsNum(shopCarBean.getGoods_id(),String.valueOf(--goods_number));
-    }
-
-    private void updateGoodsNum(String good_id,String number){
-        sessionService.updateShopCar(good_id,number,new ResponseCallback<String>(){
-
-            @Override
-            public void onSucceed(String s) {
-                if(view != null)
-                    view.updateGoodsNumSucceed();
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-
-            @Override
-            public void onApiError(String state, String message) {
-
-            }
-        });
-    }
     @Override
     public void start() {
         queryShopCar();

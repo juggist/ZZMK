@@ -105,4 +105,47 @@ public class AccountService extends BaseService implements IAccountService {
                     }
                 },new ConsumerThrowable<>(callback));
     }
+
+    /**
+     * 更新订单商品数量
+     * @param goods_id
+     * @param number
+     * @param callback
+     */
+    @Override
+    public void updateShopNum(String goods_id, String number, final ResponseCallback<String> callback) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("controller","Member");
+        params.put("action","updateShoppingCardGoodsNumber");
+        params.put("user_id",UserInfo.userId());
+        params.put("token",UserInfo.token());
+        params.put("goods_id",goods_id);
+        params.put("number",number);
+        this.getFilterResponse(accountServiceApi.updateShopNum(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        callback.onSucceed(s);
+                    }
+                },new ConsumerThrowable<>(callback));
+
+    }
+
+    @Override
+    public void deleteShop(String goods_id, final ResponseCallback<String> callback) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("controller","Member");
+        params.put("action","deleteGoodsFromShoppingCard");
+        params.put("user_id",UserInfo.userId());
+        params.put("token",UserInfo.token());
+        params.put("goods_id",goods_id);
+        this.getFilterResponse(accountServiceApi.deleteShop(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        callback.onSucceed(s);
+                    }
+                },new ConsumerThrowable<>(callback));
+
+    }
 }
