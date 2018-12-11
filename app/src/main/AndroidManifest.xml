@@ -12,7 +12,6 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +42,8 @@
         <activity android:name=".view.chooseImg.ImageBucketActivity" />
         <activity android:name=".view.chooseImg.ImageGridActivity" />
         <activity android:name=".view.chooseImg.PhotoActivity" />
-        <activity android:name=".ui.mine.AddressAddActivity"></activity>
+        <activity android:name=".ui.mine.AddressAddActivity" />
+        <activity android:name=".ui.buy.DiscountCardChooseActivity"></activity>
     </application>
 
 </manifest>

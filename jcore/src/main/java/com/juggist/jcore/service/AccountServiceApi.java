@@ -1,5 +1,6 @@
 package com.juggist.jcore.service;
 
+import com.juggist.jcore.bean.OrderPreBean;
 import com.juggist.jcore.bean.OrderRefundBean;
 import com.juggist.jcore.bean.OrderTransportBean;
 import com.juggist.jcore.bean.ResponseBean;
@@ -48,4 +49,7 @@ public interface AccountServiceApi {
     @POST("api.php")
     Observable<ResponseBean<String>> addShop(@FieldMap HashMap<String,String> params);
 
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<OrderPreBean>> createTmpOrder(@FieldMap HashMap<String,String> params);
 }

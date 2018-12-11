@@ -19,6 +19,7 @@
     <string name="title_order_transport">物流详情</string>
     <string name="title_order_refund_all">退货退款</string>
     <string name="title_discount_card">优惠券</string>
+    <string name="title_discount_card_choose">选择优惠券</string>
     <string name="title_batch_forward">批量转发</string>
     <string name="title_address">地址管理</string>
     <string name="title_address_add">新增收货地址</string>
@@ -125,6 +126,8 @@
     <string name="toast_protocol_check">请阅读并同意《用户协议》</string>
     <string name="toast_out_of_shop_max_num">您已经购买最大数量</string>
     <string name="toast_delete_product">是否删除该商品</string>
+    <string name="toast_add_shopcar_succeed">商品成功添加到购物车！</string>
+    <string name="toast_choose_product">请选择商品！</string>
     <string name="toast_choose_share_goods">请您选择批量转发的商品</string>
     <string name="toast_un_empty">请输入完整信息</string>
 
@@ -143,6 +146,7 @@
     <string name="setting_to_app">系统设置</string>
 
     <string name="address_add">添加地址</string>
+    <string name="address_add_two">还没有收货地址呢，去添加</string>
     <string name="address_choose">请选择</string>
     <string name="address_set_normal">设为默认</string>
     <string name="address_set_delete">删除</string>
@@ -159,6 +163,7 @@
     <string name="address_update_succeed">修改地址成功</string>
     <string name="address_set_fail">设置地址失败，请重试</string>
     <string name="address_update_fail">修改地址失败，请重试</string>
+    <string name="address_user_name">收货人:%s</string>
 
 
     <string name="save_bitmap_succeed">保存成功</string>

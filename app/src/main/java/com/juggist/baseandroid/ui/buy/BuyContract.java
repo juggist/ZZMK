@@ -2,9 +2,11 @@ package com.juggist.baseandroid.ui.buy;
 
 import com.juggist.jcore.base.BasePresent;
 import com.juggist.jcore.base.BaseView;
+import com.juggist.jcore.bean.OrderPreBean;
 import com.juggist.jcore.bean.ShopCarBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author juggist
@@ -20,12 +22,18 @@ public class BuyContract {
 
         void queryShopCarFail(String extMsg);
 
+
+        void crateTmpOrderSucceed(OrderPreBean orderPreBean);
+        void crateTmpOrderFail(String extMsg);
+
     }
 
 
 
     public interface Present extends BasePresent {
         void queryShopCar();
+
+        void createTmpOrder(List<ShopCarBean>shopCarBeans);
 
     }
 }

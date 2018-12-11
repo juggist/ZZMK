@@ -20,7 +20,7 @@ public class SessionContract {
 
         void queryShopCarFail(String extMsg);
 
-        void addShopCarSucceed();
+        void addShopCarSucceed(String msg);
 
         void addShopCarFail(String extMsg);
 

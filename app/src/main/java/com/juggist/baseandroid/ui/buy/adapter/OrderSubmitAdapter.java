@@ -1,54 +1,38 @@
 package com.juggist.baseandroid.ui.buy.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.R;
+import com.juggist.jcore.bean.OrderPreBean;
+
+import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author juggist
  * @date 2018/11/7 3:30 PM
  * 提交订单适配器
  */
-public class OrderSubmitAdapter extends BaseAdapter {
+public class OrderSubmitAdapter extends BaseQuickAdapter<OrderPreBean.GoodsListBean,BaseViewHolder> {
     private Context context;
-
-    public OrderSubmitAdapter(Context context) {
+    public OrderSubmitAdapter(int layoutResId, @Nullable List<OrderPreBean.GoodsListBean> data, Context context) {
+        super(layoutResId, data);
         this.context = context;
     }
 
     @Override
-    public int getCount() {
-        return 4;
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder vh;
-        if(convertView == null){
-            vh = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.adapter_order_submit_item,null);
-            convertView.setTag(vh);
-        }else{
-            vh = (ViewHolder) convertView.getTag();
+    protected void convert(BaseViewHolder helper, OrderPreBean.GoodsListBean item) {
+        Glide.with(context).load(item.getMain_pic()).into((ImageView) helper.getView(R.id.iv));
+        helper.setText(R.id.tv_content,item.getGoods_name())
+                .setText(R.id.tv_price,"￥" + item.getUser_price())
+                .setText(R.id.tv_num,"X" + item.getGoods_number());
+        if (item.getAttr() != null && item.getAttr().size() > 0) {
+            helper.setText(R.id.tv_specs, item.getAttr().get(0).getAttr_name() + ":" + item.getAttr().get(0).getValue());
         }
-        return convertView;
-    }
-
-    private static class ViewHolder{
-
     }
 }

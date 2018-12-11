@@ -196,8 +196,6 @@ public class SessionPresent implements SessionContract.Present {
 
     @Override
     public void getShopCar() {
-        if(view != null)
-            view.showLoading();
         postGetShopCar();
     }
 
@@ -306,8 +304,9 @@ public class SessionPresent implements SessionContract.Present {
             @Override
             public void onSucceed(String s) {
                 dismissLoading();
+                getShopCar();
                 if(view != null)
-                    view.addShopCarSucceed();
+                    view.addShopCarSucceed(s);
             }
 
             @Override
@@ -328,6 +327,7 @@ public class SessionPresent implements SessionContract.Present {
     @Override
     public void start() {
         getProductList();
+        getShopCar();
     }
 
     @Override

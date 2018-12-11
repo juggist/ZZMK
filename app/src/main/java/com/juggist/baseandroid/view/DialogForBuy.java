@@ -103,6 +103,7 @@ public class DialogForBuy extends DialogFragment {
         tv_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 if(listener != null)
                     listener.addShop(position,num);
             }

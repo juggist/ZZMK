@@ -2,6 +2,7 @@ package com.juggist.jcore.service;
 
 import com.juggist.jcore.base.BaseService;
 import com.juggist.jcore.base.ResponseCallback;
+import com.juggist.jcore.bean.OrderPreBean;
 import com.juggist.jcore.bean.OrderRefundBean;
 import com.juggist.jcore.bean.OrderTransportBean;
 import com.juggist.jcore.bean.UserInfo;
@@ -163,6 +164,31 @@ public class AccountService extends BaseService implements IAccountService {
                     @Override
                     public void accept(String s) throws Exception {
                         callback.onSucceed(s);
+                    }
+                },new ConsumerThrowable<>(callback));
+
+    }
+
+    /**
+     * 创建零时订单
+     * @param goods_json
+     * @param coupon_id
+     * @param callback
+     */
+    @Override
+    public void createTmpOrder(String goods_json, final ResponseCallback<OrderPreBean> callback) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("controller","Member");
+        params.put("action","getPreOrderGoodsListFromDetail");
+        params.put("user_id",UserInfo.userId());
+        params.put("token",UserInfo.token());
+        params.put("goods_json",goods_json);
+        params.put("coupon_id","-1");
+        this.getFilterResponse(accountServiceApi.createTmpOrder(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<OrderPreBean>() {
+                    @Override
+                    public void accept(OrderPreBean orderPreBean) throws Exception {
+                        callback.onSucceed(orderPreBean);
                     }
                 },new ConsumerThrowable<>(callback));
 

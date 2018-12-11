@@ -1,6 +1,7 @@
 package com.juggist.baseandroid.ui.buy;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,10 +14,12 @@ import com.juggist.baseandroid.present.buy.BuyPresent;
 import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.buy.adapter.BuyAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
+import com.juggist.jcore.bean.OrderPreBean;
 import com.juggist.jcore.bean.ShopCarBean;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -102,10 +105,15 @@ public class BuyFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.iv_select:
                 adapter.updateSelect(true);
-
                 break;
             case R.id.tv_calculate:
-                startActivity(new Intent(getActivity(), OrderSubmitActivity.class));
+                List<ShopCarBean> list = adapter.getSelectArray();
+                if(list == null || list.size() == 0){
+                    ToastUtil.showLong(getResources().getString(R.string.toast_choose_product));
+                }else{
+                    present.createTmpOrder(list);
+                }
+
                 break;
         }
     }
@@ -131,7 +139,7 @@ public class BuyFragment extends BaseFragment {
         public void queryShopCarEmpty() {
             adapter.update(new ArrayList<ShopCarBean>());
             Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.shoppingcart_pic_default)).into(statusIv);
-            statusTv.setText(getActivity().getResources().getString(R.string.lv_data_empty));
+            statusTv.setText(getActivity().getResources().getString(R.string.lv_shopcar_empty));
         }
 
         @Override
@@ -144,6 +152,20 @@ public class BuyFragment extends BaseFragment {
             showErrorDialog(extMsg);
             Glide.with(getActivity()).load(getActivity().getResources().getDrawable(R.drawable.home_pic_nonet)).into(statusIv);
             statusTv.setText(getActivity().getResources().getString(R.string.lv_net_error));
+        }
+
+        @Override
+        public void crateTmpOrderSucceed(OrderPreBean orderPreBean) {
+            Intent intent = new Intent(getActivity(),OrderSubmitActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("OrderPreBean",orderPreBean);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+
+        @Override
+        public void crateTmpOrderFail(String extMsg) {
+            showErrorDialog(extMsg);
         }
 
         @Override

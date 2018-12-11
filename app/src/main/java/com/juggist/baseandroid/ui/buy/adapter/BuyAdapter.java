@@ -251,4 +251,8 @@ public class BuyAdapter extends BaseQuickAdapter<ShopCarBean,BaseViewHolder> imp
 
         void updateSelectMoney(String money);
     }
+
+    public List<ShopCarBean> getSelectArray(){
+        return selectArray;
+    }
 }

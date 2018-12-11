@@ -271,7 +271,7 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
 
         @Override
         public void addShop(int position,int num) {
-
+            present.addShop(position,num);
         }
     }
     private class ViewModel extends SmartRefreshViewModel<ProductBean.DataBean.GoodsListBean> implements SessionContract.View {
@@ -331,13 +331,13 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
         }
 
         @Override
-        public void addShopCarSucceed() {
-
+        public void addShopCarSucceed(String msg) {
+            ToastUtil.showLong(getResources().getString(R.string.toast_add_shopcar_succeed));
         }
 
         @Override
         public void addShopCarFail(String extMsg) {
-
+            showErrorDialog(extMsg);
         }
 
 
