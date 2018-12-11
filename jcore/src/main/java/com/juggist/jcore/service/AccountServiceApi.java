@@ -44,4 +44,8 @@ public interface AccountServiceApi {
     @POST("api.php")
     Observable<ResponseBean<String>> deleteShop(@FieldMap HashMap<String,String> params);
 
+    @FormUrlEncoded
+    @POST("api.php")
+    Observable<ResponseBean<String>> addShop(@FieldMap HashMap<String,String> params);
+
 }

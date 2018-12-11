@@ -32,7 +32,7 @@ public abstract class SmartRefreshViewModel<T>{
 
     public void getListSucceed(List<T> beans, boolean refresh) {
         if(getBaseAdapter() != null){
-            if( getBaseAdapter() instanceof BaseUpdateAdapter){
+            if(getBaseAdapter() instanceof BaseUpdateAdapter){
                 ((BaseUpdateAdapter)getBaseAdapter()).update(beans);
             }else if(getBaseAdapter() instanceof BaseUpdateMultiItemAdapter){
                 ((BaseUpdateMultiItemAdapter)getBaseAdapter()).update(beans);

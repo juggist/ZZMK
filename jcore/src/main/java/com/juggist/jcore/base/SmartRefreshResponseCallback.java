@@ -12,7 +12,7 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
     public abstract void setPage(int page);
     public abstract void clearTotalList();
     public abstract List<T> getTotalList();
-    public abstract void setTotalList(List<T> t);
+    public abstract void addToTotalList(List<T> t);
     public abstract BaseView getView();
     @Override
     public void onSucceed(List<T> t){
@@ -23,7 +23,7 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
         if(getPage() == 1){//刷新
             clearTotalList();
         }
-        setTotalList(t);
+        addToTotalList(t);
 
         /**
          * 视图

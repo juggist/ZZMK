@@ -148,4 +148,23 @@ public class AccountService extends BaseService implements IAccountService {
                 },new ConsumerThrowable<>(callback));
 
     }
+
+    @Override
+    public void addShop(String goods_id, String number, final ResponseCallback<String> callback) {
+        HashMap<String,String> params = new HashMap<>();
+        params.put("controller","Member");
+        params.put("action","addGoodsToShoppingCard");
+        params.put("user_id",UserInfo.userId());
+        params.put("token",UserInfo.token());
+        params.put("goods_id",goods_id);
+        params.put("goods_number",number);
+        this.getFilterResponse(accountServiceApi.addShop(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        callback.onSucceed(s);
+                    }
+                },new ConsumerThrowable<>(callback));
+
+    }
 }

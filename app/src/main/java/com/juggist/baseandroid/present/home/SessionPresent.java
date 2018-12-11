@@ -8,9 +8,13 @@ import com.juggist.baseandroid.ui.home.SessionContract;
 import com.juggist.jcore.Constants;
 import com.juggist.jcore.MyBaseApplication;
 import com.juggist.jcore.base.BaseView;
+import com.juggist.jcore.base.ResponseCallback;
 import com.juggist.jcore.base.SmartRefreshResponseCallback;
 import com.juggist.jcore.bean.ProductBean;
+import com.juggist.jcore.bean.ShopCarBean;
 import com.juggist.jcore.bean.UserInfo;
+import com.juggist.jcore.service.AccountService;
+import com.juggist.jcore.service.IAccountService;
 import com.juggist.jcore.service.ISessionService;
 import com.juggist.jcore.service.SessionService;
 import com.juggist.jcore.utils.ClipboardUtils;
@@ -44,6 +48,7 @@ import zlc.season.rxdownload3.core.Waiting;
 public class SessionPresent implements SessionContract.Present {
     private SessionContract.View view;
     private ISessionService sessionService;
+    private IAccountService accountService;
 
     private int downloadPosition = -1;
     private int page = 1;
@@ -52,11 +57,15 @@ public class SessionPresent implements SessionContract.Present {
     private ArrayList<ProductBean.DataBean.GoodsListBean> totalProducts = new ArrayList<>();
     private Disposable downLoadDisposable;
 
+    private ArrayList<ShopCarBean> shopCarBeans;
+
     public SessionPresent(SessionContract.View view, String group_id) {
         this.view = view;
         this.group_id = group_id;
         view.setPresent(this);
+        shopCarBeans = new ArrayList<>();
         sessionService = new SessionService();
+        accountService = new AccountService();
     }
 
     @Override
@@ -185,6 +194,25 @@ public class SessionPresent implements SessionContract.Present {
                 });
     }
 
+    @Override
+    public void getShopCar() {
+        if(view != null)
+            view.showLoading();
+        postGetShopCar();
+    }
+
+    @Override
+    public void addShop(int position, int num) {
+        if(position < 0 || position >= totalProducts.size()){
+            if(view != null)
+                view.showErrorDialog(Constants.ERROR.DATA_OUT_OF_LENGTH);
+        }else{
+           if(view != null)
+               view.showLoading();
+            postAddShop(position,num);
+        }
+    }
+
     private void getProductList() {
         if (view != null)
             view.showLoading();
@@ -215,7 +243,7 @@ public class SessionPresent implements SessionContract.Present {
             }
 
             @Override
-            public void setTotalList(List<ProductBean.DataBean.GoodsListBean> t) {
+            public void addToTotalList(List<ProductBean.DataBean.GoodsListBean> t) {
                 totalProducts.addAll(t);
             }
 
@@ -244,6 +272,59 @@ public class SessionPresent implements SessionContract.Present {
         });
     }
 
+    private void postGetShopCar(){
+        sessionService.queryShopCar(new ResponseCallback<ArrayList<ShopCarBean>>() {
+            @Override
+            public void onSucceed(ArrayList<ShopCarBean> shopCarBeans) {
+                SessionPresent.this.shopCarBeans.clear();
+                SessionPresent.this.shopCarBeans.addAll(shopCarBeans);
+                if(view == null)
+                    return;
+                view.dismissLoading();
+                view.queryShopCarSucceed(shopCarBeans);
+            }
+
+            @Override
+            public void onError(String message) {
+                if(view != null){
+                    view.dismissLoading();
+                    view.showErrorDialog(message);
+                }
+            }
+
+            @Override
+            public void onApiError(String state, String message) {
+                if(view != null){
+                    view.dismissLoading();
+                    view.queryShopCarFail(message + " : " + state);
+                }
+            }
+        });
+    }
+    private void postAddShop(int position,int num){
+        accountService.addShop(totalProducts.get(position).getGoods_id(), String.valueOf(num), new ResponseCallback<String>() {
+            @Override
+            public void onSucceed(String s) {
+                dismissLoading();
+                if(view != null)
+                    view.addShopCarSucceed();
+            }
+
+            @Override
+            public void onError(String message) {
+                dismissLoading();
+                if(view != null)
+                    view.addShopCarFail(message);
+            }
+
+            @Override
+            public void onApiError(String state, String message) {
+                dismissLoading();
+                if(view != null)
+                    view.addShopCarFail(message + " ; " + state);
+            }
+        });
+    }
     @Override
     public void start() {
         getProductList();

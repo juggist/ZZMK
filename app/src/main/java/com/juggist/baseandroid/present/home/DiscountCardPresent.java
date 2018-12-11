@@ -72,7 +72,7 @@ public class DiscountCardPresent implements DiscountCardContract.Present {
             }
 
             @Override
-            public void setTotalList(List<DiscountCardBean> t) {
+            public void addToTotalList(List<DiscountCardBean> t) {
                 totalDiscountCards.addAll(t);
             }
 

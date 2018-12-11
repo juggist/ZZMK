@@ -7,24 +7,18 @@ import com.juggist.jcore.service.ISessionService;
 import com.juggist.jcore.service.SessionService;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author juggist
  * @date 2018/11/12 2:13 PM
  */
 public class BuyPresent implements BuyContract.Present {
-    private static final int maxNum = 99;//最大购买数量
-    private static final int minNum = 0;
-    private final ExecutorService task;
 
     private BuyContract.View view;
     private ISessionService sessionService;
 
 
     private ArrayList<ShopCarBean> shopCarBeans;
-    private ArrayList<ShopCarBean> selectShopCarBeans;
 
 
     public BuyPresent(BuyContract.View view) {
@@ -32,8 +26,6 @@ public class BuyPresent implements BuyContract.Present {
         view.setPresent(this);
         sessionService = new SessionService();
         shopCarBeans = new ArrayList<>();
-        selectShopCarBeans = new ArrayList<>();
-        task = Executors.newSingleThreadExecutor();
     }
 
     @Override

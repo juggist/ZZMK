@@ -165,6 +165,7 @@ public class DiscoverFragment extends BaseFragment {
 
     private class ViewModel extends SmartRefreshViewModel<ArticleBean> implements DiscoverContract.View {
 
+
         @Override
         public void getListEmpty() {
             super.getListEmpty();

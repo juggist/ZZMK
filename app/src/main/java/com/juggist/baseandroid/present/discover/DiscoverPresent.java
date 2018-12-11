@@ -208,7 +208,7 @@ public class DiscoverPresent implements DiscoverContract.Present {
             }
 
             @Override
-            public void setTotalList(List<ArticleBean> t) {
+            public void addToTotalList(List<ArticleBean> t) {
                 totalArticleBeans.addAll(t);
             }
 

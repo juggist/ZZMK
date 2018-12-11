@@ -2,9 +2,9 @@ package com.juggist.baseandroid.ui.home;
 
 import com.juggist.jcore.base.BasePresent;
 import com.juggist.jcore.base.BaseView;
-import com.juggist.jcore.bean.ProductBean;
+import com.juggist.jcore.bean.ShopCarBean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author juggist
@@ -14,14 +14,24 @@ public class SessionContract {
     public interface View extends BaseView<Present> {
         
         void getListEmpty();
-        void getListSucceed(List<ProductBean.DataBean.GoodsListBean> dataBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
-        void getListSucceedEnd(List<ProductBean.DataBean.GoodsListBean> dataBeans, boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
         void getListEmptyFail(String extMsg);
         void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
 
         void downloadShareSucceed();
         void downloadShareFail(String msg);
+
+
+
+        void queryShopCarSucceed(ArrayList<ShopCarBean> shopCarBeans);
+
+        void queryShopCarFail(String extMsg);
+
+        void addShopCarSucceed();
+
+        void addShopCarFail(String extMsg);
+
+
     }
 
     public interface Present extends BasePresent {
@@ -33,5 +43,9 @@ public class SessionContract {
         void preparDownload(int position);
 
         void startDownload();
+
+        void getShopCar();
+
+        void addShop(int position,int num);
     }
 }

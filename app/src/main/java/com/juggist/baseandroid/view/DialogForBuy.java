@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.juggist.baseandroid.R;
-import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.jcore.bean.ProductBean;
 
 import java.util.ArrayList;
@@ -37,14 +36,18 @@ import androidx.fragment.app.DialogFragment;
 public class DialogForBuy extends DialogFragment {
     private ProductBean.DataBean.GoodsListBean goodsListBean;
 
+    private Listener listener;
+    private int position;
     private int maxNum = 100;
     private int num = 1;
     public DialogForBuy() {
     }
 
     @SuppressLint("ValidFragment")
-    public DialogForBuy(ProductBean.DataBean.GoodsListBean goodsListBean) {
+    public DialogForBuy(ProductBean.DataBean.GoodsListBean goodsListBean,Listener listener,int position) {
         this.goodsListBean = goodsListBean;
+        this.listener = listener;
+        this.position = position;
     }
 
     @Override
@@ -100,7 +103,8 @@ public class DialogForBuy extends DialogFragment {
         tv_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showLong("购买数量:" + num);
+                if(listener != null)
+                    listener.addShop(position,num);
             }
         });
         return view;
@@ -169,5 +173,9 @@ public class DialogForBuy extends DialogFragment {
             textView.setLayoutParams(lp);
             return textView;
         }
+    }
+
+    public interface Listener {
+        void addShop(int position,int num);
     }
 }

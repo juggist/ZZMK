@@ -27,6 +27,7 @@ import com.juggist.baseandroid.view.DialogSessionSetting;
 import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ProductBean;
+import com.juggist.jcore.bean.ShopCarBean;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -215,9 +216,9 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
         }
 
         @Override
-        public void toBuy(ProductBean.DataBean.GoodsListBean goodsListBean) {
+        public void toBuy(ProductBean.DataBean.GoodsListBean goodsListBean,int positin) {
             FragmentTransaction ft = SessionActivity.this.getSupportFragmentManager().beginTransaction();
-            DialogForBuy dfb = new DialogForBuy(goodsListBean);
+            DialogForBuy dfb = new DialogForBuy(goodsListBean,new ShopCarListener(),positin);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             dfb.show(ft, "dfb");
         }
@@ -252,13 +253,25 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
     }
 
     /**
-     * 设置按钮回调事件
+     * 设置回调事件
      */
     private class MySettingListener implements DialogSessionSetting.SettingListener {
 
         @Override
         public void addPrice(int addPrice) {
             SessionActivity.this.addPrice = addPrice;
+        }
+    }
+
+    /**
+     * 添加到购物车回调事件
+     *
+     */
+    private class ShopCarListener implements DialogForBuy.Listener{
+
+        @Override
+        public void addShop(int position,int num) {
+
         }
     }
     private class ViewModel extends SmartRefreshViewModel<ProductBean.DataBean.GoodsListBean> implements SessionContract.View {
@@ -304,6 +317,18 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
             SessionActivity.this.dismissLoading();
         }
 
+
+        @Override
+        public void queryShopCarSucceed(ArrayList<ShopCarBean> shopCarBeans) {
+            tvShoppingNum.setText(String.valueOf(shopCarBeans.size()));
+        }
+
+        @Override
+        public void queryShopCarFail(String extMsg) {
+            showErrorDialog(extMsg);
+        }
+
+
         @Override
         public void setPresent(SessionContract.Present present) {
             SessionActivity.this.present = present;
@@ -317,11 +342,12 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
         @Override
         public void showLoading() {
             statusTv.setText(getResources().getString(R.string.lv_loading));
+            SessionActivity.this.showLoading();
         }
 
         @Override
         public void dismissLoading() {
-
+            SessionActivity.this.dismissLoading();
         }
     }
 
@@ -360,6 +386,4 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
     void saveShareBitmapNever() {
         showPermissionSaveShareBitmapFail();
     }
-
-
 }

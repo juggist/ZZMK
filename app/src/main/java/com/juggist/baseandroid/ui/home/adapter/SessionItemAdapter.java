@@ -71,7 +71,7 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
             @Override
             public void onClick(View v) {
                 if(listener != null)
-                    listener.toBuy(item);
+                    listener.toBuy(item,helper.getLayoutPosition());
             }
         });
         helper.getView(R.id.ibtn_download).setOnClickListener(new View.OnClickListener() {
@@ -149,7 +149,7 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
 
     public interface Listener {
         void toBigPic(ArrayList<String> pics, int position);
-        void toBuy(ProductBean.DataBean.GoodsListBean goodsListBean);
+        void toBuy(ProductBean.DataBean.GoodsListBean goodsListBean,int position);
         void toDownload(int position);
         void toSale(ProductBean.DataBean.GoodsListBean goodsListBean);
     }

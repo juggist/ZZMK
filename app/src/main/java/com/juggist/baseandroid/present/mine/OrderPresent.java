@@ -71,7 +71,7 @@ public class OrderPresent implements OrderContract.Present {
             }
 
             @Override
-            public void setTotalList(List<OrderBean> t) {
+            public void addToTotalList(List<OrderBean> t) {
                 totalOrderBeans.addAll(t);
             }
 

@@ -162,7 +162,7 @@ public class HomePresent implements HomeContract.Present {
             }
 
             @Override
-            public void setTotalList(List<SessionBean.DataBean> t) {
+            public void addToTotalList(List<SessionBean.DataBean> t) {
                 if (page == 1) {//刷新
                     ArrayList<SessionBean.DataBean> hotBrandList = new ArrayList<>();//人气品牌，单独领出来，特殊处理
                     for (int i = 0; i < t.size(); i++) {
