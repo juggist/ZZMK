@@ -13,15 +13,8 @@ import java.util.ArrayList;
 public class SessionContract {
     public interface View extends BaseView<Present> {
         
-        void getListEmpty();
-
-        void getListEmptyFail(String extMsg);
-        void getListFail(String extMsg,boolean refresh /*true:下拉刷新，false:上拉加载*/);
-
         void downloadShareSucceed();
         void downloadShareFail(String msg);
-
-
 
         void queryShopCarSucceed(ArrayList<ShopCarBean> shopCarBeans);
 

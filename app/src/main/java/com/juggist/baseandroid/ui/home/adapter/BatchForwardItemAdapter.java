@@ -5,10 +5,10 @@ import android.graphics.Paint;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.bean.ProductBean;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
  * @author juggist
  * @date 2018/11/16 2:40 PM
  */
-public class BatchForwardItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.GoodsListBean> {
+public class BatchForwardItemAdapter extends BaseQuickAdapter<ProductBean.DataBean.GoodsListBean,BaseViewHolder> {
     private Context context;
     private List<ProductBean.DataBean.GoodsListBean> data;
     private List<Boolean> select;
@@ -31,7 +31,6 @@ public class BatchForwardItemAdapter extends BaseUpdateAdapter<ProductBean.DataB
         select = new ArrayList<>();
     }
 
-    @Override
     public void update(List<ProductBean.DataBean.GoodsListBean> t) {
         data.clear();
         select.clear();

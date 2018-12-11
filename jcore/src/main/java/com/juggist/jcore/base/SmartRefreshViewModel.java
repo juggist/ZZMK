@@ -3,6 +3,7 @@ package com.juggist.jcore.base;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,15 @@ public abstract class SmartRefreshViewModel<T>{
 
 
     public void getListEmpty() {
+        if(getBaseAdapter() != null){
+            getBaseAdapter().setNewData(new ArrayList());
+        }else{
+            try {
+                throw new Exception(" adapter is null");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         if(getSmartRefreshLayout() != null){
             getSmartRefreshLayout().finishRefresh();
             getSmartRefreshLayout().setNoMoreData(true);
@@ -32,10 +42,10 @@ public abstract class SmartRefreshViewModel<T>{
 
     public void getListSucceed(List<T> beans, boolean refresh) {
         if(getBaseAdapter() != null){
-            if(getBaseAdapter() instanceof BaseUpdateAdapter){
-                ((BaseUpdateAdapter)getBaseAdapter()).update(beans);
-            }else if(getBaseAdapter() instanceof BaseUpdateMultiItemAdapter){
-                ((BaseUpdateMultiItemAdapter)getBaseAdapter()).update(beans);
+            if(refresh){
+                getBaseAdapter().setNewData(beans);
+            }else {
+                getBaseAdapter().addData(beans);
             }
         }else{
             try {
@@ -64,10 +74,10 @@ public abstract class SmartRefreshViewModel<T>{
 
     public void getListSucceedEnd(List<T> beans, boolean refresh) {
         if(getBaseAdapter() != null){
-            if( getBaseAdapter() instanceof BaseUpdateAdapter){
-                ((BaseUpdateAdapter)getBaseAdapter()).update(beans);
-            }else if(getBaseAdapter() instanceof BaseUpdateMultiItemAdapter){
-                ((BaseUpdateMultiItemAdapter)getBaseAdapter()).update(beans);
+            if(refresh){
+                getBaseAdapter().setNewData(beans);
+            }else {
+                getBaseAdapter().addData(beans);
             }
         }else{
             try {
@@ -123,4 +133,5 @@ public abstract class SmartRefreshViewModel<T>{
             }
         }
     }
+
 }

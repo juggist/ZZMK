@@ -2,10 +2,10 @@ package com.juggist.baseandroid.ui.mine.adapter;
 
 import android.content.Context;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.view.NoScrollRecycleListView;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.bean.OrderBean;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -19,22 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
  * @author juggist
  * @date 2018/11/13 4:58 PM
  */
-public class OrderAdapter extends BaseUpdateAdapter<OrderBean> {
-    private List<OrderBean> data;
+public class OrderAdapter extends BaseQuickAdapter<OrderBean,BaseViewHolder> {
     private Context context;
 
     public OrderAdapter(Context context, int layoutResId, @Nullable List<OrderBean> data) {
         super(layoutResId, data);
-        this.data = data;
         this.context = context;
     }
 
-    @Override
-    public void update(List<OrderBean> t) {
-        this.data.clear();
-        this.data.addAll(t);
-        notifyDataSetChanged();
-    }
 
     @Override
     protected void convert(BaseViewHolder helper, OrderBean item) {
@@ -124,15 +116,6 @@ public class OrderAdapter extends BaseUpdateAdapter<OrderBean> {
                 .build());
         lv.setAdapter(adapter);
         adapter.update(item.getGoods_list());
-    }
-    public String getRefundId(int position){
-        return String.valueOf(data.get(position).getRefund_id());
-    }
-    public String getOrderId(int position){
-        return String.valueOf(data.get(position).getOrder_id());
-    }
-    public OrderBean getOrder(int position){
-        return data.get(position);
     }
 }
 

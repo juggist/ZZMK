@@ -5,12 +5,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.AddOrMinusButton;
 import com.juggist.baseandroid.view.AlertDialog;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.ResponseCallback;
 import com.juggist.jcore.bean.ShopCarBean;
 import com.juggist.jcore.service.AccountService;
@@ -28,7 +28,7 @@ import androidx.annotation.Nullable;
  * @date 2018/11/7 2:01 PM
  * 购物车适配器
  */
-public class BuyAdapter extends BaseUpdateAdapter<ShopCarBean> implements AddOrMinusButton.Listener {
+public class BuyAdapter extends BaseQuickAdapter<ShopCarBean,BaseViewHolder> implements AddOrMinusButton.Listener {
     private Context context;
     private IAccountService accountService;
     private Listener listener;
@@ -75,7 +75,12 @@ public class BuyAdapter extends BaseUpdateAdapter<ShopCarBean> implements AddOrM
         });
         ((AddOrMinusButton) helper.getView(R.id.addOrMinus)).init(helper.getLayoutPosition(), item.getGoods_number(), this);
     }
-
+    public void update(List<ShopCarBean> t) {
+        selectArray.clear();
+        shopCarBeans.clear();
+        shopCarBeans.addAll(t);
+        notifyDataSetChanged();
+    }
 
     /**
      * 加减按钮回调事件
@@ -194,15 +199,6 @@ public class BuyAdapter extends BaseUpdateAdapter<ShopCarBean> implements AddOrM
             stepCountMap.remove(position);
         }
     }
-
-    @Override
-    public void update(List<ShopCarBean> t) {
-        selectArray.clear();
-        shopCarBeans.clear();
-        shopCarBeans.addAll(t);
-        notifyDataSetChanged();
-    }
-
     /**
      * 是否全选后者全不选
      *

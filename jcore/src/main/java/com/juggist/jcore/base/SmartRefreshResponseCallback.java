@@ -41,15 +41,15 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
                 if(t.size() == 0){ //页面数据为空
                     view.getListEmpty();
                 }else if(t.size() < getPageSize()){
-                    view.getListSucceedEnd(getTotalList(),true);
+                    view.getListSucceedEnd(transformData(t),true);
                 }else{
-                    view.getListSucceed(getTotalList(),true);
+                    view.getListSucceed(transformData(t),true);
                 }
             }else{//加载更多
                 if(t.size() >= 0 && t.size() < getPageSize()){
-                    view.getListSucceedEnd(getTotalList(),false);
+                    view.getListSucceedEnd(transformData(t),false);
                 }else{
-                    view.getListSucceed(getTotalList(),false);
+                    view.getListSucceed(transformData(t),false);
                 }
             }
         }else{
@@ -105,5 +105,14 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
             }
         }
 
+    }
+
+    /**
+     * 数据装换
+     * @param list
+     * @return
+     */
+    public List<T> transformData(List<T> list){
+        return list;
     }
 }

@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.bean.ArticleBean;
 import com.juggist.jcore.utils.TimeUtils;
 
@@ -27,7 +27,7 @@ import androidx.annotation.Nullable;
  * @author juggist
  * @date 2018/11/7 11:35 AM
  */
-public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
+public class DiscoverAdapter extends BaseQuickAdapter<ArticleBean,BaseViewHolder> {
 
     private Context context;
     private Listener listener;
@@ -89,15 +89,6 @@ public class DiscoverAdapter extends BaseUpdateAdapter<ArticleBean> {
                     listener.share();
             }
         });
-    }
-
-
-
-    @Override
-    public void update(List<ArticleBean> t) {
-        this.articleBeans.clear();
-        this.articleBeans.addAll(t);
-        notifyDataSetChanged();
     }
 
     /**

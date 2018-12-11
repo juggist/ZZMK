@@ -6,10 +6,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.BackBaseActivity;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.ResponseCallback;
 import com.juggist.jcore.bean.OrderTransportBean;
 import com.juggist.jcore.service.AccountService;
@@ -113,7 +113,7 @@ public class OrderTransportActivity extends BackBaseActivity {
         });
     }
 
-    class Adapter extends BaseUpdateAdapter<OrderTransportBean.TracesBean> {
+    class Adapter extends BaseQuickAdapter<OrderTransportBean.TracesBean,BaseViewHolder> {
 
         private List<OrderTransportBean.TracesBean> data;
         public Adapter(int layoutResId, @Nullable List<OrderTransportBean.TracesBean> data) {
@@ -121,7 +121,7 @@ public class OrderTransportActivity extends BackBaseActivity {
             Adapter.this.data = data;
         }
 
-        @Override
+
         public void update(List<OrderTransportBean.TracesBean> t) {
             Adapter.this.data.clear();
             Adapter.this.data.addAll(t);

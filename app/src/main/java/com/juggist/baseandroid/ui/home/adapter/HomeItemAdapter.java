@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
-import com.juggist.jcore.base.BaseUpdateMultiItemAdapter;
 import com.juggist.jcore.bean.SessionBean;
 import com.juggist.jcore.utils.TimeUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -36,7 +36,7 @@ import static com.juggist.jcore.bean.SessionBean.DataBean.ITEM_TOP;
  * @author juggist
  * @date 2018/11/5 4:48 PM
  */
-public class HomeItemAdapter extends BaseUpdateMultiItemAdapter<SessionBean.DataBean> {
+public class HomeItemAdapter extends BaseMultiItemQuickAdapter<SessionBean.DataBean,BaseViewHolder> {
     private Context context;
     private List<SessionBean.DataBean> sessionBeans;
     private LinearLayout.LayoutParams lp;
@@ -54,13 +54,6 @@ public class HomeItemAdapter extends BaseUpdateMultiItemAdapter<SessionBean.Data
         addItemType(ITEM_HOT_BRAND, R.layout.adapter_home_item_type_two);
         addItemType(ITEM_HOT_RECOMMED, R.layout.adapter_home_item_type_three);
         addItemType(ITEM_NORMAL, R.layout.adapter_home_item);
-    }
-
-    @Override
-    public void update(List<SessionBean.DataBean> t) {
-        sessionBeans.clear();
-        sessionBeans.addAll(t);
-        notifyDataSetChanged();
     }
 
     @Override

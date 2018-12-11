@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.bean.ProductBean;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import androidx.annotation.Nullable;
  * @author juggist
  * @date 2018/11/6 2:49 PM
  */
-public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.GoodsListBean> {
+public class SessionItemAdapter extends BaseQuickAdapter<ProductBean.DataBean.GoodsListBean,BaseViewHolder> {
     private Context context;
     private List<ProductBean.DataBean.GoodsListBean> productList;
     private Listener listener;
@@ -139,12 +139,6 @@ public class SessionItemAdapter extends BaseUpdateAdapter<ProductBean.DataBean.G
 
     private static class ViewHolder2 {
         private ImageView iv;
-    }
-
-    public void update(List<ProductBean.DataBean.GoodsListBean> productList) {
-        this.productList.clear();
-        this.productList.addAll(productList);
-        notifyDataSetChanged();
     }
 
     public interface Listener {

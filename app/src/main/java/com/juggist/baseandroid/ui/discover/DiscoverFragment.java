@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.discover.DiscoverPresent;
 import com.juggist.baseandroid.ui.BaseFragment;
@@ -18,7 +19,6 @@ import com.juggist.baseandroid.ui.discover.adapter.DiscoverAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
 import com.juggist.baseandroid.view.DialogDownload;
 import com.juggist.baseandroid.view.DialogShare;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ArticleBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -223,7 +223,7 @@ public class DiscoverFragment extends BaseFragment {
         }
 
         @Override
-        public BaseUpdateAdapter getBaseAdapter() {
+        public BaseQuickAdapter getBaseAdapter() {
             return adapter;
         }
     }

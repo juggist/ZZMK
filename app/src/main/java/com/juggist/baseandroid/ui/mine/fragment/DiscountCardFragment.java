@@ -7,13 +7,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.GlideApp;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.present.home.DiscountCardPresent;
+import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.mine.adapter.DiscountCardAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.baseandroid.ui.BaseFragment;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.DiscountCardBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -179,7 +179,7 @@ public class DiscountCardFragment extends BaseFragment {
         }
 
         @Override
-        public BaseUpdateAdapter getBaseAdapter() {
+        public BaseQuickAdapter getBaseAdapter() {
             return adapter;
         }
     }

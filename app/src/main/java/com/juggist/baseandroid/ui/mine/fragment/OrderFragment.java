@@ -18,7 +18,6 @@ import com.juggist.baseandroid.ui.mine.OrderRefundAllActivity;
 import com.juggist.baseandroid.ui.mine.OrderTransportActivity;
 import com.juggist.baseandroid.ui.mine.adapter.OrderAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.OrderBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -162,18 +161,18 @@ public class OrderFragment extends BaseFragment {
                 switch (view.getId()){
                     case R.id.btn_order_refund_about:
                         Intent intent = new Intent(getActivity(),OrderRefundActivity.class);
-                        intent.putExtra("refundId",OrderFragment.this.adapter.getRefundId(position));
+                        intent.putExtra("refundId",OrderFragment.this.present.getRefundId(position));
                         getActivity().startActivity(intent);
                         break;
                     case R.id.btn_order_transport:
                         Intent intent2 = new Intent(getActivity(),OrderTransportActivity.class);
-                        intent2.putExtra("orderId",OrderFragment.this.adapter.getOrderId(position));
+                        intent2.putExtra("orderId",OrderFragment.this.present.getOrderId(position));
                         getActivity().startActivity(intent2);
                         break;
                     case R.id.btn_order_refund:
                         Intent intent3 = new Intent(getActivity(),OrderRefundAllActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("order",OrderFragment.this.adapter.getOrder(position));
+                        bundle.putSerializable("order",OrderFragment.this.present.getOrder(position));
                         intent3.putExtras(bundle);
                         getActivity().startActivity(intent3);
                         break;
@@ -230,7 +229,7 @@ public class OrderFragment extends BaseFragment {
         }
 
         @Override
-        public BaseUpdateAdapter getBaseAdapter() {
+        public BaseQuickAdapter getBaseAdapter() {
             return adapter;
         }
     }

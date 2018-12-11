@@ -197,6 +197,15 @@ public class HomePresent implements HomeContract.Present {
             }
 
             @Override
+            public List<SessionBean.DataBean> transformData(List<SessionBean.DataBean> list) {
+                if(page == 1){
+                    return totalSessionBeans;
+                }else{
+                    return list;
+                }
+            }
+
+            @Override
             public BaseView getView() {
                 return view;
             }

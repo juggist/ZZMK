@@ -40,7 +40,15 @@ public class OrderPresent implements OrderContract.Present {
     public void loadMoreOrderList() {
         getOrderList();
     }
-
+    public String getRefundId(int position){
+        return String.valueOf(totalOrderBeans.get(position).getRefund_id());
+    }
+    public String getOrderId(int position){
+        return String.valueOf(totalOrderBeans.get(position).getOrder_id());
+    }
+    public OrderBean getOrder(int position){
+        return totalOrderBeans.get(position);
+    }
     private void getOrderList(){
         if(view != null)
             view.showLoading();

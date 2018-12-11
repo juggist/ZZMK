@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.eventbus.HomeTabChangeEvent;
 import com.juggist.baseandroid.present.home.SessionPresent;
@@ -24,7 +25,6 @@ import com.juggist.baseandroid.view.CreateShareView;
 import com.juggist.baseandroid.view.DialogDownload;
 import com.juggist.baseandroid.view.DialogForBuy;
 import com.juggist.baseandroid.view.DialogSessionSetting;
-import com.juggist.jcore.base.BaseUpdateAdapter;
 import com.juggist.jcore.base.SmartRefreshViewModel;
 import com.juggist.jcore.bean.ProductBean;
 import com.juggist.jcore.bean.ShopCarBean;
@@ -275,13 +275,15 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
         }
     }
     private class ViewModel extends SmartRefreshViewModel<ProductBean.DataBean.GoodsListBean> implements SessionContract.View {
+
+
         @Override
         public SmartRefreshLayout getSmartRefreshLayout() {
             return srl;
         }
 
         @Override
-        public BaseUpdateAdapter getBaseAdapter() {
+        public BaseQuickAdapter getBaseAdapter() {
             return adapter;
         }
 
@@ -326,6 +328,16 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
         @Override
         public void queryShopCarFail(String extMsg) {
             showErrorDialog(extMsg);
+        }
+
+        @Override
+        public void addShopCarSucceed() {
+
+        }
+
+        @Override
+        public void addShopCarFail(String extMsg) {
+
         }
 
 
