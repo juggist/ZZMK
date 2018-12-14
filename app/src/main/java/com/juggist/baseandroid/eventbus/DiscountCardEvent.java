@@ -7,9 +7,15 @@ package com.juggist.baseandroid.eventbus;
 public class DiscountCardEvent {
     public static class UseDiscountCard{
         private String unlimit;
+        private int position;
 
-        public UseDiscountCard(String unlimit) {
+        public UseDiscountCard(String unlimit,int position) {
             this.unlimit = unlimit;
+            this.position = position;
+        }
+
+        public int getPosition() {
+            return position;
         }
 
         public String getUnlimit() {

@@ -70,7 +70,11 @@ public class MineFragment extends BaseFragment {
                     case 0:
                         break;
                     case 1:
-                        startActivity(new Intent(getActivity(),AddressListActivity.class));
+                        Intent intent = new Intent(getActivity(),AddressListActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("tag",2);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                         break;
                     case 2:
                         startActivity(new Intent(getActivity(),DiscountCardActivity.class));

@@ -398,4 +398,7 @@ public class SessionActivity extends BackBaseActivity implements CreateShareView
     void saveShareBitmapNever() {
         showPermissionSaveShareBitmapFail();
     }
+    private void showPermissionSaveShareBitmapFail(){
+        showPermissionFail(getResources().getString(R.string.save_bitmap_permission_fail),getResources().getString(R.string.save_bitmap_permission_todo));
+    }
 }

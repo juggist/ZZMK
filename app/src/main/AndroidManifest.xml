@@ -43,7 +43,8 @@
         <activity android:name=".view.chooseImg.ImageGridActivity" />
         <activity android:name=".view.chooseImg.PhotoActivity" />
         <activity android:name=".ui.mine.AddressAddActivity" />
-        <activity android:name=".ui.buy.DiscountCardChooseActivity"></activity>
+        <activity android:name=".ui.buy.DiscountCardChooseActivity" />
+        <activity android:name=".ui.buy.OrderPayActivity"></activity>
     </application>
 
 </manifest>

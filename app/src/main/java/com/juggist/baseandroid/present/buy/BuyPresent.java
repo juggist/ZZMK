@@ -3,7 +3,7 @@ package com.juggist.baseandroid.present.buy;
 import com.google.gson.Gson;
 import com.juggist.baseandroid.ui.buy.BuyContract;
 import com.juggist.jcore.base.ResponseCallback;
-import com.juggist.jcore.bean.OrderPreBean;
+import com.juggist.jcore.bean.OrderCreateTmpBean;
 import com.juggist.jcore.bean.OrderTmpBean;
 import com.juggist.jcore.bean.ShopCarBean;
 import com.juggist.jcore.service.AccountService;
@@ -80,9 +80,9 @@ public class BuyPresent implements BuyContract.Present {
             list.add(new OrderTmpBean(item.getGoods_id(),item.getGoods_number()));
         }
         String json = new Gson().toJson(list);
-        accountService.createTmpOrder(json, new ResponseCallback<OrderPreBean>() {
+        accountService.createTmpOrder(json, new ResponseCallback<OrderCreateTmpBean>() {
             @Override
-            public void onSucceed(OrderPreBean orderPreBean) {
+            public void onSucceed(OrderCreateTmpBean orderPreBean) {
                 showLoading();
                 if(view != null)
                     view.crateTmpOrderSucceed(orderPreBean);

@@ -155,6 +155,11 @@ public class AddressListPresent implements AddressListContract.Present {
     }
 
     @Override
+    public AddressBean getAddress(int position) {
+        return totalAddressBeans.get(position);
+    }
+
+    @Override
     public void start() {
         getAddressList();
     }

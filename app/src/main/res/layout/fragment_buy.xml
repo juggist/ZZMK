@@ -63,7 +63,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_toLeftOf="@+id/tv_calculate"
-            android:text="合计:0.0"
+            android:text="合计:￥0.0"
             android:textColor="@color/color_invitecode"
             android:textSize="@dimen/sp_28" />
 

@@ -29,13 +29,7 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
          * 视图
          */
 
-        if(getView() == null)
-            try {
-                throw new Exception("view is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        if(getView() instanceof SmartRefreshViewModel){
+        if(isSmartRefreshViewModel()){
             SmartRefreshViewModel view = (SmartRefreshViewModel) getView();
             if(getPage() == 1){//刷新
                 if(t.size() == 0){ //页面数据为空
@@ -51,12 +45,6 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
                 }else{
                     view.getListSucceed(transformData(t),false);
                 }
-            }
-        }else{
-            try {
-                throw new Exception(" view un instanceof SmartRefreshViewModel");
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
 
@@ -80,13 +68,7 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
     }
 
     private void getListError(String extMsg) {
-        if(getView() == null)
-            try {
-                throw new Exception("view is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        if(getView() instanceof SmartRefreshViewModel) {
+        if(isSmartRefreshViewModel()){
             SmartRefreshViewModel view = (SmartRefreshViewModel) getView();
             if(getPage() == 1){//刷新
                 if(getTotalList().size() == 0){//无数据
@@ -97,14 +79,7 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
             }else{//加载更多
                 view.getListFail(extMsg,false);
             }
-        }else{
-            try {
-                throw new Exception(" view un instanceof SmartRefreshViewModel");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-
     }
 
     /**
@@ -114,5 +89,26 @@ public abstract class SmartRefreshResponseCallback<T> implements ResponseCallbac
      */
     public List<T> transformData(List<T> list){
         return list;
+    }
+
+    private boolean isSmartRefreshViewModel(){
+        if(getView() == null){
+            try {
+                throw new Exception("SmartRefreshViewModel is null");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        if(getView() instanceof SmartRefreshViewModel) {
+           return true;
+        }else{
+            try {
+                throw new Exception(" view un instanceof SmartRefreshViewModel");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
     }
 }

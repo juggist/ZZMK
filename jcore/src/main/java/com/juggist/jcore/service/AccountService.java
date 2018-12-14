@@ -1,14 +1,20 @@
 package com.juggist.jcore.service;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
 import com.juggist.jcore.base.BaseService;
 import com.juggist.jcore.base.ResponseCallback;
-import com.juggist.jcore.bean.OrderPreBean;
+import com.juggist.jcore.bean.OrderCreateBean;
+import com.juggist.jcore.bean.OrderCreateTmpBean;
 import com.juggist.jcore.bean.OrderRefundBean;
 import com.juggist.jcore.bean.OrderTransportBean;
 import com.juggist.jcore.bean.UserInfo;
 import com.juggist.jcore.http.ApiServiceGenerator;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -172,11 +178,10 @@ public class AccountService extends BaseService implements IAccountService {
     /**
      * 创建零时订单
      * @param goods_json
-     * @param coupon_id
      * @param callback
      */
     @Override
-    public void createTmpOrder(String goods_json, final ResponseCallback<OrderPreBean> callback) {
+    public void createTmpOrder(String goods_json, final ResponseCallback<OrderCreateTmpBean> callback) {
         HashMap<String,String> params = new HashMap<>();
         params.put("controller","Member");
         params.put("action","getPreOrderGoodsListFromDetail");
@@ -185,12 +190,53 @@ public class AccountService extends BaseService implements IAccountService {
         params.put("goods_json",goods_json);
         params.put("coupon_id","-1");
         this.getFilterResponse(accountServiceApi.createTmpOrder(params),AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<OrderPreBean>() {
+                .subscribe(new Consumer<OrderCreateTmpBean>() {
                     @Override
-                    public void accept(OrderPreBean orderPreBean) throws Exception {
+                    public void accept(OrderCreateTmpBean orderPreBean) throws Exception {
                         callback.onSucceed(orderPreBean);
                     }
                 },new ConsumerThrowable<>(callback));
 
+    }
+
+    @Override
+    public void createOrder(List<OrderCreateTmpBean.GoodsListBean> goodsListBeans, String address_id, String coupon_id, String cn_id, String cn_id_bg, String cd_id_front, final ResponseCallback<OrderCreateBean> callback) {
+        HashMap<String,String> params = new HashMap<>();
+        if(!TextUtils.isEmpty(cn_id)){
+            params.put("cn_id",cn_id);
+        }
+        if(!TextUtils.isEmpty(cn_id)){
+            params.put("cn_id_bg",cn_id_bg);
+        }
+        if(!TextUtils.isEmpty(cn_id)){
+            params.put("cd_id_front",cd_id_front);
+        }
+        params.put("controller","Member");
+        params.put("action","createOrder");
+        params.put("user_id",UserInfo.userId());
+        params.put("token",UserInfo.token());
+        params.put("address_id",address_id);
+        params.put("coupon_id",coupon_id);
+        params.put("note","来自Android下单");
+        JSONArray array = new JSONArray();
+        for (OrderCreateTmpBean.GoodsListBean item:goodsListBeans) {
+            JSONObject obj = new JSONObject();
+            try {
+                obj.put("goods_id",item.getAuto_id());
+                obj.put("goods_number",item.getGoods_number());
+                obj.put("attr",new Gson().toJson(item.getAttr()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            array.put(obj);
+        }
+        params.put("goods_json",array.toString());
+        this.getFilterResponse(accountServiceApi.createOrder(params),AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<OrderCreateBean>() {
+                    @Override
+                    public void accept(OrderCreateBean orderCreateBean) throws Exception {
+                        callback.onSucceed(orderCreateBean);
+                    }
+                },new ConsumerThrowable<>(callback));
     }
 }

@@ -1,5 +1,7 @@
 package com.juggist.jcore.bean;
 
+import android.text.TextUtils;
+
 import com.juggist.jcore.base.BaseBean;
 
 /**
@@ -142,5 +144,23 @@ public class AddressBean extends BaseBean {
 
     public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
+    }
+
+    public boolean isEmpty() {
+        if (TextUtils.isEmpty(auto_id) ||
+                TextUtils.isEmpty(user_id) ||
+                TextUtils.isEmpty(addr) ||
+                TextUtils.isEmpty(is_default) ||
+                TextUtils.isEmpty(province) ||
+                TextUtils.isEmpty(city) ||
+                TextUtils.isEmpty(areas) ||
+                TextUtils.isEmpty(province_name) ||
+                TextUtils.isEmpty(city_name) ||
+                TextUtils.isEmpty(areas_name) ||
+                TextUtils.isEmpty(consignee) ||
+                TextUtils.isEmpty(cellphone)
+                )
+            return true;
+        return false;
     }
 }

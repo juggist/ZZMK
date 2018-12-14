@@ -78,13 +78,12 @@ dependencies {
     api 'com.google.dagger:dagger:2.19'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
 
-
-
     /**
      * 沉浸式状态栏
      * immersionbar
      */
     api 'com.gyf.barlibrary:barlibrary:2.3.0'
+
     /**
      * 下拉刷新
      * smartRefreshLayout
@@ -92,18 +91,22 @@ dependencies {
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
     api 'androidx.appcompat:appcompat:1.0.2'//版本 23以上（必须）
+
     /**
      * banner滚动图
      */
     api 'com.youth.banner:banner:1.4.10'  //最新版本
+
     /*
      * 图片展示工具
      */
     api 'com.github.chrisbanes:PhotoView:2.2.0'
+
     /**
      * 导航栏
      */
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
+
     /**
      * 三级联动选择器
      */
@@ -116,6 +119,7 @@ dependencies {
     api 'com.jakewharton:butterknife:9.0.0-rc1'
     //这行必须写在appmodule里，否则报错
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+
     /**
      * baseRecycleAdapter
      */
@@ -124,6 +128,13 @@ dependencies {
     api "com.android.support:recyclerview-v7:{rootProject.ext.supportLibVersion}"
     //recycleview的divider插件
     api 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+
+    /**
+     * wx支付
+     */
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
+
     /**
      * tools
      */

@@ -1020,11 +1020,12 @@ public final class ActivityUtils {
     }
 
     public static void startActivityWithFinishOthers(
-                                                     @NonNull final Class<? extends Activity> clz){
+            @NonNull final Class<? extends Activity> clz) {
         Context activity = Utils.getTopActivityOrApp();
         startActivity(activity, null, activity.getPackageName(), clz.getName(), null);
         finishAllActivities();
     }
+
     /**
      * Return the list of activity.
      *
@@ -1441,6 +1442,19 @@ public final class ActivityUtils {
         List<Activity> activities = Utils.getActivityList();
         for (int i = activities.size() - 2; i >= 0; i--) {
             finishActivity(activities.get(i), enterAnim, exitAnim);
+        }
+    }
+
+    /**
+     * 退栈
+     *
+     * @param backStackCount 需要退出几个activity
+     */
+    public static void finishAcitityBackStack(int backStackCount) {
+        List<Activity> activities = Utils.getActivityList();
+        for (int i = 0; i < backStackCount; i++) {
+            if (activities.size() > 0)
+                finishActivity(activities.get(activities.size() - 1 - i));
         }
     }
 

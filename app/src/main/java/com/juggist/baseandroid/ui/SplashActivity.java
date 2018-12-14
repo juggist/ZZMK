@@ -12,6 +12,8 @@ import com.juggist.jcore.utils.SPUtil;
  *
  * 测试账号
  * 17718397309
+ *
+ * 13242001948
  * 123456
  */
 public class SplashActivity extends BaseActivity{

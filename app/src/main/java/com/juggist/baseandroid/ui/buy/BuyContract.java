@@ -2,7 +2,7 @@ package com.juggist.baseandroid.ui.buy;
 
 import com.juggist.jcore.base.BasePresent;
 import com.juggist.jcore.base.BaseView;
-import com.juggist.jcore.bean.OrderPreBean;
+import com.juggist.jcore.bean.OrderCreateTmpBean;
 import com.juggist.jcore.bean.ShopCarBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class BuyContract {
         void queryShopCarFail(String extMsg);
 
 
-        void crateTmpOrderSucceed(OrderPreBean orderPreBean);
+        void crateTmpOrderSucceed(OrderCreateTmpBean orderPreBean);
         void crateTmpOrderFail(String extMsg);
 
     }

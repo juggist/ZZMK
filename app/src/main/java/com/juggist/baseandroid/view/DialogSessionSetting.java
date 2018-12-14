@@ -149,8 +149,6 @@ public class DialogSessionSetting extends DialogFragment {
         getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {//可以在这拦截返回键啊home键啊事件
-                dialog.dismiss();
-                et.clearFocus();
                 return false;
             }
         });

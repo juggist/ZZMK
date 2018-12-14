@@ -27,7 +27,7 @@
             android:maxLength="11"
             android:paddingTop="@dimen/dp_20"
             android:paddingBottom="@dimen/dp_20"
-            android:text="17718397309"
+            android:text="13242001948"
             android:textCursorDrawable="@color/font_select"
             android:textSize="@dimen/sp_26"
             app:textHint="@string/hint_phone"

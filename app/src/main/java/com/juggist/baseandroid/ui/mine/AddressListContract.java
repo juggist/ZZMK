@@ -40,5 +40,7 @@ public class AddressListContract {
 
         void checkDefaultAddress(int position);
         void setDefaultAddress();
+
+        AddressBean getAddress(int position);
     }
 }

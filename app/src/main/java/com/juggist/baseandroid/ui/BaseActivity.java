@@ -157,18 +157,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     /**
-     * 请求保存图片
-     * WRITE_EXTERNAL_STORAGE
-     * READ_EXTERNAL_STORAGE
      * 权限拒绝
      */
-    protected void showPermissionSaveShareBitmapFail() {
+    protected void showPermissionFail(final String title, final String msg){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 new AlertDialog(BaseActivity.this).builder()
-                        .setTitle(getResources().getString(com.juggist.baseandroid.R.string.save_bitmap_permission_fail))
-                        .setMsg(getResources().getString(com.juggist.baseandroid.R.string.save_bitmap_permission_todo))
+                        .setTitle(title)
+                        .setMsg(msg)
                         .setNegativeButton("取消", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

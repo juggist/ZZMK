@@ -14,8 +14,9 @@ import com.juggist.baseandroid.present.buy.BuyPresent;
 import com.juggist.baseandroid.ui.BaseFragment;
 import com.juggist.baseandroid.ui.buy.adapter.BuyAdapter;
 import com.juggist.baseandroid.utils.ToastUtil;
-import com.juggist.jcore.bean.OrderPreBean;
+import com.juggist.jcore.bean.OrderCreateTmpBean;
 import com.juggist.jcore.bean.ShopCarBean;
+import com.orhanobut.logger.Logger;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -40,14 +41,20 @@ public class BuyFragment extends BaseFragment {
     @BindView(R.id.tv_calculate)
     TextView tvCalculate;
 
-
     private LinearLayout statusView;
     private ImageView statusIv;
     private TextView statusTv;
 
-
     private BuyAdapter adapter;
     private BuyContract.Present present;
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        present.start();
+        Logger.d("start");
+    }
 
     @Override
     public void onDestroyView() {
@@ -91,8 +98,6 @@ public class BuyFragment extends BaseFragment {
     protected void initData() {
         initAdapter();
         new BuyPresent(new ViewModel());
-        present.queryShopCar();
-
     }
 
     private void initAdapter(){
@@ -130,7 +135,7 @@ public class BuyFragment extends BaseFragment {
 
         @Override
         public void updateSelectMoney(String money) {
-            tvTotalMoney.setText("合计:$"+money);
+            tvTotalMoney.setText("合计:￥"+money);
         }
     }
     private class ViewModel implements BuyContract.View {
@@ -155,7 +160,7 @@ public class BuyFragment extends BaseFragment {
         }
 
         @Override
-        public void crateTmpOrderSucceed(OrderPreBean orderPreBean) {
+        public void crateTmpOrderSucceed(OrderCreateTmpBean orderPreBean) {
             Intent intent = new Intent(getActivity(),OrderSubmitActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("OrderPreBean",orderPreBean);

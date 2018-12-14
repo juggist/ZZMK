@@ -116,6 +116,9 @@
     <string name="order_refund_reason_empty">请选择退款原因</string>
     <string name="order_refund_dialog_title">退货原因</string>
     <string name="order_refund_dialog_succeed_title">提交成功</string>
+    <string name="order_no">订单编号</string>
+    <string name="order_money">订单金额</string>
+    <string name="order_pay_type">支付方式</string>
 
 
     <string name="toast_login_phone_empty">请输入手机号码</string>
@@ -177,4 +180,13 @@
     <string name="choose_pic_from_camera">拍摄</string>
     <string name="choose_pic_permission_fail">选取图片失败</string>
     <string name="choose_pic_permission_todo">请去系统设置里打开权限</string>
+
+    <string name="id_dialog">请补全身份信息</string>
+    <string name="id_title">身份证:</string>
+    <string name="id_hint">请填写身份证号码</string>
+    <string name="id_pic_title">(请上传身份证正反面照片)</string>
+    <string name="id_choose_pic">请上传身份证正反面照片</string>
+    <string name="id_commit">提交</string>
+
+    <string name="discount_card_empty">暂无可使用的优惠券</string>
 </resources>

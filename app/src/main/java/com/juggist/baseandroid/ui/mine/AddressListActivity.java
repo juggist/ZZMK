@@ -46,6 +46,7 @@ public class AddressListActivity extends BackBaseActivity {
     private AddressListAdapter adapter;
     private AddressListContract.Present present;
 
+    private int tag;
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -96,6 +97,7 @@ public class AddressListActivity extends BackBaseActivity {
     @Override
     protected void initData() {
         EventBus.getDefault().register(this);
+        parseBundle();
         initAdapter();
         new AddressListPresent(new ViewModel());
         present.start();
@@ -113,6 +115,15 @@ public class AddressListActivity extends BackBaseActivity {
         adapter = new AddressListAdapter(R.layout.adapter_address_item, new ArrayList<AddressBean>());
         adapter.setEmptyView(statusView);
         lv.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if(tag == 1){
+                    EventBus.getDefault().post(new AddressEvent.AddressChoose(present.getAddress(position)));
+                    AddressListActivity.this.finish();
+                }
+            }
+        });
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -136,7 +147,9 @@ public class AddressListActivity extends BackBaseActivity {
             }
         });
     }
-
+    private void parseBundle(){
+        tag = getIntent().getExtras().getInt("tag",1);
+    }
     private class ViewModel implements AddressListContract.View {
 
         @Override

@@ -18,120 +18,92 @@ public abstract class SmartRefreshViewModel<T>{
 
 
     public void getListEmpty() {
-        if(getBaseAdapter() != null){
+        if(adapterExist()){
             getBaseAdapter().setNewData(new ArrayList());
-        }else{
-            try {
-                throw new Exception(" adapter is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-        if(getSmartRefreshLayout() != null){
+        if(smartRefreshLayoutExist()){
             getSmartRefreshLayout().finishRefresh();
             getSmartRefreshLayout().setNoMoreData(true);
-        }else{
-            try {
-                throw new Exception(" srl is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
 
     public void getListSucceed(List<T> beans, boolean refresh) {
-        if(getBaseAdapter() != null){
+        if(adapterExist()){
             if(refresh){
                 getBaseAdapter().setNewData(beans);
             }else {
                 getBaseAdapter().addData(beans);
             }
-        }else{
-            try {
-                throw new Exception(" adapter is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-        if(getSmartRefreshLayout() != null){
+        if(smartRefreshLayoutExist()){
             if (refresh) {
                 getSmartRefreshLayout().finishRefresh();
             } else {
                 getSmartRefreshLayout().finishLoadMore();
             }
-        }else{
-            try {
-                throw new Exception(" srl is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-
-
     }
 
 
     public void getListSucceedEnd(List<T> beans, boolean refresh) {
-        if(getBaseAdapter() != null){
+        if(adapterExist()){
             if(refresh){
                 getBaseAdapter().setNewData(beans);
             }else {
                 getBaseAdapter().addData(beans);
             }
-        }else{
-            try {
-                throw new Exception(" adapter is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-        if(getSmartRefreshLayout() != null){
+        if(smartRefreshLayoutExist()){
             if (refresh) {
                 getSmartRefreshLayout().finishRefresh();
                 getSmartRefreshLayout().setNoMoreData(true);
             } else {
                 getSmartRefreshLayout().finishLoadMoreWithNoMoreData();
             }
-        }else{
-            try {
-                throw new Exception(" srl is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-
-
     }
 
 
     public void getListEmptyFail(String extMsg) {
-        if(getSmartRefreshLayout() != null){
+        if(smartRefreshLayoutExist()){
             getSmartRefreshLayout().finishRefresh();
-        }else{
-            try {
-                throw new Exception(" srl is null");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            getSmartRefreshLayout().setNoMoreData(true);
         }
     }
 
 
     public void getListFail(String extMsg, boolean refresh) {
-        if(getSmartRefreshLayout() != null){
+        if(smartRefreshLayoutExist()){
             if (refresh) {
                 getSmartRefreshLayout().finishRefresh();
             } else {
                 getSmartRefreshLayout().finishLoadMore();
             }
-        }else {
+        }
+    }
+    private boolean smartRefreshLayoutExist(){
+        if(getSmartRefreshLayout() != null){
+            return true;
+        }else{
             try {
-                throw new Exception(" srl is null");
+                throw new Exception("srl is null");
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return false;
         }
     }
-
+    private boolean adapterExist(){
+        if(getBaseAdapter() != null){
+           return true;
+        }else{
+            try {
+                throw new Exception(" adapter is null");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+    }
 }

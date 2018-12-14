@@ -302,5 +302,7 @@ public class BatchForwardActivity extends BackBaseActivity implements CreateShar
         showPermissionSaveShareBitmapFail();
     }
 
-
+    private void showPermissionSaveShareBitmapFail(){
+        showPermissionFail(getResources().getString(R.string.save_bitmap_permission_fail),getResources().getString(R.string.save_bitmap_permission_todo));
+    }
 }

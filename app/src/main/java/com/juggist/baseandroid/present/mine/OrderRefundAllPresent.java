@@ -35,6 +35,7 @@ public class OrderRefundAllPresent implements OrderRefundAllContract.Present {
 
     private String pickImagePath = "";//选取图片的路径
     public OrderRefundAllPresent(OrderRefundAllContract.View view,Context context, OrderBean order) {
+        Bimp.MAX_SIZE = 3;
         this.view = view;
         view.setPresent(this);
         this.order = order;

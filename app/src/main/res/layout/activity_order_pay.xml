@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.buy.OrderPayActivity">
+
+    <include layout="@layout/common_navigation_bar" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/item_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:text="@string/order_no"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <TextView
+                android:id="@+id/tv_order_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/common_margin"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:text="@string/order_money"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <TextView
+                android:id="@+id/tv_order_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/common_margin"
+                android:textColor="@color/font_select"
+                android:textSize="@dimen/sp_28" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:text="@string/order_pay_type"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+        </RelativeLayout>
+
+        <include layout="@layout/common_bottom_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/pay_wx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/common_margin"
+                android:src="@drawable/pay_icon_wechat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_toRightOf="@+id/pay_wx"
+                android:text="@string/order_pay_type"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <CheckBox
+                android:id="@+id/iv_pay_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/common_margin"
+                android:button="@drawable/button_pay_wx_bg" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_90"
+            android:layout_marginLeft="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_45"
+            android:background="@drawable/btn_corner_bg"
+            android:text="@string/order_pay"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_32" />
+    </LinearLayout>
+
+</LinearLayout>

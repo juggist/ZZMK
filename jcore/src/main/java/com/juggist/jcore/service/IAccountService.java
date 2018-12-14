@@ -1,7 +1,8 @@
 package com.juggist.jcore.service;
 
 import com.juggist.jcore.base.ResponseCallback;
-import com.juggist.jcore.bean.OrderPreBean;
+import com.juggist.jcore.bean.OrderCreateBean;
+import com.juggist.jcore.bean.OrderCreateTmpBean;
 import com.juggist.jcore.bean.OrderRefundBean;
 import com.juggist.jcore.bean.OrderTransportBean;
 
@@ -26,5 +27,7 @@ public interface IAccountService {
 
     void addShop(String goods_id, String number, ResponseCallback<String> callback);
 
-    void createTmpOrder(String goods_json, ResponseCallback<OrderPreBean> callback);
+    void createTmpOrder(String goods_json, ResponseCallback<OrderCreateTmpBean> callback);
+
+    void createOrder(List<OrderCreateTmpBean.GoodsListBean> goodsListBeans,String address_id,String coupon_id,String cn_id,String cn_id_bg,String cd_id_front, ResponseCallback<OrderCreateBean> callback);
 }

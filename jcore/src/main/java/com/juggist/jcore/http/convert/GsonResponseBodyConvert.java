@@ -6,9 +6,10 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.juggist.jcore.Constants;
+import com.juggist.jcore.bean.ResponseBean;
 import com.juggist.jcore.http.ErrorCode;
-import com.juggist.jcore.http.ResponseStatus;
 import com.juggist.jcore.http.exception.ApiCodeErrorException;
+import com.orhanobut.logger.Logger;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -50,12 +51,13 @@ public class GsonResponseBodyConvert<T> implements Converter<ResponseBody,T> {
             throw new ApiCodeErrorException(ErrorCode.NET_ERROR);
         }
         String response = value.string();
-        ResponseStatus responseStatus = gson.fromJson(response.trim(), ResponseStatus.class);
+        ResponseBean responseStatus = gson.fromJson(response.trim(), ResponseBean.class);
         //errorCode !=200 认为是异常
         if (!responseStatus.getStatus().contentEquals(Constants.REQUEST_SUCCESS)) {
             value.close();
             throw new ApiCodeErrorException(TextUtils.isEmpty(responseStatus.getStatus()) ? Constants.REQUEST_FAIL : responseStatus.getStatus(), TextUtils.isEmpty(responseStatus.getMessage()) ? Constants.SERVICE_BUSY : responseStatus.getMessage());
         }
+        Logger.d("data = " + responseStatus.getData().toString());
         MediaType contentType = value.contentType();
         Charset charset = contentType != null ? contentType.charset(UTF8) : UTF8;
         InputStream inputStream = new ByteArrayInputStream(response.getBytes());

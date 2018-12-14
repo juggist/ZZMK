@@ -36,6 +36,7 @@ public class Constants {
         public static final String SHOPCAR_UPDATE_NUM_OUT_OF_LENGTH = "修改商品数量异常";
 
         public static final String DOWNLOAD_SHARE_IMG_FAIL="下载分享图片失败";
+        public static final String ADDRESS_EMPTY="还没有收货地址呢，去添加";
 
     }
     public static class URL{
@@ -71,6 +72,7 @@ public class Constants {
         public static final String PATH_SAVE_SHARE_PIC = BASE_PATH +  "SHARE_PIC/";//商品图片分享地址
         public static final String PATH_SAVE_SHARE_MERGER_PIC = BASE_PATH +  "SHARE_MERGER_PIC/";//商品图片合成分享地址
         public static final String PATH_REFUND_PIC = BASE_PATH +  "SHARE_REFUND_PIC/";//退货退款图片地址
+        public static final String PATH_ID_PIC = BASE_PATH +  "ID_PIC/";//退货退款图片地址
 
 
     }

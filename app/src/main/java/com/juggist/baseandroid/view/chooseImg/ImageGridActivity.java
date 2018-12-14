@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.juggist.baseandroid.R;
 import com.juggist.baseandroid.ui.BackBaseActivity;
-import com.juggist.baseandroid.ui.mine.OrderRefundAllActivity;
 import com.juggist.baseandroid.utils.ActivityUtils;
 import com.juggist.baseandroid.view.chooseImg.adapter.ImageGridAdapter;
 import com.juggist.baseandroid.view.chooseImg.config.Bimp;
@@ -38,7 +37,7 @@ public class ImageGridActivity extends BackBaseActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 0:
-				Toast.makeText(ImageGridActivity.this, "最多选择3张图片", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ImageGridActivity.this, "最多选择"+Bimp.MAX_SIZE+"张图片", Toast.LENGTH_SHORT).show();
 				break;
 
 			default:
@@ -93,7 +92,7 @@ public class ImageGridActivity extends BackBaseActivity {
 						Bimp.drr.add(list.get(i));
 					}
 				}
-				ActivityUtils.finishToActivity(OrderRefundAllActivity.class,false);
+				ActivityUtils.finishAcitityBackStack(2);
 			}
 
 		});
