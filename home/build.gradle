@@ -55,4 +55,18 @@ combuild {
     applicationName = 'com.juggist.home.runalone.application.HomeApplication'
     isRegisterCompoAuto = true
 }
+//maven
+apply plugin: 'maven'
+uploadArchives{
+    repositories {
+        mavenDeployer{
+            pom.groupId='com.juggist'
+            pom.artifactId='home'
+            pom.version='1.0.0'
+            pom.packaging='aar'
+            repository(url:uri("${rootProject.projectDir}/mavenRepo"))
+        }
+    }
+}
+
 

@@ -55,4 +55,18 @@ combuild {
     applicationName = 'com.juggist.discover.runalone.application.DiscoverApplication'
     isRegisterCompoAuto = true
 }
+//maven
+apply plugin: 'maven'
+uploadArchives{
+    repositories {
+        mavenDeployer{
+            pom.groupId='com.juggist'
+            pom.artifactId='discover'
+            pom.version='1.0.0'
+            pom.packaging='aar'
+            repository(url:uri("${rootProject.projectDir}/mavenRepo"))
+        }
+    }
+}
+
 

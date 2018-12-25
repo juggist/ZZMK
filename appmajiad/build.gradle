@@ -1,11 +1,18 @@
 //apply plugin: 'com.android.application'
 apply plugin: 'com.dd.comgradle'
 
+apply plugin: 'walle'
+
 android {
+    signingConfigs {
+        release {
+            keyAlias 'juggist'
+            keyPassword '1234567890'
+            storeFile file('/Users/lufeisong/Documents/github_lufeisong1988/BaseAndroid/appmajiad/keystore')
+            storePassword '1234567890'
+        }
+    }
     compileSdkVersion 28
-
-
-
     defaultConfig {
         applicationId "com.juggist.appmajiad"
         minSdkVersion 16
@@ -19,35 +26,42 @@ android {
                 arguments = [host: "appmajiad"]
             }
         }
+        multiDexEnabled true
         compileOptions {
             sourceCompatibility 1.8
             targetCompatibility 1.8
         }
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
-
     api project(':componentservice')
     annotationProcessor 'com.github.jimu:router-anno-compiler:1.0.1'
+    compile 'com.meituan.android.walle:library:1.1.6'
 }
 
 combuild {
     applicationName = 'com.juggist.appmajiad.MyApplication'
     isRegisterCompoAuto = true
+}
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
 }

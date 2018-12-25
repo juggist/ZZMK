@@ -122,3 +122,17 @@ dependencies {
     // Optional, if you use support library fragments:
     debugApi 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
 }
+
+//maven
+apply plugin: 'maven'
+uploadArchives{
+    repositories {
+        mavenDeployer{
+            pom.groupId='com.juggist'
+            pom.artifactId='jdependencies'
+            pom.version='1.0.0'
+            pom.packaging='aar'
+            repository(url:uri("${rootProject.projectDir}/mavenRepo"))
+        }
+    }
+}

@@ -63,6 +63,7 @@ buildscript {
         //解决butterknife在lib里的问题
         classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
 
+        classpath 'com.meituan.android.walle:plugin:1.1.6'
     }
 }
 
@@ -73,6 +74,8 @@ allprojects {
         maven { url "https://jitpack.io" }
 
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+
+        maven { url uri("${rootProject.projectDir}/mavenRepo") }
     }
 }
 
