@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/id_dialog"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_30" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_30"
+            android:src="@drawable/common_pop_close" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/font_normal" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_110"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/common_margin"
+        android:paddingRight="@dimen/common_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/id_title"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_28" />
+
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@null"
+            android:hint="@string/id_hint"
+            android:lines="1"
+            android:maxLength="18"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_28" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/item_bg" />
+
+    <TextView
+        android:id="@+id/tv_choose_pic_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="@string/id_pic_title"
+        android:textColor="@color/font_normal"
+        android:textSize="@dimen/sp_28" />
+
+    <GridView
+        android:id="@+id/gv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_margin"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginRight="@dimen/common_margin"
+        android:horizontalSpacing="@dimen/dp_40"
+        android:numColumns="2"></GridView>
+
+    <Button
+        android:id="@+id/btn_commit"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_88"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/dp_80"
+        android:background="@color/font_select"
+        android:text="@string/id_commit"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_30" />
+</LinearLayout>

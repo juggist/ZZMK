@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_70"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_margin"
+    android:paddingRight="@dimen/common_margin"
+    tools:context="com.juggist.user.ui.fragment.UserLoginFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/user_input_container_bg"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.juggist.jcore.view.ClearEditText
+            android:id="@+id/user_et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@null"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingTop="@dimen/dp_20"
+            android:paddingBottom="@dimen/dp_20"
+            android:text="13242001948"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:textHint="@string/user_hint_phone"
+            app:textLeftDrawableNormal="@drawable/user_login_icon_user"
+            app:textLeftDrawableSelect="@drawable/user_login_icon_user_pre"
+            app:textSize="26" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/user_input_container_bg">
+
+        <com.juggist.user.view.ButtonCountDown
+            android:id="@+id/user_btn_code_send"
+            android:layout_width="@dimen/dp_170"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/button_auth_code_bg"
+            android:text="@string/user_code_send"
+            android:textColor="@drawable/button_auth_code_textcolor"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.juggist.jcore.view.ClearEditText
+            android:id="@+id/user_et_psw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@null"
+            android:drawableLeft="@drawable/user_login_icon_pin"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingTop="@dimen/dp_20"
+            android:text="123456"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/user_btn_code_send"
+            app:textHint="@string/user_hint_code"
+            app:textLeftDrawableNormal="@drawable/user_login_icon_pin"
+            app:textLeftDrawableSelect="@drawable/user_login_icon_pin_pre"
+            app:textSize="26" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/user_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_110"
+        android:layout_marginRight="@dimen/dp_45"
+        android:background="@drawable/common_btn_corner_bg"
+        android:text="@string/user_login"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_32" />
+
+    <TextView
+        android:id="@+id/user_tv_psw_forfet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_139"
+        android:text="@string/user_psw_forget"
+        android:textSize="@dimen/sp_26" />
+</LinearLayout>

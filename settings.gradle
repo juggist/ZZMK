@@ -1,1 +1,1 @@
-include ':app', ':jdependencies', ':jcore'
+include ':jdependencies', ':jcore', ':discover', ':componentservice', ':home', ':buy', ':address', ':order', ':account', ':user', ':main', ':appmajiac', ':appmajiad'

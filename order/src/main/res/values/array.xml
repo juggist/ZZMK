@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="order_inside">
+        <item>全部</item>
+        <item>待付款</item>
+        <item>待发货</item>
+        <item>待收货</item>
+        <item>售后服务</item>
+    </string-array>
+    <string-array name="order_refund_all_reason">
+        <item>个人原因</item>
+        <item>货物损坏</item>
+        <item>未收到货</item>
+        <item>质量原因</item>
+    </string-array>
+</resources>

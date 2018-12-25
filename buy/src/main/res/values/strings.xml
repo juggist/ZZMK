@@ -1,0 +1,32 @@
+<resources>
+    <string name="buy_app_name">Buy</string>
+    <string name="buy_title_discount_card_choose">选择优惠券</string>
+    <string name="buy_tab">购物车</string>
+
+    <string name="buy_product_buy_all">全选</string>
+    <string name="buy_lv_shopcar_empty">您的购物车还没添加宝贝哦</string>
+    <string name="buy_discount_card_empty">暂无可使用的优惠券</string>
+
+    <string name="buy_toast_out_of_shop_max_num">您已经购买最大数量</string>
+    <string name="buy_toast_delete_product">是否删除该商品</string>
+    <string name="buy_toast_choose_product">请选择商品！</string>
+
+
+    <string name="buy_order_total_num">共%s件商品</string>
+    <string name="buy_order_total_money">合计</string>
+    <string name="buy_order_submit">提交订单</string>
+    <string name="buy_order_transport_money">运费</string>
+    <string name="buy_order_transport_money_empty">免运费</string>
+    <string name="buy_order_sale_cash">优惠券</string>
+    <string name="buy_order_sale_cash_empty">暂无可用</string>
+    <string name="buy_order_total_money_2">小计</string>
+    <string name="buy_order_total_money_3">应付总额:</string>
+    <string name="buy_order_no">订单编号</string>
+    <string name="buy_order_money">订单金额</string>
+    <string name="buy_order_pay_type">支付方式</string>
+    <string name="buy_order_pay">去付款</string>
+
+    <string name="buy_address_add_two">还没有收货地址呢，去添加</string>
+    <string name="buy_title_order_submit">确认订单</string>
+    <string name="buy_address_user_name">收货人:%s</string>
+</resources>

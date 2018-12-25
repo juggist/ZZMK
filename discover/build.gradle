@@ -1,0 +1,58 @@
+//JIMU组件化
+apply plugin: 'com.dd.comgradle'
+//解决butterknife在lib里的问题
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.version.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.version.minSdkVersion
+        targetSdkVersion rootProject.ext.version.targetSdkVersion
+        versionCode rootProject.ext.version.versionCode
+        versionName rootProject.ext.version.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [host: "discover"]
+            }
+        }
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    resourcePrefix "discover_"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(':componentservice')
+
+    /**
+     * 自动注解view
+     * butterknife
+     */
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
+
+    api("com.github.hotchemi:permissionsdispatcher:4.0.0") { exclude module: 'support-v13' }
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:4.0.0'
+    api('com.github.hotchemi:permissionsdispatcher:2.4.0')
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+
+}
+//JIMU组件化
+combuild {
+    applicationName = 'com.juggist.discover.runalone.application.DiscoverApplication'
+    isRegisterCompoAuto = true
+}
+

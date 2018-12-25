@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.juggist.buy.ui.OrderSubmitActivity">
+
+    <include
+        android:id="@+id/buy_nav_bar"
+        layout="@layout/common_navigation_bar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buy_rl_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_156"
+        android:layout_below="@+id/buy_nav_bar">
+
+        <ImageView
+            android:id="@+id/buy_iv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_marginBottom="@dimen/dp_26"
+            android:src="@drawable/buy_address_icon_location"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/buy_iv_address_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_22"
+            android:layout_marginTop="@dimen/dp_26"
+            android:src="@drawable/buy_address_icon_default"
+            app:layout_constraintLeft_toRightOf="@+id/buy_iv_address"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/buy_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_28"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/buy_iv_address_default"
+            app:layout_constraintLeft_toRightOf="@+id/buy_iv_address_default"
+            app:layout_constraintTop_toTopOf="@+id/buy_iv_address_default" />
+
+        <TextView
+            android:id="@+id/buy_tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_50"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_28"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/buy_iv_address_default"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buy_iv_address_default" />
+
+        <TextView
+            android:id="@+id/buy_tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_28"
+            app:layout_constraintBottom_toBottomOf="@+id/buy_iv_address"
+            app:layout_constraintLeft_toLeftOf="@+id/buy_iv_address_default"
+            app:layout_constraintTop_toTopOf="@+id/buy_iv_address" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_margin"
+            android:src="@drawable/common_btn_more_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/buy_ll_add_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/buy_address_btn_add" />
+
+            <TextView
+                android:id="@+id/buy_tv_add_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="@string/buy_address_add_two"
+                android:textSize="@dimen/sp_30" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/buy_iv_address_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buy_rl_address"
+        android:scaleType="fitXY"
+        android:src="@drawable/buy_address_bg" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buy_rl_bottom"
+        android:layout_below="@+id/buy_iv_address_line"
+        android:background="@color/item_bg"
+        android:scrollbars="none">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <com.juggist.jcore.view.NoScrollRecycleView
+                android:id="@+id/buy_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/item_bg"
+                android:dividerHeight="@dimen/dp_1"
+                android:scrollbars="none"/>
+
+            <include layout="@layout/common_bottom_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_88">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:text="@string/buy_order_transport_money"
+                    android:textColor="@color/color_invitecode"
+                    android:textSize="@dimen/sp_28" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:text="@string/buy_order_transport_money_empty"
+                    android:textColor="@color/color_invitecode"
+                    android:textSize="@dimen/sp_28" />
+            </RelativeLayout>
+
+            <include layout="@layout/common_bottom_line" />
+
+            <RelativeLayout
+                android:id="@+id/buy_rl_discount_card"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_88">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:text="@string/buy_order_sale_cash"
+                    android:textColor="@color/color_invitecode"
+                    android:textSize="@dimen/sp_28" />
+
+                <TextView
+                    android:id="@+id/buy_tv_discount_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_toLeftOf="@+id/buy_iv_arrow"
+                    android:text="@string/buy_order_sale_cash_empty"
+                    android:textColor="@color/color_invitecode"
+                    android:textSize="@dimen/sp_28" />
+
+                <ImageView
+                    android:id="@+id/buy_iv_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:src="@drawable/buy_comment_btn_more_black" />
+            </RelativeLayout>
+
+            <include layout="@layout/common_bottom_line" />
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_88">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:text="@string/buy_order_total_money_2"
+                    android:textColor="@color/color_invitecode"
+                    android:textSize="@dimen/sp_28" />
+
+                <TextView
+                    android:id="@+id/buy_tv_total_money02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/common_margin"
+                    android:text="￥ 400"
+                    android:textColor="@color/spes_red"
+                    android:textSize="@dimen/sp_28" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/item_bg" />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/buy_rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_98"
+        android:layout_alignParentBottom="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20">
+
+            <TextView
+                android:id="@+id/buy_tv_total_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buy_order_total_num"
+                android:textColor="@color/font_normal"
+                android:textSize="@dimen/sp_24" />
+
+            <TextView
+                android:id="@+id/buy_title_total_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_14"
+                android:text="@string/buy_order_total_money"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_24"
+                app:layout_constraintTop_toBottomOf="@+id/buy_tv_total_num" />
+
+            <TextView
+                android:id="@+id/buy_tv_total_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:text="￥400"
+                android:textColor="@color/spes_red"
+                android:textSize="@dimen/sp_30"
+                app:layout_constraintBottom_toBottomOf="@+id/buy_title_total_money"
+                app:layout_constraintLeft_toRightOf="@+id/buy_title_total_money" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/buy_tv_order_submit"
+            android:layout_width="@dimen/dp_208"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/spes_red"
+            android:gravity="center"
+            android:text="@string/buy_order_submit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_24" />
+    </RelativeLayout>
+</RelativeLayout>

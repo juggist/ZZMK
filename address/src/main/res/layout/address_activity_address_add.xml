@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.juggist.address.ui.AddressAddActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/item_bg"
+        android:orientation="vertical">
+
+        <include layout="@layout/common_navigation_bar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_92"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingRight="@dimen/common_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/address_person_name"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <EditText
+                android:id="@+id/address_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_180"
+                android:background="@null"
+                android:hint="@string/address_hint_address_person_name"
+                android:maxLength="10"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:background="@color/item_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_92"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingRight="@dimen/common_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/address_person_phone"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <EditText
+                android:id="@+id/address_et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_180"
+                android:background="@null"
+                android:hint="@string/address_hint_address_person_phone"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:background="@color/item_bg" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_92"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingRight="@dimen/common_margin">
+
+            <TextView
+                android:id="@+id/address_tv_address_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address_person_address"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/address_tv_address_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_180"
+                android:layout_marginRight="@dimen/dp_10"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/address_tv_address"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/address_tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/common_btn_more_gray"
+                android:text="@string/address_choose"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:background="@color/item_bg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_166"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingRight="@dimen/common_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_28"
+                android:text="@string/address_person_address_detail"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <EditText
+                android:id="@+id/address_et_address_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_180"
+                android:layout_marginTop="@dimen/dp_28"
+                android:background="@null"
+                android:hint="@string/address_hint_address_person_detail"
+                android:maxLength="50"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:background="@color/item_bg" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_92"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_margin"
+            android:paddingRight="@dimen/common_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address_person_set_default"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_28" />
+
+            <ImageButton
+                android:id="@+id/address_ibtn_select"
+                android:layout_width="@dimen/dp_38"
+                android:layout_height="@dimen/dp_38"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/address_ibtn_address_select_bg" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/address_btn_ensure"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginRight="@dimen/common_margin"
+            android:background="@drawable/common_btn_corner_bg"
+            android:text="@string/common_finish"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_30" />
+    </LinearLayout>
+</LinearLayout>

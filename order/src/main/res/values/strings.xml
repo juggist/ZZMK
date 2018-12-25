@@ -1,0 +1,40 @@
+<resources>
+    <string name="order_app_name">Order</string>
+
+    <string name="order_title">订单列表</string>
+    <string name="order_title_refund">退款详情</string>
+    <string name="order_title_transport">物流详情</string>
+    <string name="order_title_refund_all">退货退款</string>
+
+    <string name="order_refund_dialog_title">退货原因</string>
+    <string name="order_pay">去付款</string>
+    <string name="order_refund">退款</string>
+    <string name="order_refund_about">退款详情</string>
+    <string name="order_refund_no">退货单号:</string>
+    <string name="order_refund_time">申请时间:</string>
+    <string name="order_refund_money">退款金额:</string>
+    <string name="order_refund_progress">当前进度</string>
+    <string name="order_refund_progress_02">当前进度:</string>
+    <string name="order_refund_answer">平台回复:</string>
+    <string name="order_refund_detail_get_fail_title">获取退款详情失败</string>
+    <string name="order_refund_detail_get_fail_msg">是否重新获取</string>
+    <string name="order_review">查看订单</string>
+    <string name="order_confrim">确认收货</string>
+    <string name="order_transport">查看物流</string>
+    <string name="order_comment">评论</string>
+    <string name="order_delete">删除订单</string>
+    <string name="order_mine">我的订单</string>
+    <string name="order_mine_all">查看全部订单</string>
+    <string name="order_to_money">待付款</string>
+    <string name="order_to_transport">待发货</string>
+    <string name="order_to_reciver">待收货</string>
+    <string name="order_to_service">售后服务</string>
+    <string name="order_dot">*</string>
+    <string name="order_refund_reason">退款原因</string>
+    <string name="order_refund_detail">问题描述:</string>
+    <string name="order_refund_reason_choose">请选择</string>
+    <string name="order_refund_pic">上传凭证(最多三张)</string>
+    <string name="order_refund_reason_empty">请选择退款原因</string>
+    <string name="order_total_money_3">应付总额:</string>
+    <string name="order_refund_dialog_succeed_title">提交成功</string>
+</resources>

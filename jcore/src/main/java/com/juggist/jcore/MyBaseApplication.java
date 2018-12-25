@@ -1,6 +1,7 @@
 package com.juggist.jcore;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.StrictMode;
 
 import com.juggist.jcore.utils.Utils;
@@ -9,6 +10,7 @@ import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
 import androidx.annotation.Nullable;
+import androidx.multidex.MultiDex;
 import zlc.season.rxdownload3.core.DownloadConfig;
 import zlc.season.rxdownload3.extension.ApkInstallExtension;
 
@@ -21,6 +23,12 @@ public class MyBaseApplication extends Application {
 
     public static MyBaseApplication getInstance() {
         return instance;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     @Override

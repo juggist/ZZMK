@@ -1,15 +1,12 @@
 apply plugin: 'com.android.library'
 
-
-
-
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.version.compileSdkVersion
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion rootProject.ext.version.minSdkVersion
+        targetSdkVersion rootProject.ext.version.targetSdkVersion
+        versionCode rootProject.ext.version.versionCode
+        versionName rootProject.ext.version.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -26,7 +23,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
 
         }
     }
@@ -35,13 +32,6 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-
-
-
     /**
      * bus
      * eventBus
@@ -112,27 +102,15 @@ dependencies {
      */
     api 'com.contrarywind:Android-PickerView:4.1.6'
 
-    /**
-     * 自动注解view
-     * butterknife
-     */
-    api 'com.jakewharton:butterknife:9.0.0-rc1'
-    //这行必须写在appmodule里，否则报错
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
 
     /**
      * baseRecycleAdapter
      */
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     //andriodx与baseRecycleAdapter不兼容，所以先引入recyclerview-v7,以后更新baseRecycleAdapter版本
-    api "com.android.support:recyclerview-v7:{rootProject.ext.supportLibVersion}"
+    api "com.android.support:recyclerview-v7:${rootProject.ext.version.supportLibVersion}"
     //recycleview的divider插件
     api 'com.yqritc:recyclerview-flexibledivider:1.4.0'
-
-    /**
-     * wx支付
-     */
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 
 
     /**

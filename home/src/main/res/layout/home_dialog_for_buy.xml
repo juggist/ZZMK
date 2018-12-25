@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/home_iv"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_200"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_tv_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_80"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="亚斯兰达红色石榴能量水清补水保湿体谅肤色"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toRightOf="@+id/home_iv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_tv_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_80"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="￥444"
+        android:textColor="@color/font_select"
+        android:textSize="@dimen/sp_36"
+        app:layout_constraintBottom_toBottomOf="@+id/home_iv"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_product_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/home_iv" />
+
+    <TextView
+        android:id="@+id/home_tv_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="库存:100"
+        android:textColor="@color/font_normal"
+        android:textSize="@dimen/sp_20"
+        app:layout_constraintBottom_toBottomOf="@+id/home_iv"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_product_name"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:id="@+id/home_line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:background="@color/font_normal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_store" />
+
+    <TextView
+        android:id="@+id/home_tv_specs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="@string/home_product_specs"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_line1" />
+
+    <GridView
+        android:id="@+id/home_gv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_28"
+        android:layout_marginRight="@dimen/dp_30"
+        android:numColumns="4"
+        android:text="100ML"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_specs"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_specs" />
+
+    <View
+        android:id="@+id/home_line2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:background="@color/font_normal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_gv" />
+
+    <TextView
+        android:id="@+id/home_tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_48"
+        android:text="@string/home_product_num"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_line2" />
+
+    <TextView
+        android:id="@+id/home_tv_up"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@color/num_up"
+        android:gravity="center"
+        android:text="@string/home_product_up"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_line2" />
+
+    <TextView
+        android:id="@+id/home_tv_choose_num"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_1"
+        android:background="@color/num_up"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintBottom_toBottomOf="@+id/home_tv_up"
+        app:layout_constraintRight_toLeftOf="@+id/home_tv_up"
+        app:layout_constraintTop_toTopOf="@+id/home_tv_up" />
+
+    <TextView
+        android:id="@+id/home_tv_choose_down"
+        android:layout_width="@dimen/dp_64"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_1"
+        android:background="@color/num_down"
+        android:gravity="center"
+        android:text="@string/home_product_down"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintBottom_toBottomOf="@+id/home_tv_up"
+        app:layout_constraintRight_toLeftOf="@+id/home_tv_choose_num"
+        app:layout_constraintTop_toTopOf="@+id/home_tv_up" />
+
+    <TextView
+        android:id="@+id/home_tv_buy"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_98"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@color/spes_red"
+        android:gravity="center"
+        android:text="@string/home_product_buy"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_30"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_num" />
+</androidx.constraintlayout.widget.ConstraintLayout>

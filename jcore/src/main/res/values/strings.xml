@@ -1,3 +1,55 @@
 <resources>
     <string name="app_name">JCore</string>
+
+    <string name="title_review_big_pic">查看大图</string>
+
+    <string name="save_bitmap_succeed">保存成功</string>
+    <string name="save_bitmap_succeed_todo">分享图片已经保存在相册</string>
+    <string name="save_bitmap_permission_fail">保存图片失败</string>
+    <string name="save_bitmap_permission_todo">请去系统设置里打开权限</string>
+
+
+    <string name="lv_loading">正在加载数据中...</string>
+    <string name="lv_data_empty">当前暂无数据</string>
+    <string name="lv_net_error">获取数据失败，点击屏幕重试</string>
+
+
+    <string name="share">分享</string>
+    <string name="share_to">分享到</string>
+    <string name="share_wx">微信</string>
+    <string name="share_circle">朋友圈</string>
+    <string name="share_weibo">微博</string>
+    <string name="share_qq">QQ</string>
+
+    <string name="download">下载</string>
+    <string name="download_tip01">下载图片到您的相册</string>
+    <string name="download_tip02">复制文案到您的粘贴板</string>
+
+
+    <string name="common_toast_phone_empty">请输入手机号码</string>
+    <string name="common_toast_phone_un_right">请输入正确的手机号码</string>
+    <string name="common_toast_psw_empty">请输入密码</string>
+    <string name="common_toast_psw_un_right">请输入验证码</string>
+    <string name="common_toast_auth_code">验证码发送成功</string>
+    <string name="common_toast_empty">请输入完整信息</string>
+
+    <string name="common_ensure">确定</string>
+    <string name="common_finish">完成</string>
+    <string name="common_cancle">取消</string>
+    <string name="common_quit">退出</string>
+
+    <string name="pickimg_album">相册</string>
+    <string name="choose_pic">选择图片</string>
+    <string name="choose_pic_from_album">我的相册中选择</string>
+    <string name="choose_pic_from_camera">拍摄</string>
+    <string name="choose_pic_permission_fail">选取图片失败</string>
+    <string name="choose_pic_permission_todo">请去系统设置里打开权限</string>
+
+
+    <string name="id_dialog">请补全身份信息</string>
+    <string name="id_title">身份证:</string>
+    <string name="id_hint">请填写身份证号码</string>
+    <string name="id_pic_title">(请上传身份证正反面照片)</string>
+    <string name="id_choose_pic">请上传身份证正反面照片</string>
+    <string name="id_commit">提交</string>
 </resources>

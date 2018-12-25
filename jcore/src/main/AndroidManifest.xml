@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.juggist.jcore" />
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.juggist.jcore">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+
+    </application>
+
+</manifest>

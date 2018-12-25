@@ -1,0 +1,26 @@
+<resources>
+    <string name="home_app_name">Home</string>
+    <string name="home_title_batch_forward">批量转发</string>
+
+    <string name="home_toast_add_shopcar_succeed">商品成功添加到购物车！</string>
+    <string name="home_unit">元</string>
+    <string name="home_custom_price">自定义</string>
+
+
+    <string name="home_product_specs">规格</string>
+    <string name="home_product_num">数量</string>
+    <string name="home_product_up">+</string>
+    <string name="home_product_down">-</string>
+    <string name="home_product_buy">立即购买</string>
+    <string name="home_product_buy_all">全选</string>
+    <string name="home_product_batch_forward">批量转发(%s)</string>
+
+    <string name="home_toast_choose_share_goods">请您选择批量转发的商品</string>
+
+    <string name="home_session_hot_brand">人气品牌</string>
+    <string name="home_session_end">专场结束时间</string>
+    <string name="home_session_share">批量转发</string>
+    <string name="home_session_join">进入专场</string>
+    <string name="home_session_title">专场</string>
+
+</resources>

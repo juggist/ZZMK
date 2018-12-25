@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_70"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_margin"
+    android:paddingRight="@dimen/common_margin"
+    tools:context="com.juggist.user.ui.fragment.UserRegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/user_input_container_bg"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.juggist.jcore.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:textHint="@string/user_hint_phone"
+            app:textLeftDrawableNormal="@drawable/user_register_icon_phone"
+            app:textLeftDrawableSelect="@drawable/user_register_icon_phone_pre"
+            app:textSize="26" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/user_input_container_bg">
+
+        <com.juggist.user.view.ButtonCountDown
+            android:id="@+id/btn_code_send"
+            android:layout_width="@dimen/dp_170"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/button_auth_code_bg"
+            android:text="@string/user_code_send"
+            android:textColor="@drawable/button_auth_code_textcolor"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.juggist.jcore.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_code_send"
+            app:textHint="@string/user_hint_code"
+            app:textLeftDrawableNormal="@drawable/user_register_icon_number"
+            app:textLeftDrawableSelect="@drawable/user_register_icon_number_pre"
+            app:textSize="26" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/user_input_container_bg"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <com.juggist.jcore.view.ClearEditText
+            android:inputType="number"
+            android:id="@+id/et_psw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:textHint="@string/user_hint_newPsw"
+            app:textLeftDrawableNormal="@drawable/user_register_icon_password"
+            app:textLeftDrawableSelect="@drawable/user_register_icon_password_pre"
+            app:textSize="26" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_130"
+        android:background="@drawable/user_input_container_bg">
+
+        <TextView
+            android:id="@+id/user_tv_inviteCode_to_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="@string/user_inviteCode_to_get"
+            android:textColor="@color/font_select"
+            android:textSize="@dimen/sp_22"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.juggist.jcore.view.ClearEditText
+            android:id="@+id/et_inviteCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_20"
+            android:textCursorDrawable="@color/font_select"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_inviteCode_to_get"
+            app:textHint="@string/user_hint_inviteCode"
+            app:textLeftDrawableNormal="@drawable/user_register_icon_code"
+            app:textLeftDrawableSelect="@drawable/user_register_icon_code_pre"
+            app:textSize="26" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/user_cb"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:button="@drawable/user_checkbox_style"
+            android:checked="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="@string/user_protocol_agree"
+            android:textColor="@color/font_normal"
+            android:textSize="@dimen/sp_22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_protocol_note"
+            android:textColor="@color/font_select"
+            android:textSize="@dimen/sp_22" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/user_btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:layout_marginLeft="@dimen/dp_45"
+        android:layout_marginRight="@dimen/dp_45"
+        android:layout_marginTop="@dimen/dp_110"
+        android:background="@drawable/common_btn_corner_bg"
+        android:text="@string/user_register"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_32" />
+</LinearLayout>

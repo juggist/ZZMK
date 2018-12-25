@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="bg">#f2f2f2</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black">#000000</color>
+
+    <color name="transparent">#0e000000</color>
+    <color name="font_select">#ff617f</color>
+    <color name="font_normal">#999999</color>
+    <color name="color_invitecode">#333333</color>
+    <color name="home_item_bottom_bg">#fff9fa</color>
+    <color name="item_bg">#f2f2f2</color>
+    <color name="edittext_bg">#eeeeee</color>
+    <color name="spes_gray">#f4f4f4</color>
+    <color name="spes_red">#ff617f</color>
+    <color name="num_down">#f9f9f9</color>
+    <color name="num_up">#f4f4f4</color>
+
+
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="actionsheet_black">#252729</color>
+    <color name="actionsheet_line">#d0d0d0</color>
+</resources>

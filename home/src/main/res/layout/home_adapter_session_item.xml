@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/common_margin">
+
+    <ImageView
+        android:id="@+id/home_iv_session_icon"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_120"
+        android:scaleType="fitCenter"
+        android:src="@drawable/app_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_tv_session_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="韩国GM solution水光蜂蜜面膜蚕丝补水保湿紧致提拉滋润"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_30"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/home_iv_session_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_tv_session_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/home_textview_strok_red_bg"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="中国"
+        android:textColor="@color/spes_red"
+        android:textSize="@dimen/sp_22"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_session_name"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_name" />
+
+    <TextView
+        android:id="@+id/home_tv_session_old_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="代购价: ￥238"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_session_name"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_location" />
+
+    <TextView
+        android:id="@+id/home_tv_session_counter_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text=""
+        android:textColor="@color/font_normal"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toRightOf="@+id/home_tv_session_old_price"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_location" />
+
+    <TextView
+        android:id="@+id/home_tv_session_weight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="净含量: 10片/盒"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_old_price" />
+
+    <TextView
+        android:id="@+id/home_tv_session_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="货号: 123456"
+        android:textColor="@color/color_invitecode"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_weight" />
+
+    <TextView
+        android:id="@+id/home_tv_session_new_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="￥79"
+        android:textColor="@color/font_select"
+        android:textSize="@dimen/sp_36"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_session_name"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_no" />
+
+    <TextView
+        android:id="@+id/home_tv_session_vip_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:background="@drawable/home_textview_strok_red_bg"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="升级享受会员价格:￥64"
+        android:textColor="@color/spes_red"
+        android:textSize="@dimen/sp_28"
+        app:layout_constraintBottom_toBottomOf="@+id/home_tv_session_new_price"
+        app:layout_constraintLeft_toRightOf="@+id/home_tv_session_new_price"
+        app:layout_constraintTop_toTopOf="@+id/home_tv_session_new_price" />
+
+    <com.juggist.jcore.view.NoScrollGridView
+        android:id="@+id/home_gv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:horizontalSpacing="@dimen/dp_10"
+        android:numColumns="2"
+        android:verticalSpacing="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="@+id/home_tv_session_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tv_session_new_price"></com.juggist.jcore.view.NoScrollGridView>
+
+    <ImageButton
+        android:id="@+id/home_ibtn_sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/home_btn_sale"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_gv" />
+
+    <ImageButton
+        android:id="@+id/home_ibtn_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/home_special_download"
+        app:layout_constraintRight_toLeftOf="@+id/home_ibtn_sale"
+        app:layout_constraintTop_toTopOf="@+id/home_ibtn_sale" />
+
+    <ImageButton
+        android:id="@+id/home_ibtn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@drawable/home_btn_buy"
+        app:layout_constraintRight_toLeftOf="@+id/home_ibtn_download"
+        app:layout_constraintTop_toTopOf="@+id/home_ibtn_sale" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

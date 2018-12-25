@@ -96,7 +96,7 @@ public final class ImageUtils {
     /**
      * Drawable to bitmap.
      *
-     * @param drawable The drawable.
+     * @param drawable The drawable-mdpi.
      * @return bitmap
      */
     public static Bitmap drawable2Bitmap(final Drawable drawable) {
@@ -126,10 +126,10 @@ public final class ImageUtils {
     }
 
     /**
-     * Bitmap to drawable.
+     * Bitmap to drawable-mdpi.
      *
      * @param bitmap The bitmap.
-     * @return drawable
+     * @return drawable-mdip
      */
     public static Drawable bitmap2Drawable(final Bitmap bitmap) {
         return bitmap == null ? null : new BitmapDrawable(MyBaseApplication.getInstance().getResources(), bitmap);
@@ -138,7 +138,7 @@ public final class ImageUtils {
     /**
      * Drawable to bytes.
      *
-     * @param drawable The drawable.
+     * @param drawable The drawable-mdpi.
      * @param format   The format of bitmap.
      * @return bytes
      */
@@ -147,10 +147,10 @@ public final class ImageUtils {
     }
 
     /**
-     * Bytes to drawable.
+     * Bytes to drawable-mdpi.
      *
      * @param bytes The bytes.
-     * @return drawable
+     * @return drawable-mdip
      */
     public static Drawable bytes2Drawable(final byte[] bytes) {
         return bitmap2Drawable(bytes2Bitmap(bytes));

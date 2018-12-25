@@ -1,0 +1,14 @@
+<resources>
+    <string name="account_app_name">Account</string>
+    <string name="account_title_discount_card">优惠券</string>
+
+
+    <string name="account_sale_money">销售额</string>
+    <string name="account_sale_num">今日订单数</string>
+    <string name="account_setting_to_cash">提现管理</string>
+    <string name="account_setting_to_location">地址管理</string>
+    <string name="account_setting_to_discount_card">我的优惠券</string>
+    <string name="account_setting_to_line">联系客服</string>
+    <string name="account_setting_to_app">系统设置</string>
+    <string name="account_lv_discount_card_empty">您还没有优惠券哦</string>
+</resources>

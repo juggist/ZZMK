@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="account_order">
+        <item>待付款</item>
+        <item>待发货</item>
+        <item>待收货</item>
+        <item>售后服务</item>
+    </string-array>
+
+    <string-array name="account_setting">
+        <item>提现管理</item>
+        <item>地址管理</item>
+        <item>我的优惠券</item>
+        <item>联系客服</item>
+        <item>系统设置</item>
+        <item>系统设置</item>
+    </string-array>
+
+
+    <string-array name="account_discount_card">
+        <item>未使用</item>
+        <item>已使用</item>
+        <item>已过期</item>
+    </string-array>
+</resources>

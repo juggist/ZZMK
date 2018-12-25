@@ -8,9 +8,19 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/account" />
+            <option value="$PROJECT_DIR$/address" />
+            <option value="$PROJECT_DIR$/appmajiac" />
+            <option value="$PROJECT_DIR$/appmajiad" />
+            <option value="$PROJECT_DIR$/buy" />
+            <option value="$PROJECT_DIR$/componentservice" />
+            <option value="$PROJECT_DIR$/discover" />
+            <option value="$PROJECT_DIR$/home" />
             <option value="$PROJECT_DIR$/jcore" />
             <option value="$PROJECT_DIR$/jdependencies" />
+            <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/order" />
+            <option value="$PROJECT_DIR$/user" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

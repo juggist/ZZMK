@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/item_bg"
+    tools:context="com.juggist.account.ui.AccountFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_330"
+        android:background="@color/spes_red"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.juggist.account.view.RoundImageView
+                android:id="@+id/account_iv_header"
+                android:src="@drawable/account_pic_default"
+                android:layout_width="@dimen/dp_128"
+                android:layout_height="@dimen/dp_128"
+                android:scaleType="fitXY"
+                app:type="circle" />
+
+            <TextView
+                android:id="@+id/account_tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_30" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/account_tv_sale_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/spes_red"
+                android:textSize="@dimen/sp_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/account_sale_money"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/account_tv_sale_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/spes_red"
+                android:textSize="@dimen/sp_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/account_sale_num"
+                android:textColor="@color/color_invitecode"
+                android:textSize="@dimen/sp_24" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_74"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:text="我的订单"
+            android:textColor="@color/color_invitecode"
+            android:textSize="@dimen/sp_26" />
+
+        <TextView
+            android:id="@+id/account_tv_order_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_marginRight="@dimen/common_margin"
+            android:drawableRight="@drawable/common_btn_more_gray"
+            android:text="所有订单"
+            android:textColor="@color/font_normal"
+            android:textSize="@dimen/sp_26" />
+    </RelativeLayout>
+
+    <include layout="@layout/common_bottom_line" />
+
+    <GridView
+
+        android:id="@+id/account_gv_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:numColumns="4"
+        android:scrollbars="none"></GridView>
+
+
+    <GridView
+        android:id="@+id/account_gv_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/font_normal"
+        android:horizontalSpacing="@dimen/dp_1"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/dp_1"></GridView>
+</LinearLayout>
