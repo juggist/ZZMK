@@ -6,7 +6,10 @@
         android:allowBackup="true"
         android:supportsRtl="true">
 
-
+        <activity android:name=".BigViewPagerPhotoActivity" />
+        <activity android:name=".view.chooseImg.ImageBucketActivity" />
+        <activity android:name=".view.chooseImg.ImageGridActivity" />
+        <activity android:name=".view.chooseImg.PhotoActivity" />
     </application>
 
 </manifest>

@@ -4,9 +4,4 @@
     android:id="@+id/account_main"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
-    <Button
-        android:text="跳转"
-        android:onClick="to"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </FrameLayout>
